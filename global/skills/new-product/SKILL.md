@@ -16,7 +16,9 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
 1. Copy `template/` (including dotfiles: `.claude/`, `.github/`,
    `.gitignore`, `.mcp.json.example`) into the target directory.
 2. Replace every `{{PRODUCT_NAME}}` placeholder with the product name
-   (files: CLAUDE.md, docs/*, .github/workflows/ci.yml).
+   (carriers: `CLAUDE.md`, `docs/PRD.md`, `docs/ROADMAP.md`) and every
+   `{{DATE}}` with today's date (carrier: `docs/adr/0001-*.md`). Then grep
+   the tree for `{{` to prove no placeholder survived.
 3. Fill the `[STACK]` slots interactively — ask me in ONE batch:
    language/runtime, framework(s), package layout (single app / monorepo),
    database, deploy target, test runner. Then:
@@ -28,8 +30,12 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    marker; never fill a slot with a guess.
 4. Record provenance: write the maya repo's current commit hash to
    `.maya-version` in the new repo.
-5. `git init`, initial commit: `chore: instantiate from maya <short-hash>`.
-6. Report: created path, filled slots, remaining TODO slots, and the next
+5. If the stack answers make it possible, offer to fill
+   `contracts/init.sh` from `init.sh.example` now (boot + smoke check);
+   otherwise leave it — the initializer session writes it before the first
+   unattended run (see `contracts/README.md`).
+6. `git init`, initial commit: `chore: instantiate from maya <short-hash>`.
+7. Report: created path, filled slots, remaining TODO slots, and the next
    steps — run /spec, then /mvp-scope, then configure remotes/CI.
 
 ## Rules

@@ -16,7 +16,7 @@ One repo, three jobs:
 
 ```bash
 git clone git@github.com:oguzpancuk/maya.git ~/dev/maya
-cd ~/dev/maya && ./install.sh          # links global/ into ~/.claude/
+cd ~/dev/maya && ./install.sh   # copies CLAUDE.md + links skills/agents into ~/.claude/
 # then, inside any Claude Code session, install the approved plugins:
 #   /plugin install code-review@claude-plugins-official
 #   /plugin install commit-commands@claude-plugins-official

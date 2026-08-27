@@ -29,10 +29,10 @@ honestly; a blocked fetch is "blocked", not silence):
 ## 3. Model check → ablation reminder
 If a new Claude model shipped since `last_seen_model`: remind me that every
 harness component encodes an assumption about what the previous model could
-not do. Walk the ablation watchlist from maya's CHANGELOG.md (currently:
-evidence-gate → evaluator-qa frequency → one-feature-per-session →
-push-gate → CLAUDE.md line count) and propose ONE component to trial-remove
-first, with how we'd measure the result.
+not do. Walk the ablation watchlist from maya's CHANGELOG.md (the canonical copy
+lives there — read it from ~/dev/maya/CHANGELOG.md, or ask me for the maya
+checkout if it's elsewhere) and propose ONE component to trial-remove first,
+with how we'd measure the result.
 
 ## 4. Report (never act)
 A table: change | affects (global / template / a product) | recommendation

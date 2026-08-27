@@ -1,37 +1,46 @@
 #!/usr/bin/env bash
 # PreToolUse(Edit|Write) hook for unattended runs.
-# 1) AGENT_STOP kill switch: refuse ALL writes while the file exists.
-# 2) Evidence gate: refuse writes to feature_list.json unless the session
-#    has Read evidence (test output, screenshot, log) since it started.
+# 1) AGENT_STOP kill switch: refuse Edit/Write while the file exists.
+# 2) Evidence gate: refuse writes to feature_list.json unless THIS session
+#    Read evidence — an image/screenshot, a .log file, or anything under a
+#    test-results|test-output|coverage|screenshots directory. Reading the
+#    feature list itself, configs, or source files does NOT count.
+# Unattended context: parse failures fail CLOSED (exit 2).
 set -uo pipefail
 proj="${CLAUDE_PROJECT_DIR:-.}"
 
 if [ -f "$proj/AGENT_STOP" ]; then
-  echo "evidence-gate: AGENT_STOP present — all writes halted by operator." >&2
+  echo "evidence-gate: AGENT_STOP present — Edit/Write halted by operator." >&2
   exit 2
 fi
 
+command -v python3 >/dev/null 2>&1 || { echo "evidence-gate: python3 missing — failing closed." >&2; exit 2; }
+
 payload="$(cat)"
-file_path="$(printf '%s' "$payload" | python3 -c '
+out="$(printf '%s' "$payload" | python3 -c '
 import json,sys
 try:
     d=json.load(sys.stdin)
-    print(d.get("tool_input",{}).get("file_path",""))
 except Exception:
-    pass
-' 2>/dev/null)"
+    sys.exit(3)
+print(d.get("session_id","nosession"))
+print(d.get("tool_input",{}).get("file_path",""))
+')" || { echo "evidence-gate: could not parse hook payload — failing closed." >&2; exit 2; }
+sid="$(printf '%s\n' "$out" | sed -n 1p)"
+file_path="$(printf '%s\n' "$out" | sed -n 2p)"
 
 case "$file_path" in
-  */feature_list.json) ;;
+  */feature_list.json|feature_list.json) ;;
   *) exit 0 ;;
 esac
 
-log="$proj/.claude/.session-reads.log"
-if [ -f "$log" ] && grep -Eq '\.(png|jpg|jpeg|txt|log|json|xml)$|test|spec|screenshot' "$log"; then
+log="$proj/.claude/.session-reads.${sid}.log"
+if [ -f "$log" ] && grep -Ev 'feature_list\.json$|/\.claude/' "$log" \
+     | grep -Eq '\.(png|jpe?g|gif)$|\.log$|/(test-results|test-output|coverage|screenshots)/'; then
   exit 0
 fi
 
-echo "evidence-gate: write to feature_list.json DENIED — no evidence was Read" >&2
-echo "this session. Run the verification (tests / screenshot), Read the output" >&2
-echo "file, then flip passes. The contract requires observed evidence." >&2
+echo "evidence-gate: write to feature_list.json DENIED — no evidence Read this" >&2
+echo "session. Run the verification, Read its output (screenshot / .log /" >&2
+echo "test-results file), then flip passes. Observed evidence is the contract." >&2
 exit 2

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Boots the app for a work session in one command, so no session wastes
-# context rediscovering setup. /new-product or the initializer session fills
-# this in; copy to contracts/init.sh and keep it working.
+# context rediscovering setup. The initializer session (or /new-product,
+# optionally, when the stack is already known) fills this in; copy to
+# contracts/init.sh and keep it working.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 # [STACK: e.g.

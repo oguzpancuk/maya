@@ -4,7 +4,7 @@ The pattern for overnight / goal-loop work, adapted from Anthropic's
 long-running-agents harness (`anthropics/cwc-long-running-agents`). Everything
 here is OFF by default — wire it up only for an actual unattended run, and
 re-test whether each piece is still needed on every model release
-(ablation watchlist in maya's CHANGELOG.md).
+(ablation watchlist: maya `CHANGELOG.md`).
 
 ## The pattern
 
@@ -25,21 +25,25 @@ re-test whether each piece is still needed on every model release
    verify.sh exits 0, and git status is clean — or stop after 25 turns
    ```
 
-4. **Kill switch**: create a file named `AGENT_STOP` in the repo root; the
-   evidence gate refuses all writes while it exists. Delete it to resume.
+4. **Kill switch**: create a file named `AGENT_STOP` in the repo root — the
+   gates then refuse Edit/Write and (via bash-guard) all Bash commands.
+   Delete it to resume.
 
 ## Rules baked into the contract
 
 - Agents may ONLY flip the `passes` field. It is unacceptable to remove or
   edit feature entries — that is how functionality silently disappears.
-- `passes: true` requires observed evidence (test output, screenshot,
-  driving the app). The evidence gate below enforces the observation.
+- `passes: true` requires observed evidence. What counts as evidence (a
+  heuristic, deliberately narrow): a screenshot/image, a `.log` file, or any
+  file under a `test-results/`, `test-output/`, `coverage/` or `screenshots/`
+  directory, **Read in this same session**. Reading the feature list, configs,
+  or source files does not count.
 - One feature per session. Progress notes + commits are the handoff; the
   next session starts from the repo, not from memory.
 
-## Evidence gate (optional enforcement)
+## Enforcement wiring (only for unattended runs)
 
-Two hooks, wired ONLY for unattended runs (add to `.claude/settings.json`):
+Three hooks — add to `.claude/settings.json` for the run, remove after:
 
 ```json
 "PostToolUse": [
@@ -48,15 +52,22 @@ Two hooks, wired ONLY for unattended runs (add to `.claude/settings.json`):
 ],
 "PreToolUse": [
   { "matcher": "Edit|Write", "hooks": [ { "type": "command",
-    "command": "\"$CLAUDE_PROJECT_DIR\"/contracts/evidence-gate.sh" } ] }
+    "command": "\"$CLAUDE_PROJECT_DIR\"/contracts/evidence-gate.sh" } ] },
+  { "matcher": "Bash", "hooks": [ { "type": "command",
+    "command": "\"$CLAUDE_PROJECT_DIR\"/contracts/bash-guard.sh" } ] }
 ]
 ```
 
-`track-read.sh` records what the session actually opened; `evidence-gate.sh`
-denies writes to `feature_list.json` unless evidence (test output, a
-screenshot, a log) was Read since the session started — the agent cannot
-claim success it hasn't observed. Asking nicely in the prompt does not
-reliably stop premature `passes: true`; the gate does.
+- `track-read.sh` logs what the session opened, keyed by session id
+  (`.claude/.session-reads.<session>.log`; old sessions' logs pruned) — so
+  evidence from a previous session never satisfies a new one.
+- `evidence-gate.sh` denies Edit/Write on `feature_list.json` without
+  this-session evidence, and enforces AGENT_STOP. Fails closed on parse
+  errors — asking nicely in the prompt does not reliably stop premature
+  `passes: true`; the gate does.
+- `bash-guard.sh` closes the shell bypass: no `sed -i`/`tee`/redirect writes
+  to the feature list, and AGENT_STOP halts Bash too. Without it the other
+  two gates only cover the Edit/Write tools.
 
 Also run the **evaluator-qa** agent on the final state: the builder never
 grades its own overnight work.

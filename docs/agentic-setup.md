@@ -39,9 +39,13 @@ per-product stacks vary), context-efficiency MCP tools (no measured problem).
 ### Hooks (template)
 - `format-changed.sh` (PostToolUse Edit|Write): formats via the project's own
   prettier if present; always exits 0 — convenience, never a blocker.
-- `push-gate.sh` (PreToolUse Bash): `git push` requires `verify.sh` green;
-  exit 2 blocks with the failure output. CLAUDE.md is advisory — this is the
-  enforcement layer.
+- `push-gate.sh` (PreToolUse Bash, 600s timeout): a real `git push`
+  invocation (command-position match, `-C`/`-c` covered) requires `verify.sh`
+  green; force pushes are blocked outright — run those by hand if truly
+  meant. Exit 2 blocks with the failure output; unparseable payloads fail
+  closed. CLAUDE.md is advisory — this is the enforcement layer. The
+  settings.json deny rules for force-push/rm are prefix-matched best-effort
+  only (documented Claude Code behavior); the hook is the real guard.
 - `verify.sh`: THE battery, one source of truth; CI runs the same file.
   `/new-product` must replace its placeholder — an unconfigured verify.sh
   warns loudly on every run.
@@ -59,8 +63,9 @@ per-product stacks vary), context-efficiency MCP tools (no measured problem).
 - Maintenance: `/loop` with the product's `.claude/loop.md` (one action per
   tick, "quiet tick" allowed, never invents work).
 - Unattended runs: `contracts/README.md` pattern — default-FAIL
-  feature_list.json, one feature per session, evidence gate + AGENT_STOP kill
-  switch, evaluator-qa on the final state. All OFF by default.
+  feature_list.json, one feature per session, per-session evidence gate +
+  bash-guard (closes the shell bypass) + AGENT_STOP kill switch, evaluator-qa
+  on the final state. All OFF by default.
 - Custom Agent SDK harness: not built. Revisit only when /goal measurably
   falls short; cap any experiment with `maxBudgetUsd`.
 - Managed Agents: deferred until a product ships an in-app agent. Skills
@@ -79,12 +84,16 @@ products pull template updates when `/update-stack` flags their
 harness-repricing research: pick ONE component from the watchlist
 (CHANGELOG.md keeps it current), remove it on a real task, compare. Keep the
 removal if quality holds; record either way in CHANGELOG with the evidence.
-Current watchlist order: evidence-gate → evaluator-qa frequency →
-one-feature-per-session → push-gate → CLAUDE.md line count.
+The canonical watchlist lives in CHANGELOG.md (currently: evidence-gate →
+evaluator-qa invocation frequency → one-feature-per-session constraint →
+push-gate → CLAUDE.md line count).
 
 Updating individual pieces:
-- Global skills/agents/CLAUDE.md: edit in maya, `git pull` on other machines
-  (symlinks pick changes up instantly; Claude Code hot-reloads skills).
+- Global skills/agents: edit in maya, `git pull` on other machines —
+  symlinks pick changes up instantly (Claude Code hot-reloads skills).
+  Global CLAUDE.md: edit in maya, then re-run `./install.sh` — it is COPIED,
+  not symlinked, because desktop Cowork sessions skip a symlinked
+  `~/.claude/CLAUDE.md`.
 - Plugins: auto-update by default; `/plugin` → Installed to review/prune.
 - Template: edit in maya; existing products adopt by diffing their `.claude/`
   against `template/` (their `.maya-version` names the base commit).
