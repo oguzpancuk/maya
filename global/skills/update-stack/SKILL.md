@@ -35,10 +35,15 @@ checkout if it's elsewhere) and propose ONE component to trial-remove first,
 with how we'd measure the result.
 
 ## 4. Harvest downstream improvements (products -> maya)
-The flow must run both ways. For each product repo I name (or that is
-checked out under ~/dev/): diff its `.claude/`, `contracts/` and CLAUDE.md
-against the maya template AT the commit in its `.maya-version`, and read its
-docs/NOTES.md "upstream candidates" section. Anything the product improved
+The flow must run both ways. The product list comes from maya's
+`PRODUCTS.md` (the registry /new-product maintains) plus a safety-net scan
+for `.maya-version` files under ~/dev/. For each product: if its checkout is
+reachable, diff its `.claude/`, `contracts/` and CLAUDE.md against the maya
+template AT the commit in its `.maya-version`, and read its docs/NOTES.md
+"upstream candidates" section. If a registered product's checkout is NOT
+reachable, report it as "skipped — not checked out on this machine" in the
+harvest table; never let an unreachable product silently disappear from the
+report (unknown is not zero). Anything the product improved
 locally — a hardened hook, a better rule, a new skill — is an upstream
 candidate: list it in the report with the diff hunk, so approved ones get
 applied to maya (and CHANGELOG) and every future product inherits the fix.

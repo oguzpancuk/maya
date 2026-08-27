@@ -35,7 +35,11 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    otherwise leave it — the initializer session writes it before the first
    unattended run (see `contracts/README.md`).
 6. `git init`, initial commit: `chore: instantiate from maya <short-hash>`.
-7. Report: created path, filled slots, remaining TODO slots, and the next
+7. Register the product in maya's `PRODUCTS.md` (name, repo URL if known,
+   local path, the same maya commit as `.maya-version`), commit that in the
+   maya repo. An unregistered product is invisible to /update-stack's
+   harvest — registration is part of instantiation, not optional.
+8. Report: created path, filled slots, remaining TODO slots, and the next
    steps — run /spec, then /mvp-scope, then configure remotes/CI.
 
 ## Rules
