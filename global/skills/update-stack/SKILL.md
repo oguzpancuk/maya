@@ -34,7 +34,16 @@ lives there — read it from ~/dev/maya/CHANGELOG.md, or ask me for the maya
 checkout if it's elsewhere) and propose ONE component to trial-remove first,
 with how we'd measure the result.
 
-## 4. Report (never act)
+## 4. Harvest downstream improvements (products -> maya)
+The flow must run both ways. For each product repo I name (or that is
+checked out under ~/dev/): diff its `.claude/`, `contracts/` and CLAUDE.md
+against the maya template AT the commit in its `.maya-version`, and read its
+docs/NOTES.md "upstream candidates" section. Anything the product improved
+locally — a hardened hook, a better rule, a new skill — is an upstream
+candidate: list it in the report with the diff hunk, so approved ones get
+applied to maya (and CHANGELOG) and every future product inherits the fix.
+
+## 5. Report (never act)
 A table: change | affects (global / template / a product) | recommendation
 (adopt / ignore / trial) | effort. Explicitly flag anything that means the
 maya template should change so future products inherit the fix — and list
@@ -42,6 +51,6 @@ which existing products' `.maya-version` is behind.
 Then STOP. Installation, deletion, and template edits happen only after I
 approve, in the maya repo first.
 
-## 5. Close
+## 6. Close
 Update the state file with today's date, current newest model, and the
 changelog version you saw.

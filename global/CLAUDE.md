@@ -40,6 +40,11 @@ Never let a degraded read become a destructive write.
   commit + progress note per session, bounded with "or stop after N turns".
 - When I correct a mistake of yours, propose where the fix should live so it
   compounds: this file, the project CLAUDE.md, a skill, or a hook.
+- Upstream rule: if a fix or improvement lands in a file that came from the
+  maya template (.claude/ hooks, agents, skills, contracts/, CLAUDE.md
+  sections), it belongs to every future product — apply it to the maya repo
+  too, or when maya isn't checked out, record it in the product's
+  docs/NOTES.md under "upstream candidates" so /update-stack harvests it.
 
 ## Cost discipline
 Every addition to context (plugin, MCP server, CLAUDE.md line) must justify
