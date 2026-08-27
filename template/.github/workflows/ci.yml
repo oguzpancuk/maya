@@ -1,0 +1,19 @@
+# CI runs the SAME battery agents run locally: .claude/hooks/verify.sh.
+# One source of truth for "green" — if this file and verify.sh disagree,
+# verify.sh wins and this file is wrong.
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # [STACK: toolchain setup, e.g.
+      #   - uses: actions/setup-node@v4
+      #     with: { node-version: 20 }
+      # add service containers (db etc.) here if verify.sh needs them]
+      - run: bash .claude/hooks/verify.sh
