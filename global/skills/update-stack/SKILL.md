@@ -40,18 +40,22 @@ The flow must run both ways. The product list comes from maya's
 for `.maya-version` files under ~/dev/. For each product: if its checkout is
 reachable, diff its `.claude/`, `contracts/` and CLAUDE.md against the maya
 template AT the commit in its `.maya-version`, and read its docs/NOTES.md
-"upstream candidates" section. Reachability order per registered product:
-1. Local checkout (the PRODUCTS.md path, else the ~/dev scan) — preferred.
-2. No checkout? Fetch it from GitHub with MY existing credentials (`gh` CLI
-   or plain git over SSH — whatever this machine already uses to push):
-   `git clone --depth 1 <repo-url>` into a temp dir, diff there, delete the
-   temp dir after. Depth 1 suffices — the diff BASE is the maya template at
-   the product's `.maya-version` commit, which lives in the local maya repo.
-   Never prompt for or store tokens; if this machine has no GitHub
-   credentials, say so once and move on.
-3. Clone failed too (no credentials, offline, repo gone)? Report the row as
-   "skipped — <reason>" in the harvest table; never let an unreachable
-   product silently disappear from the report (unknown is not zero). Anything the product improved
+"upstream candidates" section. Diff source per registered product: ALWAYS a fresh fetch from GitHub —
+never a local checkout, which may be stale or on a dirty branch. Using MY
+existing credentials (`gh` CLI or plain git over SSH — whatever this machine
+already uses to push): `git clone --depth 1 <repo-url>` into a temp dir,
+diff there, delete the temp dir after. Depth 1 suffices — the diff BASE is
+the maya template at the product's `.maya-version` commit, which lives in
+the local maya repo. Never prompt for or store tokens.
+Consequences to surface in the report:
+- The harvest sees only PUSHED state. Remind me to push any product with
+  local-only work before trusting its row.
+- A `.maya-version`-carrying repo found under ~/dev but missing from
+  PRODUCTS.md is reported as "unregistered — add it", and still harvested
+  from its remote, not from the local copy.
+- Clone failed (no credentials, offline, repo gone)? Report the row as
+  "skipped — <reason>"; never let an unreachable product silently disappear
+  from the report (unknown is not zero). Anything the product improved
 locally — a hardened hook, a better rule, a new skill — is an upstream
 candidate: list it in the report with the diff hunk, so approved ones get
 applied to maya (and CHANGELOG) and every future product inherits the fix.
