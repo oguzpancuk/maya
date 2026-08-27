@@ -22,6 +22,10 @@ honest deferred list — not a smaller wishlist.
 5. Summarize the cut to me in chat and list what I lose by accepting it.
 
 ## Rules
+- The skeleton's FIRST step is always the same, whatever the product: the dev
+  environment boots, the test runner runs ONE real passing test, and
+  `bash .claude/hooks/verify.sh` exits 0. The battery is born with the
+  skeleton — a later standalone "testing task" is a planning failure.
 - The skeleton must be completable in days, not weeks. If it isn't, cut again.
 - Done-when clauses must be verifiable by the project's verify battery or a
   browser check — "feels good" is not a clause.
