@@ -40,6 +40,11 @@ Never let a degraded read become a destructive write.
   commit + progress note per session, bounded with "or stop after N turns".
 - When I correct a mistake of yours, propose where the fix should live so it
   compounds: this file, the project CLAUDE.md, a skill, or a hook.
+- Machine-caught findings compound on RECURRENCE: when a verifier
+  (evaluator-qa, code review, CI, a hook) catches the same class of mistake
+  a second time, propose codifying it — a rule, a test, or a gate — so a
+  third time cannot happen. One-off bugs just get fixed; turning every bug
+  into a rule is how CLAUDE.md gets fat.
 - Upstream rule: if a fix or improvement lands in a file that came from the
   maya template (.claude/ hooks, agents, skills, contracts/, CLAUDE.md
   sections), it belongs to every future product — apply it to the maya repo
