@@ -60,7 +60,16 @@ locally — a hardened hook, a better rule, a new skill — is an upstream
 candidate: list it in the report with the diff hunk, so approved ones get
 applied to maya (and CHANGELOG) and every future product inherits the fix.
 
-## 5. Report (never act)
+## 5. Weight check (is maya getting fat?)
+Weigh the ALWAYS-LOADED layer — the only part whose growth costs every turn:
+global CLAUDE.md line count, number of global skills and total description
+length, installed plugin count (with the context costs /plugin shows), and
+the template CLAUDE.md line count. Compare against the state file's last
+weigh-in. Growth without a matching CHANGELOG justification gets flagged
+with a trim proposal; a CLAUDE.md over 200 lines is a finding, not a style
+note. Repo size is NOT weight — skill bodies and docs are free until used.
+
+## 6. Report (never act)
 A table: change | affects (global / template / a product) | recommendation
 (adopt / ignore / trial) | effort. Explicitly flag anything that means the
 maya template should change so future products inherit the fix — and list
@@ -68,6 +77,6 @@ which existing products' `.maya-version` is behind.
 Then STOP. Installation, deletion, and template edits happen only after I
 approve, in the maya repo first.
 
-## 6. Close
-Update the state file with today's date, current newest model, and the
-changelog version you saw.
+## 7. Close
+Update the state file with today's date, current newest model, the
+changelog version you saw, and this run's weight figures.
