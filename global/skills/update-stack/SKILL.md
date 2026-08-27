@@ -68,6 +68,11 @@ the template CLAUDE.md line count. Compare against the state file's last
 weigh-in. Growth without a matching CHANGELOG justification gets flagged
 with a trim proposal; a CLAUDE.md over 200 lines is a finding, not a style
 note. Repo size is NOT weight — skill bodies and docs are free until used.
+Also scan for DEAD rules: for each product harvested, any CLAUDE.md/rules
+line referencing a file, command, endpoint or service that no longer exists
+in that repo is stale experience — flag it for removal. Domain rules don't
+expire with model releases (that's the ablation watchlist's job); they
+expire when the product changes, and this scan is what notices.
 
 ## 6. Report (never act)
 A table: change | affects (global / template / a product) | recommendation
