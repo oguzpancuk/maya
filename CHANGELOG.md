@@ -4,7 +4,9 @@ maya is a ROLLING repo: there are no releases. Whatever is on `main` is
 live, and every product pins the exact commit it derives from in its
 `.maya-version` — so entries here are dated, newest first, each naming its
 commit. Removals are listed with their reasons: deletion is a feature, and
-the reasons are the evidence.
+the reasons are the evidence. One mechanical note: an entry that lands in
+the very commit it describes cannot carry its own hash (a commit cannot
+know its own id) — the next changelog edit backfills it.
 
 ## Ablation watchlist (canonical copy — other files reference this one)
 
@@ -17,7 +19,7 @@ constraint → push-gate → CLAUDE.md line count.
 ## 2026-08-28
 
 **Policy fix (found by the owner watching the loop run):**
-- product sessions never write to maya. The upstream rule's old wording
+- `8f4ead0` product sessions never write to maya. The upstream rule's old wording
   ("apply it to the maya repo too") let a pati session push straight to
   maya — technically compliant, but it skipped the owner's approval moment
   and pulled a product session into infrastructure maintenance. The path is
@@ -39,9 +41,18 @@ constraint → push-gate → CLAUDE.md line count.
   tool's process group, so the tool call hung for its full timeout and then
   killed the server with it.
 
+**Flow codified:**
+- `d93bd76` downstream ports written into /update-stack: three-way check
+  (birth template vs new template vs product file), deliberate divergences
+  never clobbered, fill-class files carry ideas not bytes, every port bumps
+  the product's .maya-version so the harvest base stays true. pati bumped
+  to this base (`d08ee2a` in pati, `3feb26c` registry).
+
 **Housekeeping:**
-- changelog restructured to match reality: rolling, dated, commit-addressed
-  ("Unreleased"/"v0.1.0" implied a release process maya doesn't have).
+- `e512795` changelog restructured to match reality: rolling, dated,
+  commit-addressed ("Unreleased"/"v0.1.0" implied a release process maya
+  doesn't have); merged as `f08d609`. `f581856` install.sh's plugin
+  reminder says why it repeats on every run.
 
 ## 2026-08-27
 
