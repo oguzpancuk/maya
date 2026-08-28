@@ -12,6 +12,9 @@ becomes a product's .maya-version base is backfilled IMMEDIATELY, because a
 base must be findable in this ledger. And the ledger's own upkeep
 (backfills, reordering, wording) gets NO entry — otherwise every backfill
 would need a backfill; `git log -- CHANGELOG.md` is its record.
+Entries that touch `template/` — the only zone products inherit — carry the
+marker **(→ products)**: a product is current when it contains every marked
+entry above its `.maya-version`; unmarked entries never create port debt.
 
 ## Ablation watchlist (canonical copy — other files reference this one)
 
@@ -21,7 +24,7 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-28 09:03 · `8e24c43` — first /update-stack run's approved batch
+### 2026-08-28 09:03 · `8e24c43` — first /update-stack run's approved batch (→ products)
 First real monthly cycle, run on the owner's machine. Adopted harvests:
 Turkish skill triggers (H1), generalized prettier fallback for multi-package
 repos (H2, supersedes the walk-up-only version), verify.sh skeleton rules
@@ -61,19 +64,19 @@ instruction is the only immediate exception.
 "Unreleased"/"v0.1.0" implied a release process maya doesn't have: main is
 live, products pin commits.
 
-### 2026-08-28 08:05 · `2352bd5` — init.sh.example detaches servers
+### 2026-08-28 08:05 · `2352bd5` — init.sh.example detaches servers (→ products)
 Harvested from pati: plain `nohup … &` stayed in the agent shell tool's
 process group — the tool call hung, then killed the server with it. Servers
 now start in their own session (setsid).
 
-### 2026-08-28 07:45 · `1dfbd00` — push-gate force check made argument-aware
+### 2026-08-28 07:45 · `1dfbd00` — push-gate force check made argument-aware (→ products)
 Harvested from pati: the whole-line force regex tripped on a commit message
 mentioning "git push -f" — and then blocked the fix attempt itself. Now
 tokenizes with shlex, inspects only the push segment's own arguments;
 unplaceable `$(...)` pushes fall back to the whole-line scan; unbalanced
 quotes fail closed. 18-case suite at tests/push-gate-test.sh.
 
-### 2026-08-28 07:40 · `4299a26` — first harvest from pati
+### 2026-08-28 07:40 · `4299a26` — first harvest from pati (→ products)
 format-changed.sh finds the nearest prettier by walking up from the edited
 file instead of assuming the repo root (pati: multi-package repo, no root
 package.json — the hook silently no-oped).
@@ -99,7 +102,7 @@ caught twice; one-off bugs stay one-off.
 - `eacc923` monthly weight check guards the always-loaded layer against
   bloat; repo size is not weight.
 
-### 2026-08-27 10:50 · `90d61dc` — upstream flow opened
+### 2026-08-27 10:50 · `90d61dc` — upstream flow opened (→ products)
 Product-born fixes to template-origin files flow back: proposed, or parked
 in the product's NOTES.md "upstream candidates" for harvest.
 (Tightened on 08-28: product sessions never write to maya directly.)
@@ -108,7 +111,7 @@ in the product's NOTES.md "upstream candidates" for harvest.
 The battery is born with the walking skeleton, never backfilled; a later
 standalone "testing task" is named a planning failure.
 
-### 2026-08-27 10:14 · `fee3fac` — hardening pass
+### 2026-08-27 10:14 · `fee3fac` — hardening pass (→ products)
 From the adversarial scaffold review; 19 attack cases verified.
 - push-gate: command-position matching, `-C`/`-c` bypass closed, force
   pushes blocked outright, 600s timeout, fail-closed parsing.
@@ -119,7 +122,7 @@ From the adversarial scaffold review; 19 attack cases verified.
 - install.sh: CLAUDE.md copied instead of symlinked (desktop Cowork skips a
   symlinked user CLAUDE.md); empty-glob guards.
 
-### 2026-08-27 09:59 · `3c3ad6f` — initial scaffold
+### 2026-08-27 09:59 · `3c3ad6f` — initial scaffold (→ products)
 Built from the Phase 1 research pass (factory repo, docs/research-notes.md).
 - `global/`: personal CLAUDE.md; skills /spec, /mvp-scope, /release-notes,
   /new-product, /update-stack; researcher agent; install.sh.
