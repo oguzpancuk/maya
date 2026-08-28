@@ -94,6 +94,11 @@ expire with model releases (that's the ablation watchlist's job); they
 expire when the product changes, and this scan is what notices.
 
 ## 6. Report (never act)
+Open the report by naming the maya commit (and clone time) the analysis ran
+against; if origin/main moves during the run, say so and offer a rerun —
+a report must never silently describe a maya that no longer exists. And the
+mirror rule for every other session: while an update run is active, hold
+maya pushes until it reports.
 A table: change | affects (global / template / a product) | recommendation
 (adopt / ignore / trial) | effort. Explicitly flag anything that means the
 maya template should change so future products inherit the fix — and list

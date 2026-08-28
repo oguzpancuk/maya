@@ -31,6 +31,13 @@ while :; do
   if [ "$dir" = "$proj" ] || [ "$dir" = "/" ]; then break; fi
   dir="$(dirname "$dir")"
 done
+if [ -z "$prettier" ]; then
+  # Multi-package repo with no root package.json: fall back to any
+  # first-level package's prettier (config still resolves per-file).
+  for cand in "$proj"/*/node_modules/.bin/prettier; do
+    if [ -x "$cand" ]; then prettier="$cand"; break; fi
+  done
+fi
 if [ -n "$prettier" ]; then
   "$prettier" --write --ignore-unknown "$file_path" >/dev/null 2>&1 || true
 fi

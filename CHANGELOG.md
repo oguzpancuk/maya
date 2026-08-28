@@ -17,6 +17,19 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
+### 2026-08-28 ~10:30 — first /update-stack run's approved batch
+First real monthly cycle, run on the owner's machine. Adopted harvests:
+Turkish skill triggers (H1), generalized prettier fallback for multi-package
+repos (H2, supersedes the walk-up-only version), verify.sh skeleton rules
+in the [STACK] example — attempt-all + deps-missing-is-FAIL (H3), loop.md
+local-device handoff bound (H4). install.sh drops the code-review plugin
+line (/code-review and /security-review are built into recent CLI).
+Coordination lessons from a mid-run maya push (the cloud session's own
+mistake): reports stamp the maya commit they analyzed; other sessions hold
+maya pushes while a run is active. Related pati fix: `npm run seed` removed
+from the allowlist — it contradicted CLAUDE.md's "ask first" for a command
+that wipes every table (report's best catch).
+
 ### 2026-08-28 08:47–08:56 · `8c2e508` `68db6b5` — ledger format settled
 Owner requests: every entry stamped with its commit's real time (UTC,
 normalized — two machines commit in different timezones), newest first.

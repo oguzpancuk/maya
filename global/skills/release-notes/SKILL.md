@@ -1,6 +1,6 @@
 ---
 name: release-notes
-description: Generate release notes from git history between two refs. Use when cutting a release, tagging, or asked "what changed since X".
+description: Generate release notes from git history between two refs. Use when cutting a release, tagging, or asked "what changed since X" / "sürüm notu çıkar".
 argument-hint: [from-ref] [to-ref, default HEAD]
 ---
 

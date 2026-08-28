@@ -1,6 +1,6 @@
 ---
 name: spec
-description: Write or revise a product PRD (docs/PRD.md) through structured questioning. Use when starting a new product or feature area, or when asked to "write the spec/PRD". The planner role — kept deliberately even as models improve, because under-scoping persists across model generations.
+description: Write or revise a product PRD (docs/PRD.md) through structured questioning. Use when starting a new product or feature area, or when asked to "write the spec/PRD" / "spec yaz" / "PRD yaz". The planner role — kept deliberately even as models improve, because under-scoping persists across model generations.
 argument-hint: [product-or-feature name]
 ---
 

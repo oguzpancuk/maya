@@ -8,5 +8,7 @@ that yields real work, do it, then report and end the tick.
 3. Tidy: if neither applies, check docs/NOTES.md for stale open questions I
    can now answer from the code; answer at most one, then stop.
 
-Bounds: never start a second feature in one tick; never touch deploy; if
-nothing is actionable, say "quiet tick" and stop — do not invent work.
+Bounds: never start a second feature in one tick; never touch deploy; work
+needing a local device or service this session cannot reach: do not
+attempt it — write the handoff into docs/NOTES.md. If nothing is
+actionable, say "quiet tick" and stop — do not invent work.
