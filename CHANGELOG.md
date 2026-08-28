@@ -9,7 +9,9 @@ and the reasons are the evidence. One mechanical note: an entry that lands
 in the very commit it describes cannot carry its own hash (a commit cannot
 know its own id) — the next changelog edit backfills it; a commit that
 becomes a product's .maya-version base is backfilled IMMEDIATELY, because a
-base must be findable in this ledger.
+base must be findable in this ledger. And the ledger's own upkeep
+(backfills, reordering, wording) gets NO entry — otherwise every backfill
+would need a backfill; `git log -- CHANGELOG.md` is its record.
 
 ## Ablation watchlist (canonical copy — other files reference this one)
 
