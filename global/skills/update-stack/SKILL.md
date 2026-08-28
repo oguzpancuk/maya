@@ -60,6 +60,21 @@ locally — a hardened hook, a better rule, a new skill — is an upstream
 candidate: list it in the report with the diff hunk, so approved ones get
 applied to maya (and CHANGELOG) and every future product inherits the fix.
 
+## 4b. Downstream ports (maya -> products)
+Template changes flow DOWN with a three-way check per product file:
+template@(the product's .maya-version) vs template@HEAD vs the product's
+current file.
+- Unmodified in the product (matches its birth template): copy the new
+  version, with my approval.
+- Deliberately diverged (a filled [STACK] slot, a product adaptation):
+  NEVER clobber — judge whether the template change still applies; port it
+  as a patch, or record "superseded locally" with one line of why.
+- Fill-class files (CLAUDE.md, verify.sh, loop.md, docs skeleton, init.sh)
+  diverge by design: port ideas, never bytes.
+After porting, bump the product's .maya-version to the maya commit ported
+to — it is the harvest's diff BASE; a stale base re-flags already-ported
+files and mistakes ports for product-born improvements.
+
 ## 5. Weight check (is maya getting fat?)
 Weigh the ALWAYS-LOADED layer — the only part whose growth costs every turn:
 global CLAUDE.md line count, number of global skills and total description
