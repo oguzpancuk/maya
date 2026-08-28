@@ -48,7 +48,8 @@ for agent in "$MAYA_DIR"/global/agents/*.md; do
 done
 
 echo ""
-echo "Done. Remaining manual steps (one-time, inside any Claude Code session):"
+echo "Done. Plugin checklist (this script cannot see what is already installed,"
+echo "so this list prints on EVERY run — skip anything you installed before):"
 echo "  /plugin install code-review@claude-plugins-official"
 echo "  /plugin install commit-commands@claude-plugins-official"
 echo "  /plugin install security-guidance@claude-plugins-official"
