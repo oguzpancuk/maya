@@ -16,6 +16,15 @@ constraint → push-gate → CLAUDE.md line count.
 
 ## 2026-08-28
 
+**Policy fix (found by the owner watching the loop run):**
+- product sessions never write to maya. The upstream rule's old wording
+  ("apply it to the maya repo too") let a pati session push straight to
+  maya — technically compliant, but it skipped the owner's approval moment
+  and pulled a product session into infrastructure maintenance. The path is
+  now: park in the product's NOTES.md → /update-stack harvests → owner
+  approves → maya commit. Explicit owner instruction remains the only
+  immediate path.
+
 **Harvested from pati:**
 - `1dfbd00` push-gate: the force-push check scanned the WHOLE command line,
   so a commit message mentioning "git push -f" chained with `&& git push`

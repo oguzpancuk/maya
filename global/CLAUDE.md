@@ -47,9 +47,13 @@ Never let a degraded read become a destructive write.
   into a rule is how CLAUDE.md gets fat.
 - Upstream rule: if a fix or improvement lands in a file that came from the
   maya template (.claude/ hooks, agents, skills, contracts/, CLAUDE.md
-  sections), it belongs to every future product — apply it to the maya repo
-  too, or when maya isn't checked out, record it in the product's
-  docs/NOTES.md under "upstream candidates" so /update-stack harvests it.
+  sections), it belongs to every future product — but a product session
+  NEVER writes to the maya repo, even when it is checked out. Record the
+  candidate in the product's docs/NOTES.md under "upstream candidates"
+  (date · file · what/why, with the diff hunk when small); /update-stack
+  harvests these and applies them WITH MY APPROVAL, in a maya-context
+  session. The only exception is my explicit in-the-moment instruction
+  ("apply this to maya now").
 
 ## Cost discipline
 Every addition to context (plugin, MCP server, CLAUDE.md line) must justify
