@@ -121,8 +121,13 @@ merge on overlap; **every gate tested before the commit lands**.
 5. Fill the [STACK] slots from the product's real commands; record any
    deliberate divergence from the template with one line of why.
 6. Add the "Upstream candidates" section to the product's NOTES.md.
-7. Write maya's current commit to `.maya-version`; register the product in
-   `PRODUCTS.md`.
+7. Write maya's current commit to `.maya-version` (part of the product's
+   integration commit). Registering the product in maya's `PRODUCTS.md` is
+   a MAYA write — the integrating product session does not push it (product
+   sessions never write to maya): either do it yourself in a maya-context
+   session, or simply let the next /update-stack run catch it — an
+   unregistered `.maya-version` repo is flagged "unregistered — add it" by
+   the harvest's safety net.
 8. Test the gates with real cases before committing: a force push must
    block, a red battery must block a push, a non-push command must pass,
    the battery must FAIL honestly where deps are missing.
