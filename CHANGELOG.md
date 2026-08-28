@@ -7,9 +7,12 @@ latest change is always at the top), every entry stamped with its commit's
 time in UTC. Removals are listed with their reasons: deletion is a feature,
 and the reasons are the evidence. One mechanical note: an entry that lands
 in the very commit it describes cannot carry its own hash (a commit cannot
-know its own id) — the next changelog edit backfills it; a commit that
-becomes a product's .maya-version base is backfilled IMMEDIATELY, because a
-base must be findable in this ledger. And the ledger's own upkeep
+know its own id) — the next changelog edit backfills it — EXCEPT an entry
+marked (→ products), whose hash is backfilled immediately (a tiny follow-up
+ledger commit in the same session): product currency is read against marked
+entries, so a marked entry must be identifiable the moment it exists. A
+commit that becomes a product's .maya-version base is the special case of
+the same rule. And the ledger's own upkeep
 (backfills, reordering, wording) gets NO entry — otherwise every backfill
 would need a backfill; `git log -- CHANGELOG.md` is its record.
 Entries that touch `template/` — the only zone products inherit — carry the
