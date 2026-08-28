@@ -6,4 +6,4 @@ invisible to the harvest — that is why registration is part of instantiation.
 
 | Product | Repo | Local path | Instantiated at (maya commit) |
 |---|---|---|---|
-| pati | https://github.com/oguzpancuk/pati | ~/dev/pati (Mac) | 8e24c43 |
+| pati | https://github.com/oguzpancuk/pati | ~/dev/pati (Mac) ⚠ UNVERIFIED — first update run found no checkout there; find the real path and fix this cell | 8e24c43 |
