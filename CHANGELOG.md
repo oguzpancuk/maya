@@ -18,6 +18,11 @@ deletion is a feature, and the reasons are the evidence.
   whole-line scan; unbalanced quotes fail closed. `tests/push-gate-test.sh`
   holds the 18-case suite (run it after any edit to the gate). Found in pati.
 
+- init.sh.example: background servers are started in their own session
+  (`perl … POSIX::setsid`). Lesson from pati's first init.sh: a plain
+  `nohup … &` stays in the agent shell tool's process group, so the tool
+  call hung for its full timeout and then killed the server with it.
+
 ## v0.1.0 — 2026-08-27
 
 Initial scaffold, built from the Phase 1 research pass
