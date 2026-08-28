@@ -71,7 +71,11 @@ current file.
   as a patch, or record "superseded locally" with one line of why.
 - Fill-class files (CLAUDE.md, verify.sh, loop.md, docs skeleton, init.sh)
   diverge by design: port ideas, never bytes.
-After porting, bump the product's .maya-version to the maya commit ported
+Apply ports only to a PULLED, CLEAN product checkout: `git pull` first
+(the diff came from GitHub — the checkout must match it), and postpone the
+port if `git status --porcelain` is not empty (never mix a port into
+someone's uncommitted work). After porting, bump the product's
+.maya-version to the maya commit ported
 to — it is the harvest's diff BASE; a stale base re-flags already-ported
 files and mistakes ports for product-born improvements.
 
