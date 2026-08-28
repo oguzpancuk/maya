@@ -9,6 +9,15 @@ deletion is a feature, and the reasons are the evidence.
   instead of assuming the repo root — first harvested lesson, from pati
   (multi-package repo, no root package.json; the hook silently no-oped).
 
+- push-gate: the force-push check scanned the WHOLE command line, so a
+  commit whose message mentioned "git push -f" chained with `&& git push`
+  was blocked — and the hook then blocked the Bash call that tried to fix
+  the hook. The check now tokenizes with shlex (quoted strings stay whole),
+  finds the `git [opts] push` segment and inspects only its own arguments;
+  `$(...)`/backtick pushes the tokenizer cannot place fall back to the old
+  whole-line scan; unbalanced quotes fail closed. `tests/push-gate-test.sh`
+  holds the 18-case suite (run it after any edit to the gate). Found in pati.
+
 ## v0.1.0 — 2026-08-27
 
 Initial scaffold, built from the Phase 1 research pass
