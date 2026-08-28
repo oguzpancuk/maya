@@ -3,6 +3,12 @@
 All notable changes to maya. Removals are listed with their reasons —
 deletion is a feature, and the reasons are the evidence.
 
+## Unreleased
+
+- format-changed.sh: locate prettier by walking up from the edited file
+  instead of assuming the repo root — first harvested lesson, from pati
+  (multi-package repo, no root package.json; the hook silently no-oped).
+
 ## v0.1.0 — 2026-08-27
 
 Initial scaffold, built from the Phase 1 research pass
