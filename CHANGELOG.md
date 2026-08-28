@@ -7,7 +7,9 @@ latest change is always at the top), every entry stamped with its commit's
 time in UTC. Removals are listed with their reasons: deletion is a feature,
 and the reasons are the evidence. One mechanical note: an entry that lands
 in the very commit it describes cannot carry its own hash (a commit cannot
-know its own id) — the next changelog edit backfills it.
+know its own id) — the next changelog edit backfills it; a commit that
+becomes a product's .maya-version base is backfilled IMMEDIATELY, because a
+base must be findable in this ledger.
 
 ## Ablation watchlist (canonical copy — other files reference this one)
 
@@ -17,7 +19,7 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-28 ~10:30 — first /update-stack run's approved batch
+### 2026-08-28 09:03 · `8e24c43` — first /update-stack run's approved batch
 First real monthly cycle, run on the owner's machine. Adopted harvests:
 Turkish skill triggers (H1), generalized prettier fallback for multi-package
 repos (H2, supersedes the walk-up-only version), verify.sh skeleton rules
