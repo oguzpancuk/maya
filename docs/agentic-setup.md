@@ -98,6 +98,40 @@ Updating individual pieces:
 - Template: edit in maya; existing products adopt by diffing their `.claude/`
   against `template/` (their `.maya-version` names the base commit).
 
+## 4a. Integrating an EXISTING product (brownfield)
+
+The path pati took (reference: pati commit `e8c6869`). Principles first:
+**minimal merge** — never replace a working `.claude/`; **no second tool for
+the same job** — check the product's existing skills/agents/commands and
+merge on overlap; **every gate tested before the commit lands**.
+
+1. Read the product's CLAUDE.md and conventions FIRST — its rules govern
+   how you commit, branch, and name things there.
+2. Add the sync-class files from `template/`: hooks (format, push-gate) and
+   `contracts/`. Make `verify.sh` the SINGLE implementation of whatever
+   verification battery the product already documents — if a /verify-style
+   command exists, rewire it to call the script rather than adding a rival.
+3. Add `evaluator-qa`, adapted: state explicitly how it differs from the
+   product's existing reviewer/QA agents, and what it must hand off instead
+   of guessing (e.g. device-only checks).
+4. Wire the hooks into `.claude/settings.json` PRESERVING the product's
+   existing permissions; add the 600s timeout on the push-gate.
+5. Fill the [STACK] slots from the product's real commands; record any
+   deliberate divergence from the template with one line of why.
+6. Add the "Upstream candidates" section to the product's NOTES.md.
+7. Write maya's current commit to `.maya-version`; register the product in
+   `PRODUCTS.md`.
+8. Test the gates with real cases before committing: a force push must
+   block, a red battery must block a push, a non-push command must pass,
+   the battery must FAIL honestly where deps are missing.
+9. Land it as ONE revertible commit ("Integrate the maya layer: …") so
+   opting out later is a single `git revert`.
+
+Expect early friction: template assumptions meet an unknown layout (pati's
+prettier lived in a subpackage and the format hook silently no-oped).
+That is normal brownfield tax — each such lesson is harvested upstream so
+the next integration pays less.
+
 ## 4. Instantiating a new product
 
 Run `/new-product <name>`. It: copies `template/` (dotfiles included),
