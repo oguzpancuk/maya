@@ -17,8 +17,11 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-28 08:47 — this ledger went chronological with timestamps
-Owner request: read top-to-bottom as a story, every entry stamped (UTC).
+### 2026-08-28 08:47–08:56 · `8c2e508` `68db6b5` — ledger format settled
+Owner requests: every entry stamped with its commit's real time (UTC,
+normalized — two machines commit in different timezones), newest first.
+Pure ledger maintenance (backfills like this one) gets no entry of its own;
+git log is its record.
 
 ### 2026-08-28 08:28–08:34 · `f581856` `e03d207` — housekeeping
 install.sh's plugin reminder says why it repeats; hash backfill convention
