@@ -2,10 +2,11 @@
 
 maya is a ROLLING repo: there are no releases. Whatever is on `main` is
 live, and every product pins the exact commit it derives from in its
-`.maya-version` — so entries here are dated, newest first, each naming its
-commit. Removals are listed with their reasons: deletion is a feature, and
-the reasons are the evidence. One mechanical note: an entry that lands in
-the very commit it describes cannot carry its own hash (a commit cannot
+`.maya-version`. This ledger is CHRONOLOGICAL (oldest first — read top to
+bottom as the story of the system), every entry stamped with its commit's
+time in UTC. Removals are listed with their reasons: deletion is a feature,
+and the reasons are the evidence. One mechanical note: an entry that lands
+in the very commit it describes cannot carry its own hash (a commit cannot
 know its own id) — the next changelog edit backfills it.
 
 ## Ablation watchlist (canonical copy — other files reference this one)
@@ -16,74 +17,17 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-## 2026-08-28
+### 2026-08-27 09:59 · `3c3ad6f` — initial scaffold
+Built from the Phase 1 research pass (factory repo, docs/research-notes.md).
+- `global/`: personal CLAUDE.md; skills /spec, /mvp-scope, /release-notes,
+  /new-product, /update-stack; researcher agent; install.sh.
+- `template/`: stack-agnostic CLAUDE.md with [STACK] slots; format/push-gate
+  hooks + verify.sh single battery; code-reviewer + evaluator-qa agents;
+  /deploy-checklist; loop.md; docs skeleton (PRD/ROADMAP/NOTES/ADR); CI
+  running verify.sh; unattended-run contracts (off by default).
 
-**Policy fix (found by the owner watching the loop run):**
-- `8f4ead0` product sessions never write to maya. The upstream rule's old wording
-  ("apply it to the maya repo too") let a pati session push straight to
-  maya — technically compliant, but it skipped the owner's approval moment
-  and pulled a product session into infrastructure maintenance. The path is
-  now: park in the product's NOTES.md → /update-stack harvests → owner
-  approves → maya commit. Explicit owner instruction remains the only
-  immediate path.
-
-**Harvested from pati:**
-- `1dfbd00` push-gate: the force-push check scanned the WHOLE command line,
-  so a commit message mentioning "git push -f" chained with `&& git push`
-  was blocked — and the hook then blocked the Bash call that tried to fix
-  the hook. Now tokenizes with shlex (quoted strings stay whole), finds the
-  `git [opts] push` segment and inspects only its own arguments;
-  `$(...)`/backtick pushes the tokenizer cannot place fall back to the
-  whole-line scan; unbalanced quotes fail closed. `tests/push-gate-test.sh`
-  holds the 18-case suite — run it after any edit to the gate.
-- `2352bd5` init.sh.example: background servers start in their own session
-  (`perl … POSIX::setsid`) — a plain `nohup … &` stayed in the agent shell
-  tool's process group, so the tool call hung for its full timeout and then
-  killed the server with it.
-
-**Flow codified:**
-- `d93bd76` downstream ports written into /update-stack: three-way check
-  (birth template vs new template vs product file), deliberate divergences
-  never clobbered, fill-class files carry ideas not bytes, every port bumps
-  the product's .maya-version so the harvest base stays true. pati bumped
-  to this base (`d08ee2a` in pati, `3feb26c` registry).
-
-**Housekeeping:**
-- `e512795` changelog restructured to match reality: rolling, dated,
-  commit-addressed ("Unreleased"/"v0.1.0" implied a release process maya
-  doesn't have); merged as `f08d609`. `f581856` install.sh's plugin
-  reminder says why it repeats on every run.
-
-## 2026-08-27
-
-**Harvested from products (first real harvest):**
-- `4299a26` format-changed.sh finds the nearest prettier by walking up from
-  the edited file instead of assuming the repo root. Lesson from pati:
-  multi-package repo with no root package.json — the hook silently no-oped.
-
-**Products:**
-- `89c656d` pati registered in PRODUCTS.md (integrated as a minimal merge;
-  pati carries battery, gates, evaluator-qa, contracts, .maya-version).
-
-**Rules and mechanisms added while closing gaps found in review/Q&A:**
-- `3b674a3` dead-rule scan: domain-experience rules expire with the product,
-  not the model — weight check flags rules whose referents no longer exist.
-- `195f2b2` recurrence rule: machine-caught findings (QA/CI/hooks) compound
-  when the same class is caught twice; one-off bugs stay one-off.
-- `eacc923` monthly weight check guards the always-loaded layer against
-  bloat; repo size is not weight.
-- `ff03ef2` harvest diffs only fresh GitHub state (a local clone can be
-  stale or dirty); `19ac8fa` shallow-clone fallback with the machine's own
-  git credentials.
-- `82b469b` PRODUCTS.md registry: unreachable products report as "skipped",
-  never vanish silently.
-- `90d61dc` upstream flow: product-born fixes to template-origin files are
-  proposed back to maya, or parked in the product's NOTES.md for harvest.
-- `9a6f7a5` test infra is the mandatory FIRST walking-skeleton step — the
-  battery is born with the skeleton, never backfilled.
-
-**Hardening pass (`fee3fac`, from the adversarial scaffold review — 19
-attack cases verified):**
+### 2026-08-27 10:14 · `fee3fac` — hardening pass
+From the adversarial scaffold review; 19 attack cases verified.
 - push-gate: command-position matching, `-C`/`-c` bypass closed, force
   pushes blocked outright, 600s timeout, fail-closed parsing.
 - evidence gate: session-keyed read logs; reading the feature list or
@@ -93,10 +37,73 @@ attack cases verified):**
 - install.sh: CLAUDE.md copied instead of symlinked (desktop Cowork skips a
   symlinked user CLAUDE.md); empty-glob guards.
 
-**Initial scaffold (`3c3ad6f`):**
-- `global/`: personal CLAUDE.md; skills /spec, /mvp-scope, /release-notes,
-  /new-product, /update-stack; researcher agent; install.sh.
-- `template/`: stack-agnostic CLAUDE.md with [STACK] slots; format/push-gate
-  hooks + verify.sh single battery; code-reviewer + evaluator-qa agents;
-  /deploy-checklist; loop.md; docs skeleton (PRD/ROADMAP/NOTES/ADR); CI
-  running verify.sh; unattended-run contracts (off by default).
+### 2026-08-27 10:47 · `9a6f7a5` — test infra is the first skeleton step
+The battery is born with the walking skeleton, never backfilled; a later
+standalone "testing task" is named a planning failure.
+
+### 2026-08-27 10:50 · `90d61dc` — upstream flow opened
+Product-born fixes to template-origin files flow back: proposed, or parked
+in the product's NOTES.md "upstream candidates" for harvest.
+(Tightened on 08-28: product sessions never write to maya directly.)
+
+### 2026-08-27 10:53–10:57 · `82b469b` `19ac8fa` `ff03ef2` `eacc923` — harvest machinery
+- `82b469b` PRODUCTS.md registry: unreachable products report as "skipped",
+  never vanish silently.
+- `19ac8fa` harvest can shallow-clone from GitHub with the machine's own
+  credentials; `ff03ef2` GitHub state becomes the ONLY diff source (local
+  clones can be stale or dirty).
+- `eacc923` monthly weight check guards the always-loaded layer against
+  bloat; repo size is not weight.
+
+### 2026-08-27 11:17 · `195f2b2` — recurrence rule
+Machine-caught findings (QA/CI/hooks) compound when the same class is
+caught twice; one-off bugs stay one-off.
+
+### 2026-08-27 11:21 · `3b674a3` — dead-rule scan
+Domain-experience rules expire with the product, not the model; the weight
+check flags rules whose referents no longer exist.
+
+### 2026-08-28 06:53 · `89c656d` — pati registered
+First product on the maya layer (minimal merge: battery, gates,
+evaluator-qa, contracts, .maya-version).
+
+### 2026-08-28 07:40 · `4299a26` — first harvest from pati
+format-changed.sh finds the nearest prettier by walking up from the edited
+file instead of assuming the repo root (pati: multi-package repo, no root
+package.json — the hook silently no-oped).
+
+### 2026-08-28 07:45 · `1dfbd00` — push-gate force check made argument-aware
+Harvested from pati: the whole-line force regex tripped on a commit message
+mentioning "git push -f" — and then blocked the fix attempt itself. Now
+tokenizes with shlex, inspects only the push segment's own arguments;
+unplaceable `$(...)` pushes fall back to the whole-line scan; unbalanced
+quotes fail closed. 18-case suite at tests/push-gate-test.sh.
+
+### 2026-08-28 08:05 · `2352bd5` — init.sh.example detaches servers
+Harvested from pati: plain `nohup … &` stayed in the agent shell tool's
+process group — the tool call hung, then killed the server with it. Servers
+now start in their own session (setsid).
+
+### 2026-08-28 08:15 · `e512795` — changelog went rolling (merged `f08d609`)
+"Unreleased"/"v0.1.0" implied a release process maya doesn't have: main is
+live, products pin commits.
+
+### 2026-08-28 08:20 · `8f4ead0` — policy: product sessions never write to maya
+Found by the owner watching the loop run: the old wording ("apply it to the
+maya repo too") let a pati session push straight to maya, skipping the
+approval moment. Path is now park → harvest → approve; explicit owner
+instruction is the only immediate exception.
+
+### 2026-08-28 08:24 · `d93bd76` — downstream port flow codified
+Three-way check (birth template vs new template vs product file);
+deliberate divergences never clobbered; fill-class files carry ideas, not
+bytes; every port bumps the product's .maya-version so the harvest base
+stays true. pati bumped to this base (`d08ee2a` in pati; registry
+`3feb26c`).
+
+### 2026-08-28 08:28–08:34 · `f581856` `e03d207` — housekeeping
+install.sh's plugin reminder says why it repeats; hash backfill convention
+stated and applied.
+
+### 2026-08-28 08:47 — this ledger went chronological with timestamps
+Owner request: read top-to-bottom as a story, every entry stamped (UTC).
