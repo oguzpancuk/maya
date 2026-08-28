@@ -44,6 +44,7 @@ Monthly maintenance: run `/update-stack`.
 
 ## Versioning
 
-Products record the maya commit they were instantiated from in `.maya-version`.
+maya is rolling: no releases, no version numbers — `main` is live. Products
+record the maya commit they were instantiated from in `.maya-version`.
 Template changes land here first; `/update-stack` flags when a product should
 pull them. See CHANGELOG.md.

@@ -1,42 +1,62 @@
 # Changelog
 
-All notable changes to maya. Removals are listed with their reasons —
-deletion is a feature, and the reasons are the evidence.
+maya is a ROLLING repo: there are no releases. Whatever is on `main` is
+live, and every product pins the exact commit it derives from in its
+`.maya-version` — so entries here are dated, newest first, each naming its
+commit. Removals are listed with their reasons: deletion is a feature, and
+the reasons are the evidence.
 
-## Unreleased
+## Ablation watchlist (canonical copy — other files reference this one)
 
-- format-changed.sh: locate prettier by walking up from the edited file
-  instead of assuming the repo root — first harvested lesson, from pati
-  (multi-package repo, no root package.json; the hook silently no-oped).
+Re-test on each model release, ONE component at a time, in this order:
+evidence-gate → evaluator-qa invocation frequency → one-feature-per-session
+constraint → push-gate → CLAUDE.md line count.
 
-## v0.1.0 — 2026-08-27
+---
 
-Initial scaffold, built from the Phase 1 research pass
-(factory repo, `docs/research-notes.md`):
+## 2026-08-27
 
-- `global/`: personal CLAUDE.md; skills: /spec, /mvp-scope, /release-notes,
-  /new-product, /update-stack; agent: researcher.
-- `template/`: stack-agnostic project CLAUDE.md; hooks: format-on-edit,
-  push-gate (+ verify.sh stack slot); agents: code-reviewer, evaluator-qa;
-  skill: /deploy-checklist; loop.md; docs skeleton (PRD/ROADMAP/NOTES/ADR);
-  CI skeleton that runs verify.sh; unattended-run contracts
-  (feature_list + evidence gate, off by default).
-- Ablation watchlist (CANONICAL copy — other files reference this one;
-  re-test on each model release, in order): evidence-gate → evaluator-qa
-  invocation frequency → one-feature-per-session constraint → push-gate →
-  CLAUDE.md line count.
+**Harvested from products (first real harvest):**
+- `4299a26` format-changed.sh finds the nearest prettier by walking up from
+  the edited file instead of assuming the repo root. Lesson from pati:
+  multi-package repo with no root package.json — the hook silently no-oped.
 
-### Hardening pass (same day, from the adversarial scaffold review)
-- push-gate: command-position matching (no more false blocks on
-  `git commit -m "... git push ..."`), `-C`/`-c` bypass closed, force pushes
-  (`--force`/`-f`/`--force-with-lease`/`+refspec`) blocked outright,
-  600s hook timeout, parse failures fail closed, verify warnings forwarded.
-- evidence gate: per-session read logs (session_id-keyed, pruned after a
-  day), evidence pattern no longer satisfied by reading the feature list or
-  any config; fails closed without python3.
-- new bash-guard hook closes the shell bypass (sed/tee/redirect writes to
-  feature_list.json; AGENT_STOP now halts Bash too).
-- settings.json: dead `Grep(**)`/`Glob(**)` rules removed (covered by
-  `Read(**)`; the Glob rule warns at startup per current docs).
-- install.sh: CLAUDE.md is copied instead of symlinked (desktop Cowork skips
-  a symlinked user CLAUDE.md); glob guards for trimmed layers.
+**Products:**
+- `89c656d` pati registered in PRODUCTS.md (integrated as a minimal merge;
+  pati carries battery, gates, evaluator-qa, contracts, .maya-version).
+
+**Rules and mechanisms added while closing gaps found in review/Q&A:**
+- `3b674a3` dead-rule scan: domain-experience rules expire with the product,
+  not the model — weight check flags rules whose referents no longer exist.
+- `195f2b2` recurrence rule: machine-caught findings (QA/CI/hooks) compound
+  when the same class is caught twice; one-off bugs stay one-off.
+- `eacc923` monthly weight check guards the always-loaded layer against
+  bloat; repo size is not weight.
+- `ff03ef2` harvest diffs only fresh GitHub state (a local clone can be
+  stale or dirty); `19ac8fa` shallow-clone fallback with the machine's own
+  git credentials.
+- `82b469b` PRODUCTS.md registry: unreachable products report as "skipped",
+  never vanish silently.
+- `90d61dc` upstream flow: product-born fixes to template-origin files are
+  proposed back to maya, or parked in the product's NOTES.md for harvest.
+- `9a6f7a5` test infra is the mandatory FIRST walking-skeleton step — the
+  battery is born with the skeleton, never backfilled.
+
+**Hardening pass (`fee3fac`, from the adversarial scaffold review — 19
+attack cases verified):**
+- push-gate: command-position matching, `-C`/`-c` bypass closed, force
+  pushes blocked outright, 600s timeout, fail-closed parsing.
+- evidence gate: session-keyed read logs; reading the feature list or
+  configs no longer counts as evidence; fails closed without python3.
+- new bash-guard: closes the sed/tee/redirect bypass; AGENT_STOP halts Bash.
+- settings.json: dead `Grep(**)`/`Glob(**)` rules removed.
+- install.sh: CLAUDE.md copied instead of symlinked (desktop Cowork skips a
+  symlinked user CLAUDE.md); empty-glob guards.
+
+**Initial scaffold (`3c3ad6f`):**
+- `global/`: personal CLAUDE.md; skills /spec, /mvp-scope, /release-notes,
+  /new-product, /update-stack; researcher agent; install.sh.
+- `template/`: stack-agnostic CLAUDE.md with [STACK] slots; format/push-gate
+  hooks + verify.sh single battery; code-reviewer + evaluator-qa agents;
+  /deploy-checklist; loop.md; docs skeleton (PRD/ROADMAP/NOTES/ADR); CI
+  running verify.sh; unattended-run contracts (off by default).
