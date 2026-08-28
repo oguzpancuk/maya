@@ -14,6 +14,26 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
+## 2026-08-28
+
+**Harvested from pati:**
+- `1dfbd00` push-gate: the force-push check scanned the WHOLE command line,
+  so a commit message mentioning "git push -f" chained with `&& git push`
+  was blocked — and the hook then blocked the Bash call that tried to fix
+  the hook. Now tokenizes with shlex (quoted strings stay whole), finds the
+  `git [opts] push` segment and inspects only its own arguments;
+  `$(...)`/backtick pushes the tokenizer cannot place fall back to the
+  whole-line scan; unbalanced quotes fail closed. `tests/push-gate-test.sh`
+  holds the 18-case suite — run it after any edit to the gate.
+- `2352bd5` init.sh.example: background servers start in their own session
+  (`perl … POSIX::setsid`) — a plain `nohup … &` stayed in the agent shell
+  tool's process group, so the tool call hung for its full timeout and then
+  killed the server with it.
+
+**Housekeeping:**
+- changelog restructured to match reality: rolling, dated, commit-addressed
+  ("Unreleased"/"v0.1.0" implied a release process maya doesn't have).
+
 ## 2026-08-27
 
 **Harvested from products (first real harvest):**
