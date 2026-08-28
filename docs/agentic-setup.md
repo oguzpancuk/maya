@@ -1,8 +1,10 @@
 # Agentic setup — the living manual
 
 What is installed, why, how each piece is updated, and the pitfalls that cost
-real time. The research behind every choice: `docs/research-notes.md` in the
-factory repo (Phase 1, 2026-08-27).
+real time. The research behind every choice: `docs/research-notes.md` (Phase 1,
+2026-08-27; moved here from the factory repo's side branch so maya's
+foundation lives with maya). The Turkish primer/handbook is a private
+claude.ai artifact: https://claude.ai/code/artifact/89e20f3f-114d-4df9-983d-dbb71cbc7e1e
 
 ## 1. The two layers
 
