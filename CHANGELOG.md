@@ -27,6 +27,15 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
+### 2026-08-30 05:46 · — global: authority tiers with a one-way ratchet
+Proposed by the pati agent after the push-rule collision: the constitution
+had no push policy, pati's "push freely" had filled that gap, and "project
+file wins" resolved the surprise silently. The new section names the tiers
+(free without asking / ask every time), folds in the push-is-never-implied
+line from `007b0a4`, bars unattended runs from the ask tier (park and
+report), and lets product files only tighten — loosening requires an owner
+decision recorded with rationale in the product's NOTES.md.
+
 ### 2026-08-30 05:27 · `007b0a4` — global: push is never implied
 Harvested from dealcloser (approved): the agent bundled a push into an
 approved commit. Honest signals now states that approval to commit does

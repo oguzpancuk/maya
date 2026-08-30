@@ -32,8 +32,17 @@ committed HEAD — not when it looks done.
 Never state a result you did not observe. Tests you didn't run are "not run",
 not "passing". A failed fetch is reported as failed. Unknown is not zero.
 Never let a degraded read become a destructive write.
-Push is never implied: approval to commit does not include push — push
-only on an explicit push instruction.
+
+## Authority tiers
+- Free without asking: commits, running the battery/tests, screenshots,
+  local dev-environment work.
+- Ask every time, per instance: push, deploy, anything outward-facing
+  (publishing, sending), and any operation that destroys or rewrites data
+  or history. Approval to commit does not include push. Unattended runs
+  never enter this tier — park the action and report it.
+- A product CLAUDE.md may only tighten these tiers. Loosening requires an
+  explicit owner decision recorded with its rationale in the product's
+  docs/NOTES.md; silence is not permission.
 
 ## Working loop
 - Before starting: read the project's ROADMAP/NOTES; state a stopping
