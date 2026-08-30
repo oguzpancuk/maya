@@ -9,9 +9,10 @@ and the reasons are the evidence. One mechanical note: an entry that lands
 in the very commit it describes cannot carry its own hash (a commit cannot
 know its own id), so EVERY entry's hash is backfilled immediately — a tiny
 follow-up ledger commit in the same session, no exceptions and no
-two-class rule. Relatedly, a product's .maya-version base is always the
-newest (→ products) commit at port time, never plain HEAD, so every base
-is identifiable in the ledger. And the ledger's own upkeep
+two-class rule. Relatedly, a product's .maya-version is the newest
+entry's hash at the end of the update run that last reconciled it — a
+run watermark, never plain HEAD — so every base is identifiable here;
+the (→ products) marker tracks port debt only. And the ledger's own upkeep
 (backfills, reordering, wording) gets NO entry — otherwise every backfill
 would need a backfill; `git log -- CHANGELOG.md` is its record.
 Entries that touch `template/` — the only zone products inherit — carry the
@@ -25,6 +26,14 @@ evidence-gate → evaluator-qa invocation frequency → one-feature-per-session
 constraint → push-gate → CLAUDE.md line count.
 
 ---
+
+### 2026-08-30 06:23 · — bases are run watermarks
+Owner refinement of `8bc0cad`, minutes later: after an update run's
+approved maya changes are pushed, EVERY harvested product's .maya-version
+(port or no port) bumps to the newest CHANGELOG entry's hash — recording
+"reconciled through here", which now covers global rules (4c) and not
+just the template. The (→ products) marker is demoted to pure port-debt
+tracking.
 
 ### 2026-08-30 06:18 · `8bc0cad` — ledger addressability: immediate hashes, marked bases
 Owner decision after catching that both products' .maya-version pointed at

@@ -80,11 +80,14 @@ current file.
 Apply ports only to a PULLED, CLEAN product checkout: `git pull` first
 (the diff came from GitHub — the checkout must match it), and postpone the
 port if `git status --porcelain` is not empty (never mix a port into
-someone's uncommitted work). After porting, bump the product's
-.maya-version to the newest (→ products)-marked maya commit at port time —
-never plain HEAD: the base must be identifiable in the ledger, and only
-marked commits change the template anyway. It is the harvest's diff BASE;
-a stale base re-flags already-ported files and mistakes ports for
+someone's uncommitted work). After the run's approved maya updates are
+committed and PUSHED, bump EVERY harvested product's .maya-version (port
+or no port) to the hash of the newest CHANGELOG entry — the run's
+reconciliation watermark: "this product was checked against everything up
+to here". Never plain HEAD (an entry-less upkeep commit is not
+addressable in the ledger), and not the newest (→ products) commit — that
+marker only tracks port debt. The base is the harvest's diff BASE; a
+stale base re-flags already-ported files and mistakes ports for
 product-born improvements.
 
 ## 4c. Ratchet scan (global -> products)
