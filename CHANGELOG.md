@@ -27,7 +27,7 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-30 06:36 · — the run closes the machine, too
+### 2026-08-30 06:36 · `1b43f16` — the run closes the machine, too
 update-stack's close now runs install.sh itself when the global layer
 changed, and installs missing checklist plugins (with per-instance
 approval, reporting context cost right after). Maintenance commands are
