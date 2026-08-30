@@ -19,7 +19,7 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-30 10:39 · — async-owner defaults, opt-in parallel tracks, consolidation (→ products)
+### 2026-08-30 10:39 · `cd1a40d` — async-owner defaults, opt-in parallel tracks, consolidation (→ products)
 Fourth run's approved batch, harvested from pati's improvement sprint and
 refined with the owner in session. Working loop now defaults to ONE
 serial agent with async-owner behavior: never block on the owner (queue
@@ -39,8 +39,8 @@ trap. Template .gitignore learns .claude/worktrees/ (pati 9b017b3). 4c
 now also reads @-included files (the AGENTS.md case). Deferred by owner:
 parity-test seed, evaluator-qa evidence slot; pati settings.json repair
 goes to the pati agent. Plus a wording-only consolidation pass over
-global/CLAUDE.md (71→75 lines including the new rules), update-stack
-SKILL.md (~150→~115) and this header — semantics unchanged, rationale
+global/CLAUDE.md (71→72 lines, new rules included), update-stack
+SKILL.md (150→108) and this header — semantics unchanged, rationale
 lives here.
 
 ### 2026-08-30 06:40 · `ddbe56d` — watermark bumps belong to the run's close, only
