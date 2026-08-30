@@ -27,7 +27,17 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-30 05:46 · — global: authority tiers with a one-way ratchet
+### 2026-08-30 06:03 · — update-stack learns two blind spots
+Second run of the day, both candidates from pati, both aimed at the skill
+itself. (1) New step 4c, the ratchet scan: template diffs never see the
+global layer, so every run now checks product CLAUDE.md files for lines
+that loosen the authority tiers without a NOTES-recorded owner decision.
+(2) Step 4b, hybrid files: generic sections sync per hunk (template@HEAD
+wins outside [STACK] slots absent a NOTES rationale) instead of falling
+into the per-file "diverged → judge" branch that lost the "yayınla"
+trigger for a cycle.
+
+### 2026-08-30 05:46 · `c091c7b` — global: authority tiers with a one-way ratchet
 Proposed by the pati agent after the push-rule collision: the constitution
 had no push policy, pati's "push freely" had filled that gap, and "project
 file wins" resolved the surprise silently. The new section names the tiers

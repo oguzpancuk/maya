@@ -69,6 +69,12 @@ current file.
 - Deliberately diverged (a filled [STACK] slot, a product adaptation):
   NEVER clobber — judge whether the template change still applies; port it
   as a patch, or record "superseded locally" with one line of why.
+- Hybrid files (a generic half plus [STACK] slots — deploy-checklist is
+  the type case) sync their generic sections PER HUNK, mechanically: for
+  hunks outside the [STACK] slots, template@HEAD wins unless the product's
+  hunk carries its own NOTES-documented rationale. Only the slots are
+  judged per-product. (Motivating miss: a trigger word added to the
+  generic description never reached pati until a later harvest caught it.)
 - Fill-class files (CLAUDE.md, verify.sh, loop.md, docs skeleton, init.sh)
   diverge by design: port ideas, never bytes.
 Apply ports only to a PULLED, CLEAN product checkout: `git pull` first
@@ -78,6 +84,17 @@ someone's uncommitted work). After porting, bump the product's
 .maya-version to the maya commit ported
 to — it is the harvest's diff BASE; a stale base re-flags already-ported
 files and mistakes ports for product-born improvements.
+
+## 4c. Ratchet scan (global -> products)
+4b diffs only TEMPLATE files, so global-layer rules have no enforcer of
+their own. Every run: check each harvested product's CLAUDE.md against the
+global CLAUDE.md's authority tiers (and any other policy rule) for lines
+that LOOSEN them — granting freely what the global layer says to ask
+about. A loosening line backed by an owner decision recorded in that
+product's docs/NOTES.md is listed as a confirmed divergence; one without
+is a finding — the ratchet says products may only tighten. (Motivating
+miss: authority tiers landed while a product still carried "commit + push
+freely"; no template diff would ever have caught it.)
 
 ## 5. Weight check (is maya getting fat?)
 Weigh the ALWAYS-LOADED layer — the only part whose growth costs every turn:
