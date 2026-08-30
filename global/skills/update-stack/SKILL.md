@@ -81,9 +81,11 @@ Apply ports only to a PULLED, CLEAN product checkout: `git pull` first
 (the diff came from GitHub — the checkout must match it), and postpone the
 port if `git status --porcelain` is not empty (never mix a port into
 someone's uncommitted work). After porting, bump the product's
-.maya-version to the maya commit ported
-to — it is the harvest's diff BASE; a stale base re-flags already-ported
-files and mistakes ports for product-born improvements.
+.maya-version to the newest (→ products)-marked maya commit at port time —
+never plain HEAD: the base must be identifiable in the ledger, and only
+marked commits change the template anyway. It is the harvest's diff BASE;
+a stale base re-flags already-ported files and mistakes ports for
+product-born improvements.
 
 ## 4c. Ratchet scan (global -> products)
 4b diffs only TEMPLATE files, so global-layer rules have no enforcer of

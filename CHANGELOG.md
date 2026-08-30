@@ -7,12 +7,11 @@ latest change is always at the top), every entry stamped with its commit's
 time in UTC. Removals are listed with their reasons: deletion is a feature,
 and the reasons are the evidence. One mechanical note: an entry that lands
 in the very commit it describes cannot carry its own hash (a commit cannot
-know its own id) — the next changelog edit backfills it — EXCEPT an entry
-marked (→ products), whose hash is backfilled immediately (a tiny follow-up
-ledger commit in the same session): product currency is read against marked
-entries, so a marked entry must be identifiable the moment it exists. A
-commit that becomes a product's .maya-version base is the special case of
-the same rule. And the ledger's own upkeep
+know its own id), so EVERY entry's hash is backfilled immediately — a tiny
+follow-up ledger commit in the same session, no exceptions and no
+two-class rule. Relatedly, a product's .maya-version base is always the
+newest (→ products) commit at port time, never plain HEAD, so every base
+is identifiable in the ledger. And the ledger's own upkeep
 (backfills, reordering, wording) gets NO entry — otherwise every backfill
 would need a backfill; `git log -- CHANGELOG.md` is its record.
 Entries that touch `template/` — the only zone products inherit — carry the
@@ -27,7 +26,16 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-30 06:03 · — update-stack learns two blind spots
+### 2026-08-30 06:18 · — ledger addressability: immediate hashes, marked bases
+Owner decision after catching that both products' .maya-version pointed at
+`a005446` — a registry docs commit with no ledger entry. Two rules replace
+the old two-class backfill: (1) EVERY entry's hash is backfilled
+immediately by a tiny follow-up ledger commit, marked or not; (2) 4b bumps
+.maya-version to the newest (→ products) commit at port time, never plain
+HEAD, so a base is always identifiable here. Both products' bases
+repointed to `a72d36a` (same template bytes; only the address changes).
+
+### 2026-08-30 06:03 · `c2919b9` — update-stack learns two blind spots
 Second run of the day, both candidates from pati, both aimed at the skill
 itself. (1) New step 4c, the ratchet scan: template diffs never see the
 global layer, so every run now checks product CLAUDE.md files for lines
