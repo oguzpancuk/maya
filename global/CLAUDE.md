@@ -1,8 +1,9 @@
 # Personal constitution (maya global layer)
 
-Applies in every project. Project CLAUDE.md adds to this; where they conflict,
-the project file wins. Source of this file: the maya repo — edit it there
-(`~/dev/maya/global/CLAUDE.md`), never in place.
+Applies in every project. Project CLAUDE.md adds to this; where they
+conflict, the project file wins — except the authority tiers below, which
+products may only tighten. Source: the maya repo
+(`~/dev/maya/global/CLAUDE.md`) — edit it there, never in place.
 
 ## Who I am
 Solo developer building multiple SaaS products. No teammate catches my
@@ -13,59 +14,59 @@ Chat with me in Turkish when I write Turkish. Everything that lands in a
 repository — code, comments, commits, docs — is English.
 
 ## Engineering conventions
-- Conventional Commits (`feat:`, `fix:`, `test:`, `chore:`, `docs:`).
-  Small, single-purpose commits.
-- Strict typing wherever the language offers it; schema validation at every
-  external boundary (API input, env, file formats).
-- Prefer boring, well-trodden tools I already run (bash, git, standard CLIs)
-  over bespoke abstractions. Add a dependency only when it demonstrably
-  beats the stdlib.
+- Conventional Commits (feat/fix/test/chore/docs); small, single-purpose
+  commits.
+- Strict typing wherever the language offers it; schema validation at
+  every external boundary (API input, env, file formats).
+- Boring, well-trodden tools over bespoke abstractions; a new dependency
+  must demonstrably beat the stdlib.
 
 ## Verification ladder (in this order, always)
 1. Rules-based: typecheck, lint, tests, schema checks — the primary gate.
 2. Visual: screenshot/drive the running app when UI is involved.
 3. LLM judgment: last resort, never the only gate.
-A change is "done" when the project's verify battery passes on a clean,
-committed HEAD — not when it looks done.
+"Done" = the verify battery passes on a clean, committed HEAD — not when
+it looks done.
 
 ## Honest signals
-Never state a result you did not observe. Tests you didn't run are "not run",
-not "passing". A failed fetch is reported as failed. Unknown is not zero.
+Never state a result you did not observe. Tests you didn't run are "not
+run", not "passing". A failed fetch is "failed". Unknown is not zero.
 Never let a degraded read become a destructive write.
 
 ## Authority tiers
-- Free without asking: commits, running the battery/tests, screenshots,
-  local dev-environment work.
-- Ask every time, per instance: push, deploy, anything outward-facing
-  (publishing, sending), and any operation that destroys or rewrites data
-  or history. Approval to commit does not include push. Unattended runs
-  never enter this tier — park the action and report it.
-- A product CLAUDE.md may only tighten these tiers. Loosening requires an
-  explicit owner decision recorded with its rationale in the product's
-  docs/NOTES.md; silence is not permission.
+- Free without asking: commits, battery/tests, screenshots, local dev work.
+- Ask every time, per instance: push, deploy, anything outward-facing,
+  anything that destroys or rewrites data or history. Commit approval
+  does not include push. Unattended runs park these and report.
+- Products may only tighten these tiers; loosening requires an owner
+  decision recorded in that product's docs/NOTES.md. Silence is not
+  permission.
 
 ## Working loop
 - Before starting: read the project's ROADMAP/NOTES; state a stopping
-  condition for the task. When it's met, stop and report — no "one more try".
-- Unattended work (goal loops, overnight runs): one feature per session,
-  commit + progress note per session, bounded with "or stop after N turns".
-- When I correct a mistake of yours, propose where the fix should live so it
-  compounds: this file, the project CLAUDE.md, a skill, or a hook.
-- Machine-caught findings compound on RECURRENCE: when a verifier
-  (evaluator-qa, code review, CI, a hook) catches the same class of mistake
-  a second time, propose codifying it — a rule, a test, or a gate — so a
-  third time cannot happen. One-off bugs just get fixed; turning every bug
-  into a rule is how CLAUDE.md gets fat.
-- Upstream rule: if a fix or improvement lands in a file that came from the
-  maya template (.claude/ hooks, agents, skills, contracts/, CLAUDE.md
-  sections), it belongs to every future product — but a product session
-  NEVER writes to the maya repo, even when it is checked out. Record the
-  candidate in the product's docs/NOTES.md under "upstream candidates"
-  (date · file · what/why, with the diff hunk when small); /update-stack
-  harvests these and applies them WITH MY APPROVAL, in a maya-context
-  session. The only exception is my explicit in-the-moment instruction
-  ("apply this to maya now").
+  condition. When it's met, stop and report — no "one more try".
+- I am async. Never block on me: ask, queue the approval, keep working —
+  pushes stay per-approval, prefix-style. Never make me wait: my mid-work
+  message preempts; answer it as your next visible output, closing the
+  turn with the answer if needed. Commands over ~1 minute run in the
+  background so you stay receptive.
+- Long multi-item request: short plan into the ROADMAP, owner-level
+  questions up front, then execute serially. Parallel worktree tracks
+  only on my explicit yes — propose by showing the disjoint partition;
+  mechanics: the /parallel-tracks skill.
+- Unattended runs: one feature per session, commit + progress note each,
+  bounded ("or stop after N turns").
+- When I correct you, propose where the fix should live so it compounds:
+  this file, the project CLAUDE.md, a skill, or a hook. When a verifier
+  catches the same mistake class twice, propose a rule, test, or gate;
+  one-off bugs just get fixed.
+- Template-origin improvements belong to every product, but a product
+  session NEVER writes to the maya repo: park them in the product's
+  docs/NOTES.md "upstream candidates" (date · file · what/why);
+  /update-stack harvests and applies them with my approval. Only my
+  explicit "apply to maya now" bypasses this.
 
 ## Cost discipline
-Every addition to context (plugin, MCP server, CLAUDE.md line) must justify
-its per-turn token cost. When in doubt, leave it out — retrieval is cheap.
+Every addition to context (plugin, MCP server, CLAUDE.md line) must
+justify its per-turn token cost. When in doubt, leave it out — retrieval
+is cheap.

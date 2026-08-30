@@ -1,23 +1,15 @@
 # Changelog
 
-maya is a ROLLING repo: there are no releases. Whatever is on `main` is
-live, and every product pins the exact commit it derives from in its
-`.maya-version`. This ledger is reverse-chronological (NEWEST FIRST — the
-latest change is always at the top), every entry stamped with its commit's
-time in UTC. Removals are listed with their reasons: deletion is a feature,
-and the reasons are the evidence. One mechanical note: an entry that lands
-in the very commit it describes cannot carry its own hash (a commit cannot
-know its own id), so EVERY entry's hash is backfilled immediately — a tiny
-follow-up ledger commit in the same session, no exceptions and no
-two-class rule. Relatedly, a product's .maya-version is the newest
-entry's hash at the end of the update run that last reconciled it — a
-run watermark, never plain HEAD — so every base is identifiable here;
-the (→ products) marker tracks port debt only. And the ledger's own upkeep
-(backfills, reordering, wording) gets NO entry — otherwise every backfill
-would need a backfill; `git log -- CHANGELOG.md` is its record.
-Entries that touch `template/` — the only zone products inherit — carry the
-marker **(→ products)**: a product is current when it contains every marked
-entry above its `.maya-version`; unmarked entries never create port debt.
+maya is a ROLLING repo: no releases — `main` is live. This ledger is
+reverse-chronological (newest first), every entry stamped with its
+commit's UTC time. Every entry's hash is backfilled immediately by a tiny
+follow-up ledger commit (a commit cannot know its own id); ledger upkeep
+itself gets no entry — `git log -- CHANGELOG.md` is its record. Removals
+are listed with their reasons: deletion is a feature.
+Entries touching `template/` carry **(→ products)** and track port debt:
+a product is current when it contains every marked entry above its
+`.maya-version` — which pins the newest ledger entry at the close of the
+update run that last reconciled it (its watermark), never plain HEAD.
 
 ## Ablation watchlist (canonical copy — other files reference this one)
 
@@ -26,6 +18,30 @@ evidence-gate → evaluator-qa invocation frequency → one-feature-per-session
 constraint → push-gate → CLAUDE.md line count.
 
 ---
+
+### 2026-08-30 10:39 · — async-owner defaults, opt-in parallel tracks, consolidation (→ products)
+Fourth run's approved batch, harvested from pati's improvement sprint and
+refined with the owner in session. Working loop now defaults to ONE
+serial agent with async-owner behavior: never block on the owner (queue
+prefix-push approvals, keep working), never make the owner wait (a
+mid-work message preempts — answered as the next visible output, closing
+the turn if needed; commands over ~1 min run in the background).
+Plan-first for long multi-item requests, owner questions up front.
+Parallel worktree tracks are OPT-IN only — proposed by showing the
+disjoint partition, never default: parallelism buys wall-clock only,
+which is nearly free for a solo owner, while adding whole error classes;
+this restores the founding verdict (multi-agent for research, one
+generator) after a one-day drift the owner caught. Mechanics live in the
+new template skill /parallel-tracks: file claims, --no-ff track merges as
+rollback handles, park-on-conflict, single-owner shared resources,
+merged-whole battery + evaluator-qa before push, the revert-of-a-merge
+trap. Template .gitignore learns .claude/worktrees/ (pati 9b017b3). 4c
+now also reads @-included files (the AGENTS.md case). Deferred by owner:
+parity-test seed, evaluator-qa evidence slot; pati settings.json repair
+goes to the pati agent. Plus a wording-only consolidation pass over
+global/CLAUDE.md (71→75 lines including the new rules), update-stack
+SKILL.md (~150→~115) and this header — semantics unchanged, rationale
+lives here.
 
 ### 2026-08-30 06:40 · `ddbe56d` — watermark bumps belong to the run's close, only
 Owner caught the agent proposing a .maya-version bump after a maya push
