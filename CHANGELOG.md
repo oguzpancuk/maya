@@ -27,7 +27,7 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-30 06:23 · — bases are run watermarks
+### 2026-08-30 06:23 · `987bea1` — bases are run watermarks
 Owner refinement of `8bc0cad`, minutes later: after an update run's
 approved maya changes are pushed, EVERY harvested product's .maya-version
 (port or no port) bumps to the newest CHANGELOG entry's hash — recording
