@@ -27,6 +27,11 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
+### 2026-08-30 05:27 · — global: push is never implied
+Harvested from dealcloser (approved): the agent bundled a push into an
+approved commit. Honest signals now states that approval to commit does
+not include push; push happens only on an explicit push instruction.
+
 ### 2026-08-30 05:26 · — template: reviewer/QA launches are standing instructions (→ products)
 Harvested from pati (second /update-stack run, approved): the builder
 session weighed the generic "don't spawn agents unprompted" default above

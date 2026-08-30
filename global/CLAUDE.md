@@ -32,6 +32,8 @@ committed HEAD — not when it looks done.
 Never state a result you did not observe. Tests you didn't run are "not run",
 not "passing". A failed fetch is reported as failed. Unknown is not zero.
 Never let a degraded read become a destructive write.
+Push is never implied: approval to commit does not include push — push
+only on an explicit push instruction.
 
 ## Working loop
 - Before starting: read the project's ROADMAP/NOTES; state a stopping
