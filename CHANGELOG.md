@@ -27,6 +27,13 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
+### 2026-08-30 06:40 · — watermark bumps belong to the run's close, only
+Owner caught the agent proposing a .maya-version bump after a maya push
+that happened OUTSIDE an update-stack run. 4b now states the scope
+explicitly: the watermark claims "reconciled through here", only a run
+reconciles, so a maya push alone never moves it — commits between runs
+accumulate above the watermark until the next run advances it once.
+
 ### 2026-08-30 06:36 · `1b43f16` — the run closes the machine, too
 update-stack's close now runs install.sh itself when the global layer
 changed, and installs missing checklist plugins (with per-instance

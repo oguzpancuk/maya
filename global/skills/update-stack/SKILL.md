@@ -88,7 +88,10 @@ to here". Never plain HEAD (an entry-less upkeep commit is not
 addressable in the ledger), and not the newest (→ products) commit — that
 marker only tracks port debt. The base is the harvest's diff BASE; a
 stale base re-flags already-ported files and mistakes ports for
-product-born improvements.
+product-born improvements. The bump belongs to the run's close and ONLY
+there: a maya push outside an update-stack run never moves a product's
+watermark — the watermark claims "reconciled through here", and only a
+run reconciles.
 
 ## 4c. Ratchet scan (global -> products)
 4b diffs only TEMPLATE files, so global-layer rules have no enforcer of
