@@ -26,7 +26,7 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-30 06:18 · — ledger addressability: immediate hashes, marked bases
+### 2026-08-30 06:18 · `8bc0cad` — ledger addressability: immediate hashes, marked bases
 Owner decision after catching that both products' .maya-version pointed at
 `a005446` — a registry docs commit with no ledger entry. Two rules replace
 the old two-class backfill: (1) EVERY entry's hash is backfilled
