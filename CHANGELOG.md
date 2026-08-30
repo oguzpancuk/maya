@@ -27,6 +27,14 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
+### 2026-08-30 05:26 · — template: reviewer/QA launches are standing instructions (→ products)
+Harvested from pati (second /update-stack run, approved): the builder
+session weighed the generic "don't spawn agents unprompted" default above
+the project convention and skipped code-reviewer/evaluator-qa until asked.
+The Workflow section now names the trigger points — code-reviewer before a
+feature is reported done; evaluator-qa before a deploy and at the end of
+an unattended run.
+
 ### 2026-08-28 09:03 · `8e24c43` — first /update-stack run's approved batch (→ products)
 First real monthly cycle, run on the owner's machine. Adopted harvests:
 Turkish skill triggers (H1), generalized prettier fallback for multi-package
