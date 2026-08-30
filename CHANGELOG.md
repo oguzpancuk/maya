@@ -40,8 +40,10 @@ now also reads @-included files (the AGENTS.md case). Deferred by owner:
 parity-test seed, evaluator-qa evidence slot; pati settings.json repair
 goes to the pati agent. Plus a wording-only consolidation pass over
 global/CLAUDE.md (71→72 lines, new rules included), update-stack
-SKILL.md (150→108) and this header — semantics unchanged, rationale
-lives here.
+SKILL.md (150→108), this header, and the spec skill's always-loaded
+description (rationale moved into its body) — semantics unchanged,
+rationale lives here. An audit of the rest of the repo found it already
+lean (largest remaining file is retrieval-only docs).
 
 ### 2026-08-30 06:40 · `ddbe56d` — watermark bumps belong to the run's close, only
 Owner caught the agent proposing a .maya-version bump after a maya push
