@@ -27,7 +27,7 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
-### 2026-08-30 06:40 · — watermark bumps belong to the run's close, only
+### 2026-08-30 06:40 · `ddbe56d` — watermark bumps belong to the run's close, only
 Owner caught the agent proposing a .maya-version bump after a maya push
 that happened OUTSIDE an update-stack run. 4b now states the scope
 explicitly: the watermark claims "reconciled through here", only a run
