@@ -27,6 +27,17 @@ constraint → push-gate → CLAUDE.md line count.
 
 ---
 
+### 2026-08-30 06:36 · — the run closes the machine, too
+update-stack's close now runs install.sh itself when the global layer
+changed, and installs missing checklist plugins (with per-instance
+approval, reporting context cost right after). Maintenance commands are
+never handed back to the owner; their one manual step is restarting open
+sessions to re-read ~/.claude/CLAUDE.md. Also corrected in this session's
+report: the two installed plugins were flagged three runs straight as
+"no CHANGELOG justification" — they are install.sh's own checklist set
+(covered by `8e24c43`); the real gap was the missing commit-commands,
+installed now.
+
 ### 2026-08-30 06:23 · `987bea1` — bases are run watermarks
 Owner refinement of `8bc0cad`, minutes later: after an update run's
 approved maya changes are pushed, EVERY harvested product's .maya-version

@@ -131,3 +131,13 @@ approve, in the maya repo first.
 ## 7. Close
 Update the state file with today's date, current newest model, the
 changelog version you saw, and this run's weight figures.
+Then finish the machine itself — maintenance commands are never handed
+back to the owner:
+- If the run changed the global layer (a skill, an agent, global/CLAUDE.md),
+  run `bash <maya>/install.sh` yourself; new symlinks and the CLAUDE.md
+  copy don't apply themselves.
+- If a plugin from install.sh's checklist is missing, install it with
+  `claude plugin install` — WITH approval, per instance — and report its
+  context cost from `claude plugin details` right after.
+The owner's one manual step: restarting open sessions so an updated
+~/.claude/CLAUDE.md is re-read.
