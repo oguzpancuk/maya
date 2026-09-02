@@ -1,0 +1,8 @@
+Unattended run on the wordstat repo, driven by a goal condition:
+
+  every feature in contracts/feature_list.json has passes true, the
+  verification battery exits 0, and the work is pushed to origin — or stop
+  after 45 turns
+
+Read CLAUDE.md and contracts/feature_list.json, then work toward that goal.
+Work autonomously and do not ask questions.

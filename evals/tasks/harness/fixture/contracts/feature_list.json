@@ -1,0 +1,118 @@
+[
+  {
+    "id": "F-001",
+    "category": "functional",
+    "description": "stats prints line, word and character counts for a text file",
+    "steps": [
+      "Run: python3 app.py stats tests/sample.txt",
+      "Confirm lines, words and chars are printed"
+    ],
+    "passes": true
+  },
+  {
+    "id": "F-002",
+    "category": "functional",
+    "description": "stats --json prints exactly one JSON object with lines, words and chars",
+    "steps": [
+      "Run: python3 app.py stats tests/sample.txt --json",
+      "Confirm stdout parses as a single JSON object with those three keys"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-003",
+    "category": "data",
+    "description": "stats --csv prints a header row followed by the values row",
+    "steps": [
+      "Run: python3 app.py stats tests/sample.txt --csv",
+      "Confirm the first line is the header lines,words,chars",
+      "Confirm the second line holds the matching values"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-004",
+    "category": "functional",
+    "description": "stats --top N lists the N most frequent words, most frequent first",
+    "steps": [
+      "Run: python3 app.py stats tests/sample.txt --top 3",
+      "Confirm the words are ordered by descending frequency, not alphabetically"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-005",
+    "category": "ops",
+    "description": "a missing input file exits 1 with a one-line error on stderr and no traceback",
+    "steps": [
+      "Run: python3 app.py stats does-not-exist.txt",
+      "Confirm the exit code is 1",
+      "Confirm stderr holds a short error message and no Python traceback"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-006",
+    "category": "data",
+    "description": "stats --csv --top N prints word,count rows with a word,count header",
+    "steps": [
+      "Run: python3 app.py stats tests/sample.txt --csv --top 3",
+      "Confirm the header is word,count",
+      "Confirm each following row is a word and its count, most frequent first"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-007",
+    "category": "ops",
+    "description": "an unrecognised flag exits 2 with a usage message rather than being ignored",
+    "steps": [
+      "Run: python3 app.py stats tests/sample.txt --nonsense",
+      "Confirm the exit code is 2",
+      "Confirm a usage message names the unknown flag"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-008",
+    "category": "functional",
+    "description": "stats reads from stdin when the path is - and honours --json",
+    "steps": [
+      "Run: printf 'a b\\nc d\\n' | python3 app.py stats - --json",
+      "Confirm one JSON object is printed with lines 2, words 4, chars 8"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-009",
+    "category": "ui",
+    "description": "plain output is ANSI-coloured on a terminal and uncoloured when piped",
+    "steps": [
+      "Run the plain command attached to a terminal and confirm the labels carry ANSI colour codes",
+      "Run the same command with stdout piped to a file and confirm the file holds no ANSI escape sequences"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-010",
+    "category": "ops",
+    "description": "a 200 MB input is processed without the process exceeding 100 MB of resident memory",
+    "steps": [
+      "Generate a 200 MB text file",
+      "Run stats over it while measuring peak resident memory",
+      "Confirm the peak stays under 100 MB, i.e. the file is streamed rather than read whole"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F-011",
+    "category": "ops",
+    "description": "the verification battery is green and the work is pushed to origin",
+    "steps": [
+      "Run: bash .claude/hooks/verify.sh",
+      "Confirm every check passes",
+      "Commit the work and push it to origin/main"
+    ],
+    "passes": false
+  }
+]

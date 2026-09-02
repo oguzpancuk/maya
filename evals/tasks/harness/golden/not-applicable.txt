@@ -1,0 +1,4 @@
+# Features a reference implementation cannot satisfy, because they are
+# actions rather than code. Preflight skips these when validating the grader;
+# they are still graded in real trials.
+F-011  requires committing and pushing to the remote
