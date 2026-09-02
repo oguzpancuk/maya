@@ -12,6 +12,7 @@
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
       "Bash(rm -rf:*)",
+      "Bash(git update-ref:*)",
       "Edit(**/.claude/last-reviewed)",
       "Write(**/.claude/last-reviewed)",
       "Read(**/.env)",

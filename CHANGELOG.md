@@ -30,6 +30,23 @@ yet are re-tested by hand, and that is noted as such.
 
 ---
 
+### 2026-09-02 08:58 · — the gate batch, after its own review (→ products)
+The port commits were reviewed before push by a fresh-context reviewer
+(the rule applies to the maya session too, whose pushes bypass the product
+hooks by construction). Verdict NEEDS_WORK, all findings taken: the
+evidence-gate relevance check only worked for Write — an Edit fragment
+never parsed and the fallback accepted any evidence, so the gate now
+reconstructs the file the edit would produce and fails closed when it
+cannot; `GIT_DIR=`/`GIT_WORK_TREE=`/`pushd` join the other-directory
+refusal; `git update-ref` is denied (one command rewrote what "on a
+remote" means); the marker-write heuristic refuses dd/ln/install/ruby/php
+/xargs and no longer trips on `2>/dev/null`; code-reviewer reviews
+`last-reviewed..HEAD` of COMMITTED state, and CLAUDE.md says commit first,
+then review — otherwise every push needed a second identical review.
+Deliberate-evasion shapes (a split "pu""sh", `git send-pack`, a
+variable-assembled marker path) stay out of scope by design; the gate
+turns "forgot" into a block, and the ledger says so. 28 hook contracts.
+
 ### 2026-09-02 08:43 · `4fb055e` — push gates stop parsing; nothing leaves unreviewed (→ products)
 Harvested from pati (seven review rounds on its own attempt, `a15cb43`) and
 reproduced here first: the template push-gate's command-position regex let

@@ -48,11 +48,26 @@ fresh() { # a sandbox that looks like a product repo mid-run
 payload_write_content() { # <session> <file_path> <new content>
   python3 -c 'import json,sys; print(json.dumps({"session_id":sys.argv[1],"tool_input":{"file_path":sys.argv[2],"content":sys.argv[3]}}))' "$1" "$2" "$3"
 }
+payload_edit() { # <session> <file_path> <old_string> <new_string>
+  python3 -c 'import json,sys; print(json.dumps({"session_id":sys.argv[1],"tool_input":{"file_path":sys.argv[2],"old_string":sys.argv[3],"new_string":sys.argv[4]}}))' "$1" "$2" "$3" "$4"
+}
 
 echo "── evidence-gate ──────────────────────────────────────────────"
 T="$(fresh)"
 payload_write s1 "$T/contracts/feature_list.json" | CLAUDE_PROJECT_DIR="$T" bash "$contracts/evidence-gate.sh" >/dev/null 2>&1
 check 2 $? "blocks a feature-list write with no evidence read this session"
+
+# The Edit tool sends a fragment; the gate must judge the file it produces.
+printf '%s/test-results/f001.log\n' "$T" > "$T/.claude/.session-reads.e1.log"
+payload_edit e1 "$T/contracts/feature_list.json" '{"id":"F-002","passes":false}' '{"id":"F-002","passes":true}' \
+  | CLAUDE_PROJECT_DIR="$T" bash "$contracts/evidence-gate.sh" >/dev/null 2>&1
+check 2 $? "an Edit flipping F-002 with evidence naming only F-001 is blocked"
+payload_edit e1 "$T/contracts/feature_list.json" '{"id":"F-001","passes":false}' '{"id":"F-001","passes":true}' \
+  | CLAUDE_PROJECT_DIR="$T" bash "$contracts/evidence-gate.sh" >/dev/null 2>&1
+check 0 $? "an Edit flipping F-001 with evidence naming F-001 is allowed"
+payload_edit e1 "$T/contracts/feature_list.json" 'no such text' '{"id":"F-001","passes":true}' \
+  | CLAUDE_PROJECT_DIR="$T" bash "$contracts/evidence-gate.sh" >/dev/null 2>&1
+check 2 $? "an Edit whose old_string is not in the file fails closed"
 
 printf '%s/test-results/f001.log\n' "$T" > "$T/.claude/.session-reads.s2.log"
 payload_write_content s2 "$T/contracts/feature_list.json" \

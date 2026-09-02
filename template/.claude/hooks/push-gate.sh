@@ -51,7 +51,8 @@ fi
 # Another repository (-C, --git-dir, a preceding cd): the battery can only
 # vouch for this project, so refuse rather than guess.
 if mentions '(^|[[:space:]])(-C|--git-dir|--work-tree)([[:space:]=]|$)' \
-   || mentions '(^|[;&|(]|[[:space:]])cd[[:space:]]'; then
+   || mentions '(^|[;&|(]|[[:space:]])(cd|pushd)[[:space:]]' \
+   || mentions '(^|[^[:alnum:]_])GIT_(DIR|WORK_TREE)='; then
   echo "push-gate: this push targets another directory (-C / --git-dir / cd) — blocked. Push from the project root." >&2
   exit 2
 fi

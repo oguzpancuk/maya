@@ -35,7 +35,8 @@ It must pass on a clean, committed HEAD before a push or a "done" report —
 is not a result.
 Nothing leaves this machine unreviewed: the push gate refuses any local
 commit newer than `.claude/last-reviewed`, which the harness writes when
-code-reviewer finishes — fix after a review, then review again. Force
+code-reviewer finishes. Commit first, then review — the reviewer covers
+`last-reviewed..HEAD`; a fix made after a review needs its own. Force
 pushes and remote deletions are refused outright; the scan is coarse, so a
 commit message that mentions a push flag is written with `git commit -F`.
 

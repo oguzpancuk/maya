@@ -82,10 +82,16 @@ run BLOCK "message mentioning -f (accepted false positive)" "git commit -m \"den
 echo "── another directory ──"
 run BLOCK "-C"                               "git -C /tmp/elsewhere pu""sh origin main"
 run BLOCK "cd first"                         "cd /tmp/elsewhere && $P origin main"
+run BLOCK "pushd first"                      "pushd /tmp/elsewhere && $P origin main"
+run BLOCK "GIT_DIR prefix"                   "GIT_DIR=/tmp/elsewhere/.git $P origin main"
+run BLOCK "GIT_WORK_TREE prefix"             "GIT_WORK_TREE=/tmp/elsewhere $P origin main"
 
 echo "── the marker is harness-written ──"
 run BLOCK "redirect into it"                 "echo abc > .claude/last-reviewed"
+run BLOCK "append into it"                   "echo abc >> .claude/last-reviewed"
 run BLOCK "tee into it"                      "git rev-parse HEAD | tee .claude/last-reviewed"
+run BLOCK "dd into it"                       "dd if=/dev/null of=.claude/last-reviewed"
+run ALLOW "reading it with stderr silenced"  "cat .claude/last-reviewed 2>/dev/null"
 
 echo "── an unreviewed side branch and tag exist ──"
 git checkout -qb feature; echo two > f2; git add -A; git commit -qm "unreviewed on feature"; git tag unreviewed-tag; git checkout -q main

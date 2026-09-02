@@ -33,8 +33,10 @@ except Exception:
 ti=d.get("tool_input",{}) or {}
 print(d.get("session_id","nosession"))
 print(ti.get("file_path",""))
-# the proposed new text: Write sends content, Edit sends new_string
-print(json.dumps(ti.get("content") or ti.get("new_string") or ""))
+# Write sends the whole file; Edit sends old_string/new_string (+ replace_all).
+# Both are passed down so the gate can see the file as it WOULD be.
+print(json.dumps({"content": ti.get("content"), "old": ti.get("old_string"),
+                  "new": ti.get("new_string"), "all": bool(ti.get("replace_all"))}))
 ')" || { echo "evidence-gate: could not parse hook payload — failing closed." >&2; exit 2; }
 sid="$(printf '%s\n' "$out" | sed -n 1p)"
 file_path="$(printf '%s\n' "$out" | sed -n 2p)"
@@ -56,9 +58,9 @@ verdict="$(python3 - "$file_path" "$log" "$proposed" <<'PY'
 import json, os, re, sys
 path, log, proposed = sys.argv[1], sys.argv[2], sys.argv[3]
 try:
-    proposed = json.loads(proposed)
+    edit = json.loads(proposed)
 except Exception:
-    proposed = ""
+    print("UNREADABLE"); sys.exit(0)
 
 def passing(text):
     try:
@@ -67,17 +69,26 @@ def passing(text):
         return None
 
 try:
-    current = passing(open(path, encoding="utf-8").read()) or set()
+    current_text = open(path, encoding="utf-8").read()
 except Exception:
-    current = set()
-newly = passing(proposed)
-if newly is None:
-    # Cannot see which features are being claimed (a partial edit): fall back
-    # to requiring some evidence rather than failing open.
-    newly = set()
-    fallback = True
+    current_text = ""
+current = passing(current_text) or set()
+
+# Reconstruct the file as it would be after the tool call. The new_string of
+# an Edit is a fragment: judged alone it never parses, and the old fallback
+# then accepted any evidence at all (review finding, 2026-09-02). No
+# apostrophes in this block: bash 3.2 mis-parses them inside $( <<heredoc ).
+if edit.get("content") is not None:
+    proposed_text = edit["content"]
 else:
-    fallback = False
+    old, new = edit.get("old") or "", edit.get("new") or ""
+    if not old or old not in current_text:
+        print("UNREADABLE"); sys.exit(0)   # the Edit itself would fail; block
+    proposed_text = current_text.replace(old, new) if edit.get("all") else current_text.replace(old, new, 1)
+newly = passing(proposed_text)
+if newly is None:
+    print("UNREADABLE"); sys.exit(0)       # writing a broken feature list: block
+fallback = False
 claimed = sorted(newly - current)
 
 EV = re.compile(r"\.(png|jpe?g|gif)$|\.log$|/(test-results|test-output|coverage|screenshots)/")
@@ -109,6 +120,10 @@ case "$verdict" in
   NONE)
     echo "evidence-gate: DENIED — no evidence Read this session. Run the" >&2
     echo "verification, Read its output (screenshot / .log / test-results), then flip." >&2
+    exit 2 ;;
+  UNREADABLE)
+    echo "evidence-gate: DENIED — cannot read the feature list this edit would produce" >&2
+    echo "(old_string not found, or the result is not valid JSON). Fix the edit." >&2
     exit 2 ;;
   MISSING*)
     echo "evidence-gate: DENIED — evidence was Read, but none of it names ${verdict#MISSING }." >&2

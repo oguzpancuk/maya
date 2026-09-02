@@ -31,9 +31,12 @@ print(d.get("tool_input",{}).get("command",""))
 [ -n "$cmd" ] || exit 0
 mentions() { printf '%s' "$cmd" | grep -Eq "$1"; }
 
-# 1) The marker is harness-written. Same write heuristic as bash-guard.
+# 1) The marker is harness-written. A redirect INTO it, or a writing tool
+#    named alongside it, is refused; `2>/dev/null` on a read is not.
 if mentions 'last-reviewed' \
-   && mentions '(>|>>)|(^|[^[:alnum:]_.-])tee([^[:alnum:]_.-]|$)|(^|[^[:alnum:]_.-])sed([^;|&]*)[[:space:]]-i|(^|[^[:alnum:]_.-])(mv|cp|truncate|python[0-9.]*|node|perl)([^[:alnum:]_.-]|$)'; then
+   && { mentions '>>?[[:space:]]*["'"'"']?[^[:space:]>]*last-reviewed' \
+        || mentions '(^|[^[:alnum:]_.-])(tee|dd|ln|install|mv|cp|truncate|python[0-9.]*|node|perl|ruby|php|xargs)([^[:alnum:]_.-]|$)' \
+        || mentions '(^|[^[:alnum:]_.-])sed([^;|&]*)[[:space:]]-i'; }; then
   echo "review-gate: '$marker' is written by the harness when code-reviewer finishes — never by hand." >&2
   exit 2
 fi
@@ -42,7 +45,8 @@ fi
 mentions '(^|[^[:alnum:]_.-])git([^[:alnum:]_.-]|$)' && mentions '(^|[^[:alnum:]_.-])push([^[:alnum:]_.-]|$)' || exit 0
 
 if mentions '(^|[[:space:]])(-C|--git-dir|--work-tree)([[:space:]=]|$)' \
-   || mentions '(^|[;&|(]|[[:space:]])cd[[:space:]]'; then
+   || mentions '(^|[;&|(]|[[:space:]])(cd|pushd)[[:space:]]' \
+   || mentions '(^|[^[:alnum:]_])GIT_(DIR|WORK_TREE)='; then
   echo "review-gate: this push targets another directory (-C / --git-dir / cd) — blocked. Push from the project root." >&2
   exit 2
 fi
