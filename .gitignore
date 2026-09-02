@@ -1,2 +1,5 @@
 .DS_Store
 *.log
+
+# eval sandboxes are throwaway; results are committed, scratch is not
+evals/results/*.tmp

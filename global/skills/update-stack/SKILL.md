@@ -26,8 +26,10 @@ blocked fetch is "blocked", never silence:
 If a new Claude model shipped since `last_seen_model`: every harness
 component encodes an assumption about what the previous model could not
 do. Walk the ablation watchlist (canonical copy: maya CHANGELOG.md) and
-propose ONE component to trial-remove first, with how to measure the
-result.
+propose ONE component to trial-remove first. Measure it, do not
+eyeball it: if the component has a task under maya `evals/`, run
+`bash evals/run.sh <task> --trials N` and report both arms with their n;
+if it does not, say the re-test was manual.
 
 ## 4. Harvest (products -> maya)
 Products = maya's PRODUCTS.md registry + a safety-net scan for
