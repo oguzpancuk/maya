@@ -30,7 +30,7 @@ yet are re-tested by hand, and that is noted as such.
 
 ---
 
-### 2026-09-02 08:43 · — push gates stop parsing; nothing leaves unreviewed (→ products)
+### 2026-09-02 08:43 · `4fb055e` — push gates stop parsing; nothing leaves unreviewed (→ products)
 Harvested from pati (seven review rounds on its own attempt, `a15cb43`) and
 reproduced here first: the template push-gate's command-position regex let
 `env git push`, `\git push` and `GIT_TRACE=1 git push` skip both the force
