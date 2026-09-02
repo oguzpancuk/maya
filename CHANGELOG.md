@@ -45,7 +45,13 @@ remote" means); the marker-write heuristic refuses dd/ln/install/ruby/php
 then review — otherwise every push needed a second identical review.
 Deliberate-evasion shapes (a split "pu""sh", `git send-pack`, a
 variable-assembled marker path) stay out of scope by design; the gate
-turns "forgot" into a block, and the ledger says so. 28 hook contracts.
+turns "forgot" into a block, and the ledger says so. A second, delta-only
+review approved the fix and named two one-liners, applied after approval
+and covered by the suite: `>|` joins the marker-write refusal, and
+review-gate refuses `update-ref`/`symbolic-ref`/`refs/remotes/` outright
+(`git fetch . x:refs/remotes/...` could launder a commit as "on a remote";
+the settings deny is prefix-matched, this backs it). 28 hook contracts,
+52 gate cases.
 
 ### 2026-09-02 08:43 · `4fb055e` — push gates stop parsing; nothing leaves unreviewed (→ products)
 Harvested from pati (seven review rounds on its own attempt, `a15cb43`) and

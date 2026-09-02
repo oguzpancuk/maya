@@ -91,7 +91,12 @@ run BLOCK "redirect into it"                 "echo abc > .claude/last-reviewed"
 run BLOCK "append into it"                   "echo abc >> .claude/last-reviewed"
 run BLOCK "tee into it"                      "git rev-parse HEAD | tee .claude/last-reviewed"
 run BLOCK "dd into it"                       "dd if=/dev/null of=.claude/last-reviewed"
+run BLOCK "noclobber override"               "echo abc >| .claude/last-reviewed"
 run ALLOW "reading it with stderr silenced"  "cat .claude/last-reviewed 2>/dev/null"
+run BLOCK "rewriting a remote-tracking ref"  "git update-ref refs/remotes/origin/main HEAD"
+run BLOCK "fetch into refs/remotes"          "git fetch . HEAD:refs/remotes/origin/main"
+run BLOCK "symbolic-ref"                     "git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main"
+run ALLOW "ordinary fetch"                   "git fetch origin"
 
 echo "── an unreviewed side branch and tag exist ──"
 git checkout -qb feature; echo two > f2; git add -A; git commit -qm "unreviewed on feature"; git tag unreviewed-tag; git checkout -q main

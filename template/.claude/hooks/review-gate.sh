@@ -34,10 +34,19 @@ mentions() { printf '%s' "$cmd" | grep -Eq "$1"; }
 # 1) The marker is harness-written. A redirect INTO it, or a writing tool
 #    named alongside it, is refused; `2>/dev/null` on a read is not.
 if mentions 'last-reviewed' \
-   && { mentions '>>?[[:space:]]*["'"'"']?[^[:space:]>]*last-reviewed' \
+   && { mentions '>>?\|?[[:space:]]*["'"'"']?[^[:space:]>]*last-reviewed' \
         || mentions '(^|[^[:alnum:]_.-])(tee|dd|ln|install|mv|cp|truncate|python[0-9.]*|node|perl|ruby|php|xargs)([^[:alnum:]_.-]|$)' \
         || mentions '(^|[^[:alnum:]_.-])sed([^;|&]*)[[:space:]]-i'; }; then
   echo "review-gate: '$marker' is written by the harness when code-reviewer finishes — never by hand." >&2
+  exit 2
+fi
+
+# 1b) "Already on a remote" is decided by remote-tracking refs, which only
+#     git itself writes here. Rewriting them (update-ref, symbolic-ref,
+#     `fetch . x:refs/remotes/...`) would launder unreviewed commits; the
+#     settings deny is prefix-matched, this is its backstop.
+if mentions '(^|[^[:alnum:]_.-])(update-ref|symbolic-ref)([^[:alnum:]_.-]|$)' || mentions 'refs/remotes/'; then
+  echo "review-gate: remote-tracking refs are written by git during fetch/push only — blocked." >&2
   exit 2
 fi
 
