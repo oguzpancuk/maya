@@ -12,6 +12,31 @@ One repo, three jobs:
 | `template/` | The per-product starter: CLAUDE.md, hooks, agents, docs skeleton, CI, unattended-run contracts | cloned into each new product by `/new-product` |
 | `docs/agentic-setup.md` | The living manual: what is installed, why, how to update, known pitfalls | read it |
 
+## What problem this solves
+
+A coding agent is a fast generator with no memory of what it broke last time.
+Prompts are advice it may or may not take; the things that must always happen
+have to be enforced outside the model. maya is the enforcement layer:
+
+- **Deterministic gates, not prose.** A pre-push gate blocks unapproved
+  pushes, an evidence gate rejects claims nothing verified, a verification
+  battery runs before work is called done. These are hooks — the model cannot
+  talk its way past them.
+- **A verification ladder.** Rules-based checks first (typecheck, lint, tests,
+  schema), visual confirmation second, LLM judgment last and never alone.
+- **Ablation as routine.** Every harness component encodes an assumption about
+  what the model cannot do yet. On each model release one component is removed
+  and re-tested; what is no longer load-bearing gets deleted, with the reason
+  recorded in CHANGELOG.md.
+- **Propagation, not copy-paste.** Products are instantiated from `template/`
+  and record their origin commit in `.maya-version`. Ledger entries marked
+  `(→ products)` are port debt: a product is current when it contains every
+  such entry above its watermark.
+
+It is in daily use: see PRODUCTS.md for the products built on it, and
+[docs/ablating-your-own-guardrails.md](docs/ablating-your-own-guardrails.md)
+for how components here get measured — and deleted.
+
 ## Quickstart (on the dev machine)
 
 ```bash

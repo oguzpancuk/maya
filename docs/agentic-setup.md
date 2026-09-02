@@ -86,6 +86,12 @@ products pull template updates when `/update-stack` flags their
 harness-repricing research: pick ONE component from the watchlist
 (CHANGELOG.md keeps it current), remove it on a real task, compare. Keep the
 removal if quality holds; record either way in CHANGELOG with the evidence.
+The instrument is `evals/` — control vs ablated arm on the same fixture, one
+deterministic grader, rates written to `evals/results/`; see evals/README.md.
+Before any behavioural result is believed, `bash tests/hooks-test.sh` must
+pass: it pins each hook's contract without a model and serves as the positive
+control. A gate that never fires produces the same clean table as a gate that
+does nothing. The plan for covering the rest is docs/test-plan.md.
 The canonical watchlist lives in CHANGELOG.md (currently: evidence-gate →
 evaluator-qa invocation frequency → one-feature-per-session constraint →
 push-gate → CLAUDE.md line count).

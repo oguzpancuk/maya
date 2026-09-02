@@ -14,10 +14,45 @@ update run that last reconciled it (its watermark), never plain HEAD.
 ## Ablation watchlist (canonical copy — other files reference this one)
 
 Re-test on each model release, ONE component at a time, in this order:
-evidence-gate → evaluator-qa invocation frequency → one-feature-per-session
-constraint → push-gate → CLAUDE.md line count.
+evidence-gate (measured 2026-09-01: never fires on Opus 5 across 57 sessions;
+fires constantly on Haiku 4.5 but does not move the false-claim rate, because
+it checks that evidence exists rather than that it is relevant — fix the
+heuristic before re-testing) → evaluator-qa
+invocation frequency → one-feature-per-session constraint → push-gate →
+CLAUDE.md line count.
+
+Re-testing means running the ablation, not judging it by eye: `evals/`
+runs a task with the component wired in and with it removed, grades both
+deterministically, and writes rates to `evals/results/`. A component whose
+ablated arm is no worse than its control arm is a deletion candidate —
+record the numbers here with the decision. Components without an eval task
+yet are re-tested by hand, and that is noted as such.
 
 ---
+
+### 2026-09-02 · `PENDING` — harness measured end to end on Haiku 4.5
+`evals/tasks/harness` wires every hook maya ships — evidence-gate, track-read,
+bash-guard, push-gate, format-changed — on a fixture where each can act:
+eleven features to claim, a shell-editable feature list, a verification battery
+that arrives red from a seeded bug, and a real bare remote behind a goal
+condition ending in a push. `full` is that; `none` is the same repository with
+no hooks and a CLAUDE.md carrying only the project description.
+
+**Result, 100 sessions with a turn budget both arms complete inside:** unsound
+claims ran 8.8% (42/480) without the harness and 6.9% (34/496) with it, at
+matched claim volume, p=0.28. The gate was invoked 883 times and denied 62.
+Direction favours the harness; the sample does not settle it, and the entry
+says so rather than rounding it into a finding.
+
+Method and the failure modes it closes: `docs/ablating-your-own-guardrails.md`.
+Preconditions enforced by the rig itself — `evals/preflight.sh` refuses to
+spend on a grader that rejects a golden solution, `run.sh` refuses to start
+unless `tests/hooks-test.sh` passes, `analyze.sh` reports intention-to-treat
+and completers-only side by side with claim volume so a throughput effect
+cannot be read as a reliability one.
+
+Earlier fixtures in this family (single-gate, tighter budgets) measured null or
+proved unable to discriminate and were deleted; deletion is a feature.
 
 ### 2026-08-30 10:39 · `cd1a40d` — async-owner defaults, opt-in parallel tracks, consolidation (→ products)
 Fourth run's approved batch, harvested from pati's improvement sprint and
