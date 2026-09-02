@@ -30,7 +30,7 @@ yet are re-tested by hand, and that is noted as such.
 
 ---
 
-### 2026-09-02 · `PENDING` — harness measured end to end on Haiku 4.5
+### 2026-09-02 · `75715d2` — harness measured end to end on Haiku 4.5
 `evals/tasks/harness` wires every hook maya ships — evidence-gate, track-read,
 bash-guard, push-gate, format-changed — on a fixture where each can act:
 eleven features to claim, a shell-editable feature list, a verification battery
