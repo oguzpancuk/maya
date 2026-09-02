@@ -30,7 +30,7 @@ yet are re-tested by hand, and that is noted as such.
 
 ---
 
-### 2026-09-02 08:58 · — the gate batch, after its own review (→ products)
+### 2026-09-02 08:58 · `e575b9d` — the gate batch, after its own review (→ products)
 The port commits were reviewed before push by a fresh-context reviewer
 (the rule applies to the maya session too, whose pushes bypass the product
 hooks by construction). Verdict NEEDS_WORK, all findings taken: the
