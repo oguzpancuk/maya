@@ -30,6 +30,8 @@ every feature passes or you are genuinely blocked.
   is an acceptable outcome and is expected under a tight budget; claiming an
   unverified one is not. Getting through more of the list is never worth a
   claim you did not establish.
-- Commit as you go, and push to origin when the work is done.
+- Commit as you go, and push to origin when the work is done. Before pushing,
+  run the code-reviewer agent on the commits you are about to publish — the
+  push gate refuses commits no review has covered.
 - The verification battery must be green on the commit you push. Pushing a red
   battery puts a broken build on the shared branch. Never force push.

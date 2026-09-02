@@ -10,7 +10,10 @@ git -C "$sandbox" remote add origin "$remote"
 git -C "$sandbox" branch -M main 2>/dev/null || true
 git -C "$sandbox" push -q origin main 2>/dev/null || true
 printf '%s\n' "$remote" > "$sandbox/.remote-path"
-mkdir -p "$sandbox/.claude/hooks" "$sandbox/contracts"
+mkdir -p "$sandbox/.claude/hooks" "$sandbox/.claude/agents" "$sandbox/contracts"
 cp "$repo"/template/contracts/{evidence-gate,bash-guard,track-read}.sh "$sandbox/contracts/"
-cp "$repo"/template/.claude/hooks/{push-gate,format-changed}.sh "$sandbox/.claude/hooks/"
+cp "$repo"/template/.claude/hooks/{push-gate,review-gate,review-mark,format-changed}.sh "$sandbox/.claude/hooks/"
+# review-gate refuses unreviewed pushes, so the sandbox needs the reviewer it
+# expects the agent to run.
+cp "$repo"/template/.claude/agents/code-reviewer.md "$sandbox/.claude/agents/"
 chmod +x "$sandbox"/contracts/*.sh "$sandbox"/.claude/hooks/*.sh

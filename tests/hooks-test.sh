@@ -144,7 +144,7 @@ rm -rf "$T"
 echo
 echo "── push-gate ──────────────────────────────────────────────────"
 if [ -f "$repo/tests/push-gate-test.sh" ]; then
-  out="$(bash "$repo/tests/push-gate-test.sh" "$hooks/push-gate.sh" 2>&1)"
+  out="$(bash "$repo/tests/push-gate-test.sh" "$hooks" 2>&1)"
   printf '%s\n' "$out" | sed 's/^/  /'
   if printf '%s' "$out" | grep -q '^FAIL'; then fail=1; else pass=$((pass + 1)); fi
 else

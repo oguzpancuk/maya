@@ -42,11 +42,16 @@ def fisher(a, b, c, d):
     lo, hi = max(0, c1 - (n - r1)), min(r1, c1)
     return sum(p(x) for x in range(lo, hi + 1) if p(x) <= p0 + 1e-12)
 
+# run.sh names arms per task (none/bare/hooks/prose/full); the comparison is
+# always "harness on" vs "harness off", so pool them onto the two sides here.
+ARM_SIDE = {"control": "control", "full": "control", "prose": "control", "hooks": "control",
+            "ablated": "ablated", "none": "ablated", "bare": "ablated"}
 cells = collections.defaultdict(list)
 for r in rows:
     if only and r.get("task") != only:
         continue
-    cells[(f'{r.get("task")} v{r.get("fixture_version","1")}', model_of(r), r.get("arm"))].append(r)
+    side = ARM_SIDE.get(r.get("arm"), r.get("arm"))
+    cells[(f'{r.get("task")} v{r.get("fixture_version","1")}', model_of(r), side)].append(r)
 
 def wilson(k, n, z=1.96):
     """Wilson score interval — behaves at 0/n, where the normal approximation

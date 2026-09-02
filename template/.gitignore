@@ -8,3 +8,4 @@ build/
 .claude/.session-reads.log
 .claude/settings.local.json
 .claude/worktrees/
+.claude/last-reviewed

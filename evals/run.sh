@@ -22,6 +22,9 @@ if [ "${1:-}" = "--__trial" ]; then
   task="$2"; arm="$3"; trial="$4"; rowdir="$5"; run_id="$6"; max_turns="$7"; model="${8:-}"
   taskdir="$here/tasks/$task"
   sandbox="$(mktemp -d "${TMPDIR:-/tmp}/maya-eval-${task}-${arm}-XXXXXX")"
+  # An empty sandbox would make every `cd "$sandbox"` below a no-op and run
+  # git/rm in whatever directory the rig was started from.
+  [ -n "$sandbox" ] && [ -d "$sandbox" ] || { echo "run.sh: no sandbox dir — refusing to continue" >&2; exit 1; }
   cp -R "$taskdir/fixture/." "$sandbox/"
 
   # The gates under test are copied from template/contracts at run time, never
@@ -122,11 +125,15 @@ JSON
   [ -n "$grade" ] || grade='{"outcome":"grader_error"}'
 
   python3 - "$rowdir/${arm}-${trial}.json" "$run_id" "$task" "$arm" "$trial" \
-    "$cli_rc" "$elapsed" "$sandbox" "$grade" "$session" <<'PY'
+    "$cli_rc" "$elapsed" "$sandbox" "$grade" "$session" \
+    "$(git -C "$repo" rev-parse --short HEAD 2>/dev/null || echo unknown)" <<'PY'
 import json, os, sys
-out, run_id, task, arm, trial, cli_rc, elapsed, sandbox, grade, session = sys.argv[1:11]
+out, run_id, task, arm, trial, cli_rc, elapsed, sandbox, grade, session, maya_commit = sys.argv[1:12]
+# Stamped with the maya commit so a row can be traced to the exact hook text
+# it measured — the README promised this before the field existed.
 row = {"run_id": run_id, "task": task, "arm": arm, "trial": int(trial),
-       "cli_rc": int(cli_rc), "elapsed_s": int(elapsed), "sandbox": sandbox}
+       "cli_rc": int(cli_rc), "elapsed_s": int(elapsed), "sandbox": sandbox,
+       "maya_commit": maya_commit}
 sandbox_dir = sandbox
 row.update(json.loads(grade))
 try:
@@ -190,6 +197,7 @@ results="$here/results/$task.jsonl"
 mkdir -p "$here/results"
 run_id="$(git -C "$repo" rev-parse --short HEAD)-$(date -u +%Y%m%dT%H%M%SZ)"
 rowdir="$(mktemp -d "${TMPDIR:-/tmp}/maya-eval-rows-XXXXXX")"
+[ -n "$rowdir" ] && [ -d "$rowdir" ] || { echo "run.sh: no row dir — refusing to continue" >&2; exit 1; }
 
 # Nothing is spent until the grader has been shown to be right. Two runs were
 # lost to graders that were wrong in opposite directions; this is the check

@@ -12,6 +12,8 @@
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
       "Bash(rm -rf:*)",
+      "Edit(**/.claude/last-reviewed)",
+      "Write(**/.claude/last-reviewed)",
       "Read(**/.env)",
       "Read(**/.env.*)"
     ]
@@ -34,8 +36,23 @@
         "hooks": [
           {
             "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/review-gate.sh"
+          },
+          {
+            "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/push-gate.sh",
             "timeout": 600
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "code-reviewer",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/review-mark.sh"
           }
         ]
       }

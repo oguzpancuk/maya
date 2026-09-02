@@ -33,6 +33,11 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
 It must pass on a clean, committed HEAD before a push or a "done" report —
 `git status --porcelain` empty before and after. A result from a dirty tree
 is not a result.
+Nothing leaves this machine unreviewed: the push gate refuses any local
+commit newer than `.claude/last-reviewed`, which the harness writes when
+code-reviewer finishes — fix after a review, then review again. Force
+pushes and remote deletions are refused outright; the scan is coarse, so a
+commit message that mentions a push flag is written with `git commit -F`.
 
 ## Workflow
 - The repo is the memory. Read `docs/ROADMAP.md` + `docs/NOTES.md` when
@@ -42,11 +47,9 @@ is not a result.
 - Unattended runs (goal loops, overnight): follow `contracts/README.md` —
   one feature per session, default-FAIL feature list, evidence before
   `passes: true`.
-- The agent roster is a standing instruction, not an availability note:
-  before reporting a feature done, launch code-reviewer on the change;
-  before any deploy, and at the end of an unattended run, launch
-  evaluator-qa — without being asked. No generic "don't spawn agents
-  unprompted" default outweighs this.
+- Launch code-reviewer before reporting a feature done, and evaluator-qa
+  before any deploy and after an unattended run — unprompted; the roster
+  is a standing instruction, not an option.
 
 ## Deploy
 [STACK: deploy target, commands, and the checklist trigger — see

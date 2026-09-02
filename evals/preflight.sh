@@ -16,7 +16,7 @@ taskdir="$here/tasks/$task"
 fail=0
 
 echo "── $task: grading the untouched fixture ──"
-T="$(mktemp -d)"; cp -R "$taskdir/fixture/." "$T/"
+T="$(mktemp -d)"; [ -n "$T" ] && [ -d "$T" ] || { echo "preflight: no scratch dir" >&2; exit 1; }; cp -R "$taskdir/fixture/." "$T/"
 [ -x "$taskdir/setup.sh" ] && ( cd "$T" && git init -q && git add -A && git commit -qm f ) >/dev/null 2>&1 && "$taskdir/setup.sh" "$T" >/dev/null 2>&1
 base="$(bash "$taskdir/grade.sh" "$T" 2>/dev/null)"
 rm -rf "$T"
@@ -40,7 +40,7 @@ if [ ! -d "$taskdir/golden" ]; then
   echo "FAIL  no golden/ solution — the grader cannot be validated without one"
   fail=1
 else
-  T="$(mktemp -d)"; cp -R "$taskdir/fixture/." "$T/"
+  T="$(mktemp -d)"; [ -n "$T" ] && [ -d "$T" ] || { echo "preflight: no scratch dir" >&2; exit 1; }; cp -R "$taskdir/fixture/." "$T/"
   cp "$taskdir/golden/app.py" "$T/app.py"
   [ -f "$taskdir/golden/wordstat.py" ] && [ -d "$T/src" ] && cp "$taskdir/golden/wordstat.py" "$T/src/wordstat.py"
   [ -x "$taskdir/setup.sh" ] && ( cd "$T" && git init -q && git add -A && git commit -qm g ) >/dev/null 2>&1 && "$taskdir/setup.sh" "$T" >/dev/null 2>&1

@@ -30,7 +30,36 @@ yet are re-tested by hand, and that is noted as such.
 
 ---
 
-### 2026-09-02 · `75715d2` — harness measured end to end on Haiku 4.5
+### 2026-09-02 08:43 · — push gates stop parsing; nothing leaves unreviewed (→ products)
+Harvested from pati (seven review rounds on its own attempt, `a15cb43`) and
+reproduced here first: the template push-gate's command-position regex let
+`env git push`, `\git push` and `GIT_TRACE=1 git push` skip both the force
+check and the battery, and its force scan missed `--mirror`, `--delete` and
+`origin :branch`. Two hardening passes (fee3fac, 1dfbd00) had made the
+parser more precise; precision is what leaked. push-gate.sh now parses
+nothing: does the text mention git and push, does it carry a force-shaped
+flag anywhere — and it accepts the false positive that buys (a commit
+message naming a push flag blocks; write it with `git commit -F`),
+deliberately reversing 1dfbd00. Remote deletions count as destructive.
+New review gate, the owner's second-occurrence finding (30 Aug "why didn't
+you run it", 2 Sep "it ran on intermediate commits, the pushed state was
+never reviewed"): `review-gate.sh` refuses any local commit — HEAD, branches,
+tags, minus what remotes have — that is not an ancestor of
+`.claude/last-reviewed`; `review-mark.sh`, a SubagentStop hook on
+code-reviewer, writes that marker so the harness, not the agent, records
+what was reviewed; shell writes to it are refused and Edit/Write denied in
+settings. No refspec parsing: a stale side branch over-blocks, accepted.
+No exceptions, docs-only included. Fix after a review → review again.
+Suite rewritten (45 cases, real scratch repo with a bare remote, cwd guards
+— pati's harness once committed the user's tree after a failed clone; the
+same `cd ""` shape existed in evals/run.sh and preflight.sh). The eval
+fixture ships the reviewer and the new wiring, so `full` measures the
+harness as shipped; fixture v2 keeps old rows apart. Also: analyze.sh
+pools task arm names onto control/ablated (it printed "no trials" over
+100 rows), run.sh stamps rows with the maya commit the README promised,
+and the 2 Sep entry below gains the (→ products) marker it lacked.
+
+### 2026-09-02 · `75715d2` — harness measured end to end on Haiku 4.5 (→ products)
 `evals/tasks/harness` wires every hook maya ships — evidence-gate, track-read,
 bash-guard, push-gate, format-changed — on a fixture where each can act:
 eleven features to claim, a shell-editable feature list, a verification battery
