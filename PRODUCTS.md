@@ -8,3 +8,4 @@ invisible to the harvest — that is why registration is part of instantiation.
 |---|---|---|---|
 | pati | https://github.com/oguzpancuk/pati | ~/dev/pati (Mac) | e575b9d |
 | dealcloser | https://github.com/oguzpancuk/dealcloser | ~/dev/dealcloser (Mac) | e575b9d (retrofit — repo predates maya) |
+| stardate | (no remote yet) | ~/dev/stardate (Mac) | 22e7efe |
