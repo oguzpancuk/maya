@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 18:15 · `pending` — the battery gets a discipline, not a measurement (→ products)
+### 2026-09-18 18:15 · `59e9cf3` — the battery gets a discipline, not a measurement (→ products)
 With `evals/` gone, nothing measures whether a green battery means a
 working feature — the one gap the old instrument did show. Four rules
 stand in for the measurement, chosen because they cost nothing and do not
