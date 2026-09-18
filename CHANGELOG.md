@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 19:42 · `pending` — QA keyed on the clause, review until APPROVE, rule files trimmed (→ products)
+### 2026-09-18 19:42 · `4d88502` — QA keyed on the clause, review until APPROVE, rule files trimmed (→ products)
 Three changes to the two files every thread loads.
 
 The QA trigger was the author's call: "if the battery cannot cover the
