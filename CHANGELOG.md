@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 17:54 · `pending` — evaluator-qa comes back, narrowed (→ products)
+### 2026-09-18 17:54 · `cfcfb11` — evaluator-qa comes back, narrowed (→ products)
 Reversing one removal from the entry below, on the same evidence that
 motivated the rest of it. The measured gap was never enforcement: the
 battery was green at tip in 100/100 runs while roughly 0.7 features per
