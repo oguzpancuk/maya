@@ -26,6 +26,8 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
   external boundary. `any`/untyped escape hatches need a `// why:` comment.
 - Every feature lands with its verification: a test, or for UI a screenshot
   check — named in the ROADMAP done-when clause it satisfies.
+- A new test is seen failing before the change that makes it pass, and the
+  pull request says so. A test that was never red proves nothing.
 - [STACK: framework/library conventions specific to this product]
 
 ## Verification

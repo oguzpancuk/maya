@@ -28,5 +28,8 @@ honest deferred list — not a smaller wishlist.
   skeleton — a later standalone "testing task" is a planning failure.
 - The skeleton must be completable in days, not weeks. If it isn't, cut again.
 - Done-when clauses must be verifiable by the project's verify battery or a
-  browser check — "feels good" is not a clause.
+  browser check — "feels good" is not a clause. Verifiable is not enough:
+  each clause also says what failure looks like ("wrong password → 401
+  and no session cookie"), so the test written for it has a red state to
+  show. A clause that cannot fail cannot be tested.
 - Never delete PRD content — the roadmap references it, it doesn't replace it.

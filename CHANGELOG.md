@@ -13,6 +13,29 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 18:15 · `pending` — the battery gets a discipline, not a measurement (→ products)
+With `evals/` gone, nothing measures whether a green battery means a
+working feature — the one gap the old instrument did show. Four rules
+stand in for the measurement, chosen because they cost nothing and do not
+depend on Projects:
+- `/mvp-scope`: a done-when clause also says what failure looks like. A
+  clause that cannot fail cannot be tested, and a vague clause is where a
+  green-but-broken test starts.
+- `template/CLAUDE.md`: a new test is seen red before the change that
+  turns it green, and the pull request says so.
+- `project-instructions.md`: the pull request body names the red run; the
+  review thread checks each new test against its clause and asks for the
+  run when it is missing — so the claim has a second reader.
+- `docs/NOTES.md` gains a "Battery gaps" section: every miss the battery
+  let through, with the test that closed it. `/update-stack` harvests the
+  classes of miss across products.
+
+Considered and deferred, deliberately: a release-time sabotage pass by
+`evaluator-qa` (break each done item, confirm the battery goes red) that
+would give a number back. It is one paragraph in a file that already
+exists and can be added when a product shows it is needed. Until then
+the honest answer to "how good is the battery" is: production tells us.
+
 ### 2026-09-18 17:54 · `cfcfb11` — evaluator-qa comes back, narrowed (→ products)
 Reversing one removal from the entry below, on the same evidence that
 motivated the rest of it. The measured gap was never enforcement: the

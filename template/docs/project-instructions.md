@@ -25,6 +25,8 @@
 ## How a thread checks its own work
 - Run `bash .claude/hooks/verify.sh` before opening the pull request and put
   its result in the body.
+- Every new test is run red before the change that turns it green; the
+  pull request body says which test and how it was made to fail.
 - If the done-when clause covers something the battery cannot see — UI
   behaviour, data state, an external service — CLAUDE.md names what to run
   for it; do that and put the verdict in the pull request body. Never
@@ -34,6 +36,8 @@
 - When a thread opens a pull request, start a separate review thread for it:
   its task is to review the diff against `CLAUDE.md` and leave findings as
   pull request comments. The review thread does not change code.
+- The review thread checks each new test against the done-when clause it
+  claims to cover, and asks for the red run if the body does not show one.
 - The authoring thread picks the findings up from the pull request and fixes
   them.
 

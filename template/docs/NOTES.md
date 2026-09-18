@@ -10,6 +10,12 @@
      /update-stack harvests this list.
      Format: date · file · one-line what/why. Remove entries once upstreamed. -->
 
+## Battery gaps
+<!-- Every time evaluator-qa or production finds something the battery
+     passed: date · done-when clause · what the battery missed · the test
+     added. This is how the battery learns. /update-stack harvests the
+     classes of miss so other products' batteries can close them too. -->
+
 ## 2026-01-01 (template placeholder)
 - Repo instantiated from maya. Fill verify.sh and the CLAUDE.md stack slots
   before the first feature.
