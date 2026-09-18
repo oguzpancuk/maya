@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 18:52 · `pending` — one reviewer, two wrappers; "project" disambiguated (→ products)
+### 2026-09-18 18:52 · `8a74ce6` — one reviewer, two wrappers; "project" disambiguated (→ products)
 The review thread and the `code-reviewer` agent had the same independence
 property and different methods: the agent file spells one out (severity
 order, a failure scenario per finding, an explicit verdict), the project
