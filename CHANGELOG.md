@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 18:26 · `pending` — the harvest gets its input back in a project (→ products)
+### 2026-09-18 18:26 · `25a8b6b` — the harvest gets its input back in a project (→ products)
 `/update-stack` harvests `docs/NOTES.md`; in a project, threads were never
 told to write there. The rule that sends template-origin improvements to
 "Upstream candidates" lived only in `global/CLAUDE.md`, which threads do
