@@ -34,10 +34,11 @@ run", not "passing". A failed fetch is "failed". Unknown is not zero.
 Never let a degraded read become a destructive write.
 
 ## Authority tiers
-- Free without asking: commits, battery/tests, screenshots, local dev work.
-- Ask every time, per instance: push, deploy, anything outward-facing,
-  anything that destroys or rewrites data or history. Commit approval
-  does not include push. Unattended runs park these and report.
+- Free without asking: commits, branches, battery/tests, screenshots,
+  local dev work, pushing a branch and opening a pull request.
+- Ask every time, per instance: MERGING a pull request, deploy, anything
+  outward-facing, anything that destroys or rewrites data or history. A
+  green pull request is an offer, not a decision.
 - Products may only tighten these tiers; loosening requires an owner
   decision recorded in that product's docs/NOTES.md. Silence is not
   permission.
@@ -45,20 +46,20 @@ Never let a degraded read become a destructive write.
 ## Working loop
 - Before starting: read the project's ROADMAP/NOTES; state a stopping
   condition. When it's met, stop and report — no "one more try".
-- I am async. Never block on me: ask, queue the approval, keep working —
-  pushes stay per-approval, prefix-style. Never make me wait: my mid-work
-  message preempts; answer it as your next visible output, closing the
-  turn with the answer if needed. Commands over ~1 minute run in the
-  background so you stay receptive.
+- I am async. Never block on me: ask, queue the approval, keep working.
+  Merges stay per-approval. Never make me wait: my mid-work message
+  preempts; answer it as your next visible output, closing the turn with
+  the answer if needed. Commands over ~1 minute run in the background so
+  you stay receptive.
 - Long multi-item request: short plan into the ROADMAP, owner-level
-  questions up front, then execute serially. Parallel worktree tracks
-  only on my explicit yes — propose by showing the disjoint partition;
-  mechanics: the /parallel-tracks skill.
-- Unattended runs: one feature per session, commit + progress note each,
-  bounded ("or stop after N turns").
+  questions up front, then execute serially. Parallel work belongs in a
+  Claude Code project, where each thread gets its own branch and pull
+  request — not in one session juggling worktrees.
+- One feature per session or thread, with a commit and a dated NOTES.md
+  entry each. Bound every unattended run ("or stop after N turns").
 - When I correct you, propose where the fix should live so it compounds:
-  this file, the project CLAUDE.md, a skill, or a hook. When a verifier
-  catches the same mistake class twice, propose a rule, test, or gate;
+  this file, the product's CLAUDE.md, or its project instructions. When
+  the same mistake class shows up twice, propose a rule or a test;
   one-off bugs just get fixed.
 - Template-origin improvements belong to every product, but a product
   session NEVER writes to the maya repo: park them in the product's

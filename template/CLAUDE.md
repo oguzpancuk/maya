@@ -29,29 +29,25 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
 - [STACK: framework/library conventions specific to this product]
 
 ## Verification
-`bash .claude/hooks/verify.sh` is the single battery (CI runs the same file).
-It must pass on a clean, committed HEAD before a push or a "done" report —
-`git status --porcelain` empty before and after. A result from a dirty tree
-is not a result.
-Nothing leaves this machine unreviewed: the push gate refuses any local
-commit newer than `.claude/last-reviewed`, which the harness writes when
-code-reviewer finishes. Commit first, then review — the reviewer covers
-`last-reviewed..HEAD`; a fix made after a review needs its own. Force
-pushes and remote deletions are refused outright; the scan is coarse, so a
-commit message that mentions a push flag is written with `git commit -F`.
+`bash .claude/hooks/verify.sh` is the single battery. CI runs the same file,
+and that CI run is the required status check on every pull request — nothing
+reaches `main` without it green. Run it yourself before opening a pull
+request or reporting "done": on a clean, committed HEAD, `git status
+--porcelain` empty before and after. A result from a dirty tree is not a
+result. If the battery cannot cover a done-when clause (UI behaviour, data
+state, an external service), verify it by hand and say in the pull request
+what you observed — an unverifiable claim is not a passing claim.
 
 ## Workflow
+- Work on a branch, never on `main`; land through a pull request.
 - The repo is the memory. Read `docs/ROADMAP.md` + `docs/NOTES.md` when
   starting; update `docs/NOTES.md` (dated, append-only) when stopping.
   Decisions that constrain the future go to `docs/adr/`.
 - Every task states its stopping condition up front; when met, stop & report.
-- Unattended runs (goal loops, overnight): follow `contracts/README.md` —
-  one feature per session, default-FAIL feature list, evidence before
-  `passes: true`.
-- Launch code-reviewer before reporting a feature done, and evaluator-qa
-  before any deploy and after an unattended run — unprompted; the roster
-  is a standing instruction, not an option.
+- Merging is the owner's call, always. Do not merge, force-push, or change
+  CI configuration without being asked in this session.
 
 ## Deploy
-[STACK: deploy target, commands, and the checklist trigger — see
-/deploy-checklist. Until filled: this product has no deploy path.]
+[STACK: deploy target and commands. Until filled: this product has no deploy
+path. Deploys are run by the owner from a local session, never from a cloud
+thread.]

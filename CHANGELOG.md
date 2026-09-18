@@ -11,24 +11,63 @@ a product is current when it contains every marked entry above its
 `.maya-version` — which pins the newest ledger entry at the close of the
 update run that last reconciled it (its watermark), never plain HEAD.
 
-## Ablation watchlist (canonical copy — other files reference this one)
-
-Re-test on each model release, ONE component at a time, in this order:
-evidence-gate (measured 2026-09-01: never fires on Opus 5 across 57 sessions;
-fires constantly on Haiku 4.5 but does not move the false-claim rate, because
-it checks that evidence exists rather than that it is relevant — fix the
-heuristic before re-testing) → evaluator-qa
-invocation frequency → one-feature-per-session constraint → push-gate →
-CLAUDE.md line count.
-
-Re-testing means running the ablation, not judging it by eye: `evals/`
-runs a task with the component wired in and with it removed, grades both
-deterministically, and writes rates to `evals/results/`. A component whose
-ablated arm is no worse than its control arm is a deletion candidate —
-record the numbers here with the decision. Components without an eval task
-yet are re-tested by hand, and that is noted as such.
-
 ---
+
+### 2026-09-18 17:49 · `pending` — the harness comes out; the gate moves to GitHub (→ products)
+Claude Code projects shipped on 2026-09-17: one conversation coordinates
+parallel cloud threads, each on its own branch, each opening a pull
+request and watching it. Coordination was the job several components here
+were doing by hand, so the whole stack was repriced against it — and
+against this repo's own measurements.
+
+What the measurements said, before `evals/` was removed with everything
+else (run `0bd0de2-20260902T031130Z`, 50 trials per arm, Haiku 4.5, in
+`git log`): the full-harness arm and the no-harness arm were the same
+within noise on false passes (27/50 vs 31/50), and `red_battery_pushed`
+was **0/50 in both arms** — the push gate's failure case never once
+occurred. The full arm cost +73% turns, +67% wall clock and +88% dollars
+for that. The evidence gate had already been recorded as never firing on
+Opus 5 across 57 sessions. The one finding that did hold: the battery was
+green at tip in 100/100 runs while ~0.7 features per run were actually
+broken. The gap was never enforcement — it was what the battery checks.
+
+So enforcement leaves the model's machine and moves to the forge: `main`
+protected, pull request required, the `ci` run of `verify.sh` required.
+A hook can be argued past and, in a project with several repositories,
+threads read no repository's `settings.json` at all — a required check
+holds in both cases. `/new-product` now sets this up as part of
+instantiation rather than leaving it to "later".
+
+Removed, with reasons:
+- `push-gate`, `review-gate`, `review-mark`, `evidence-gate`, `bash-guard`,
+  `format-changed` and their `settings.json` wiring — measured above, or
+  superseded by branch protection.
+- `code-reviewer` — the built-in `/code-review` does the same work in its
+  own context window. Review now runs as a separate thread that comments
+  on the pull request; the pull request itself is a better record than the
+  untracked `.claude/last-reviewed` marker ever was.
+- `evaluator-qa`, `/deploy-checklist`, `/parallel-tracks`, `contracts/`,
+  `loop.md`, `/release-notes`, the `researcher` agent — owner decision:
+  keep the template, `/new-product`, `/update-stack` + the registry, and
+  the two scope skills; drop the rest.
+- `evals/`, `tests/`, `docs/test-plan.md`,
+  `docs/ablating-your-own-guardrails.md` — the instrument and its manuals,
+  removed with the components they measured. This is the honest cost of
+  this entry: the numbers above cannot be reproduced from a checkout any
+  more, only from history. `/update-stack`'s model-release step is now a
+  judgement call ("propose one rule to drop"), not a measurement.
+
+Added/changed:
+- `verify.sh` unconfigured now exits 1. As the required check it would
+  otherwise be a green light on nothing — worse than no check.
+- `template/docs/project-instructions.md`: the source text pasted into a
+  project's instructions field. Instructions live in a web UI, which maya
+  cannot propagate; keeping the original as a repo file restores versioning
+  and lets `/update-stack` port it.
+- Authority tiers: the per-instance approval moves from **push** to
+  **merge**. Threads push to their own branches constantly; the branch is
+  cheap and the merge is the decision.
+- `install.sh` prunes `~/.claude` symlinks left by components deleted here.
 
 ### 2026-09-02 08:58 · `e575b9d` — the gate batch, after its own review (→ products)
 The port commits were reviewed before push by a fresh-context reviewer

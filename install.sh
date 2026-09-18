@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # maya installer: puts the global layer into ~/.claude/ for local Claude Code
-# sessions. Skills and agents are symlinked (edits in maya apply instantly);
+# sessions. Skills are symlinked (edits in maya apply instantly);
 # CLAUDE.md is COPIED, because desktop Cowork sessions skip a symlinked
 # ~/.claude/CLAUDE.md — re-run this script after editing it in maya.
 # Idempotent; never silently overwrites — existing real files are backed up.
@@ -42,22 +42,24 @@ for skill in "$MAYA_DIR"/global/skills/*/; do
   link "${skill%/}" "$CLAUDE_DIR/skills/$(basename "$skill")"
 done
 
-for agent in "$MAYA_DIR"/global/agents/*.md; do
-  [ -f "$agent" ] || continue
-  link "$agent" "$CLAUDE_DIR/agents/$(basename "$agent")"
-done
+# Prune links left by components deleted from maya (a removed skill or
+# agent): only symlinks pointing into THIS checkout that no longer resolve.
+prune() {
+  local dir="$1" l
+  [ -d "$dir" ] || return 0
+  for l in "$dir"/*; do
+    [ -L "$l" ] || continue
+    case "$(readlink "$l")" in
+      "$MAYA_DIR"/*) [ -e "$l" ] || { rm "$l"; echo "  pruned stale $(basename "$l")"; } ;;
+    esac
+  done
+}
+prune "$CLAUDE_DIR/skills"
+prune "$CLAUDE_DIR/agents"
 
 echo ""
-echo "Done. Plugin checklist (this script cannot see what is already installed,"
-echo "so this list prints on EVERY run — skip anything you installed before):"
-echo "  /plugin install commit-commands@claude-plugins-official"
-echo "  /plugin install security-guidance@claude-plugins-official"
-echo "  /plugin install typescript-lsp@claude-plugins-official"
-echo "     (typescript-lsp also needs: npm i -g typescript-language-server typescript)"
-echo "  (/code-review and /security-review are BUILT INTO recent CLI versions —"
-echo "   no plugin needed for on-demand review; security-guidance stays for the"
-echo "   continuous hook-driven layer.)"
+echo "Done. Installed: /new-product, /update-stack, /spec, /mvp-scope."
 echo ""
-echo "Check the per-plugin 'Context cost' shown in /plugin before confirming."
-echo "Cloud/remote sessions do NOT read ~/.claude — for those, the product repo's"
-echo "own .claude/ (from template/) is what carries the setup."
+echo "Cloud sessions and project threads do NOT read ~/.claude — for those,"
+echo "the product repo's own CLAUDE.md and .claude/ (from template/) is what"
+echo "carries the setup."

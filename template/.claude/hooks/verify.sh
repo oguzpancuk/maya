@@ -5,7 +5,10 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 
-echo "WARNING: verify.sh is not configured yet — this battery verifies NOTHING." >&2
+# An unconfigured battery FAILS. This file is the required status check that
+# gates every merge, so a placeholder that exits 0 would be a green light on
+# nothing. /new-product must replace this block.
+echo "FAIL: verify.sh is not configured yet — this battery verifies NOTHING." >&2
 echo "Fill it with the real stack commands (see CLAUDE.md commands table)." >&2
 # [STACK: replace everything below with the real battery. Two rules proven
 # in pati: (1) attempt EVERY step even after a failure, then report them
@@ -22,4 +25,4 @@ echo "Fill it with the real stack commands (see CLAUDE.md commands table)." >&2
 #   step "tests"     app npm test
 #   printf '%s\n' "${results[@]}"; exit $fail
 # ]
-exit 0
+exit 1

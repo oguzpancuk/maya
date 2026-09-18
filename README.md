@@ -1,71 +1,74 @@
 # maya
 
-A reusable agentic development environment for building SaaS products with
-Claude Code. Like a sourdough starter (*maya*), every new product rises from a
-piece of it — and the starter itself keeps improving.
+A reusable starter for building SaaS products with Claude Code. Like a
+sourdough starter (*maya*), every new product rises from a piece of it — and
+the starter itself keeps improving.
 
 One repo, three jobs:
 
 | Directory | What it is | Where it lands |
 |---|---|---|
-| `global/` | The personal layer: my conventions, cross-product skills and agents | `~/.claude/` via `./install.sh` (symlinks) |
-| `template/` | The per-product starter: CLAUDE.md, hooks, agents, docs skeleton, CI, unattended-run contracts | cloned into each new product by `/new-product` |
-| `docs/agentic-setup.md` | The living manual: what is installed, why, how to update, known pitfalls | read it |
+| `template/` | The per-product starter: CLAUDE.md, the verification battery, CI, docs skeleton, project instructions | copied into each new product by `/new-product` |
+| `global/` | The personal layer: conventions and the four skills | `~/.claude/` via `./install.sh` |
+| `PRODUCTS.md` + `/update-stack` | The registry and the monthly harvest that carries improvements between products | run `/update-stack` |
 
 ## What problem this solves
 
-A coding agent is a fast generator with no memory of what it broke last time.
-Prompts are advice it may or may not take; the things that must always happen
-have to be enforced outside the model. maya is the enforcement layer:
+Claude Code projects coordinate the work: you describe what needs doing and
+threads run in parallel, each on its own branch, each opening a pull request.
+What they do not do is create the repository, decide what "done" means, or
+carry a lesson learned in one product over to the next. That is maya's job:
 
-- **Deterministic gates, not prose.** A pre-push gate blocks unapproved
-  pushes, an evidence gate rejects claims nothing verified, a verification
-  battery runs before work is called done. These are hooks — the model cannot
-  talk its way past them.
-- **A verification ladder.** Rules-based checks first (typecheck, lint, tests,
-  schema), visual confirmation second, LLM judgment last and never alone.
-- **Ablation as routine.** Every harness component encodes an assumption about
-  what the model cannot do yet. On each model release one component is removed
-  and re-tested; what is no longer load-bearing gets deleted, with the reason
-  recorded in CHANGELOG.md.
-- **Propagation, not copy-paste.** Products are instantiated from `template/`
-  and record their origin commit in `.maya-version`. Ledger entries marked
-  `(→ products)` are port debt: a product is current when it contains every
-  such entry above its watermark.
+- **One battery, one definition of green.** `verify.sh` is the single
+  verification script. CI runs the same file, and that CI run is the required
+  check on every pull request — so nothing merges unverified. An unconfigured
+  battery fails on purpose; a green check on nothing is worse than no check.
+- **Every product starts equipped.** `/new-product` copies the template, fills
+  the stack slots, sets up the repository and its merge gate, and records the
+  maya commit it came from in `.maya-version`.
+- **Improvements propagate.** Products are registered in `PRODUCTS.md`;
+  `/update-stack` harvests what one product learned and reports which products
+  are behind the template. Without it, each product relearns the same lesson.
+- **Deletion is a feature.** Nothing stays because it once seemed necessary.
+  When a model release makes a rule unnecessary, the rule goes, with the
+  reason recorded in CHANGELOG.md.
 
-It is in daily use: see PRODUCTS.md for the products built on it, and
-[docs/ablating-your-own-guardrails.md](docs/ablating-your-own-guardrails.md)
-for how components here get measured — and deleted.
+In daily use: see PRODUCTS.md for the products built on it.
 
 ## Quickstart (on the dev machine)
 
 ```bash
 git clone git@github.com:oguzpancuk/maya.git ~/dev/maya
-cd ~/dev/maya && ./install.sh   # copies CLAUDE.md + links skills/agents into ~/.claude/
-# then, inside any Claude Code session, install the approved plugins:
-#   /plugin install code-review@claude-plugins-official
-#   /plugin install commit-commands@claude-plugins-official
-#   /plugin install security-guidance@claude-plugins-official
-#   /plugin install typescript-lsp@claude-plugins-official
+cd ~/dev/maya && ./install.sh   # copies CLAUDE.md + links the skills into ~/.claude/
 ```
 
-Start a new product: run `/new-product` in Claude Code.
-Monthly maintenance: run `/update-stack`.
+Installed skills: `/new-product`, `/spec`, `/mvp-scope`, `/update-stack`.
+
+## Starting a product
+
+1. `/new-product` — repository, CLAUDE.md, verify.sh, CI, docs skeleton.
+2. Push to GitHub, install the Claude GitHub App, protect `main`: pull request
+   required, `ci` required. (`/new-product` walks these.)
+3. `/spec` → `docs/PRD.md`, then `/mvp-scope` → `docs/ROADMAP.md`. Commit.
+4. Create the project at claude.ai/code, add the repository, and paste
+   `docs/project-instructions.md` into Project settings > Memory.
+
+Then the day-to-day is: send work to the project, read the pull requests,
+merge. Deploys stay local and manual. Monthly: `/update-stack`.
 
 ## Design rules (non-negotiable)
 
 1. **Simple > complex.** Composable pieces over frameworks. Nothing gets added
    without justifying its context-window cost.
-2. **Deletion is a feature.** Every harness component encodes an assumption
-   about what the model can't do on its own. On every model release,
-   `/update-stack` reminds us to re-test one component at a time and delete
-   what is no longer load-bearing. Removals go to CHANGELOG.md with reasons.
-3. **CLAUDE.md is advisory; hooks are enforcement.** Anything that must always
-   happen is a hook, not prose.
+2. **Deletion is a feature.** Every rule encodes an assumption about what the
+   model cannot do on its own. Assumptions expire; removals go to CHANGELOG.md
+   with their reasons.
+3. **Enforcement lives outside the model.** Anything that must always happen
+   is branch protection and a required check, not a sentence in a prompt.
 4. **Honest signals.** A claim no one verified does not get written down.
    Unknown is not zero; a fetch that failed is reported as failed.
 5. **The template is stack-agnostic.** Stack specifics live only in marked
-   `[STACK]` slots and `verify.sh`. No product's stack is assumed permanent.
+   `[STACK]` slots and `verify.sh`.
 
 ## Versioning
 

@@ -1,6 +1,6 @@
 ---
 name: update-stack
-description: Monthly maintenance of the agentic environment — check plugin/marketplace updates, fetch Anthropic news + engineering index + Claude Code changelog, remind about harness ablation when a new model shipped, and flag maya-template impact. Reports only; never auto-installs.
+description: Monthly maintenance of the agentic environment — check plugin/marketplace updates, fetch Anthropic news + engineering index + Claude Code changelog, remind about trimming rules a new model no longer needs, and flag maya-template impact. Reports only; never auto-installs.
 disable-model-invocation: true
 ---
 
@@ -22,20 +22,19 @@ blocked fetch is "blocked", never silence:
 - https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md
 - https://code.claude.com/docs/llms.txt
 
-## 3. Model check → ablation reminder
-If a new Claude model shipped since `last_seen_model`: every harness
-component encodes an assumption about what the previous model could not
-do. Walk the ablation watchlist (canonical copy: maya CHANGELOG.md) and
-propose ONE component to trial-remove first. Measure it, do not
-eyeball it: if the component has a task under maya `evals/`, run
-`bash evals/run.sh <task> --trials N` and report both arms with their n;
-if it does not, say the re-test was manual.
+## 3. Model check → trim reminder
+If a new Claude model shipped since `last_seen_model`: every rule in the
+template encodes an assumption about what the previous model could not do
+on its own. Re-read `template/CLAUDE.md` and
+`template/docs/project-instructions.md` and propose ONE rule to drop —
+the one whose absence you would notice least. Deletion is a feature;
+record the removal and its reason in CHANGELOG.md.
 
 ## 4. Harvest (products -> maya)
 Products = maya's PRODUCTS.md registry + a safety-net scan for
 `.maya-version` files under ~/dev. Per product, diff its `.claude/`,
-`contracts/` and CLAUDE.md against the maya template at its
-`.maya-version`, and read its docs/NOTES.md "upstream candidates".
+`CLAUDE.md` and `docs/project-instructions.md` against the maya template
+at its `.maya-version`, and read its docs/NOTES.md "upstream candidates".
 - Diff source is ALWAYS a fresh `git clone --depth 1` from GitHub into a
   temp dir (existing credentials; never prompt for or store tokens;
   delete the dir after) — never a local checkout. The diff BASE comes
@@ -55,11 +54,14 @@ template@(product's .maya-version) vs template@HEAD vs the product file.
 - Unmodified in the product: copy the new version, with my approval.
 - Deliberately diverged: NEVER clobber — port the change as a patch, or
   record "superseded locally" with one line of why.
-- Hybrid files (generic half + [STACK] slots, e.g. deploy-checklist):
-  sync generic sections PER HUNK — outside the slots, template@HEAD wins
-  unless the product hunk has a NOTES-documented rationale.
-- Fill-class files (CLAUDE.md, verify.sh, loop.md, docs skeleton,
-  init.sh) diverge by design: port ideas, never bytes.
+- Hybrid files (generic half + [STACK] slots, e.g. ci.yml): sync generic
+  sections PER HUNK — outside the slots, template@HEAD wins unless the
+  product hunk has a NOTES-documented rationale.
+- Fill-class files (CLAUDE.md, verify.sh, docs skeleton,
+  project-instructions) diverge by design: port ideas, never bytes.
+- If a port changes a product's `docs/project-instructions.md`, say so in
+  the report: the copy pasted into that product's project settings is a
+  copy, and only I can re-paste it.
 Apply ports only to a PULLED, CLEAN checkout: `git pull` first, postpone
 if `git status --porcelain` is not empty.
 
@@ -102,7 +104,7 @@ template edits happen only after my approval, in the maya repo first.
 Update the state file (date, newest model, changelog version, weights).
 Then finish the machine — maintenance commands are never handed back to
 the owner:
-- Global layer changed (skill, agent, global/CLAUDE.md)? Run
+- Global layer changed (a skill or global/CLAUDE.md)? Run
   `bash <maya>/install.sh` yourself.
 - A checklist plugin missing? `claude plugin install` WITH approval, per
   instance; report its context cost from `claude plugin details` after.

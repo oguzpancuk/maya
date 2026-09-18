@@ -5,8 +5,9 @@
      Never rewrite old entries — this file is the audit trail. -->
 
 ## Upstream candidates
-<!-- Improvements made HERE to template-origin files (.claude/, contracts/,
-     CLAUDE.md) that maya should inherit. /update-stack harvests this list.
+<!-- Improvements made HERE to template-origin files (CLAUDE.md, verify.sh,
+     ci.yml, project-instructions.md) that maya should inherit.
+     /update-stack harvests this list.
      Format: date · file · one-line what/why. Remove entries once upstreamed. -->
 
 ## 2026-01-01 (template placeholder)
