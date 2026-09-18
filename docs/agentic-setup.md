@@ -49,8 +49,8 @@ Two facts dictate the split:
   memory.
 
 Enforcement is not in this repo. It lives on GitHub: `main` protected, pull
-request required, `ci` required, branches must be up to date before they
-merge. A hook can be argued with; a required check cannot.
+request required, the `verify` check required, branches must be up to
+date before they merge. A hook can be argued with; a required check cannot.
 
 ## 3. Update routine
 
@@ -83,8 +83,8 @@ tool for the same job**.
    the script.
 3. Add the CI workflow that runs `verify.sh`, and confirm it is green before
    making it required.
-4. Protect `main`: pull request required, `ci` required, up to date before
-   merging.
+4. Protect `main`: pull request required, the `verify` check required, up
+   to date before merging.
 5. Add `docs/project-instructions.md`, adapted to the product.
 6. Add the "Upstream candidates" section to the product's NOTES.md.
 7. Write maya's current commit to `.maya-version`. Registering in maya's

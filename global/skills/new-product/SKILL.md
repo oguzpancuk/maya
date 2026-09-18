@@ -39,8 +39,9 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    clone the repo or open pull requests.
 8. Confirm CI ran and is green on `main`. A red or skipped first run means
    the battery or the workflow is wrong — fix it now, not later.
-9. Protect `main`: direct pushes off, pull request required, the `ci` check
-   required, and "require branches to be up to date before merging" on —
+9. Protect `main`: direct pushes off, pull request required, the `verify`
+   status check required (the job in `ci.yml`; GitHub lists checks by job
+   name), and "require branches to be up to date before merging" on —
    so two green branches cannot merge into a red `main`. This is the only
    thing that stops unverified work from landing, so it is part of
    instantiation, not a later improvement.
