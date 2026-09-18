@@ -13,6 +13,16 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 19:32 · `pending` — the release-time QA pass gets wired (→ products)
+`evaluator-qa`'s description has said "and before a release" since it
+came back, and nothing called it at a release: `/deploy-checklist` had
+five gates and none was it. So the claim that a test-green-but-broken
+feature would be caught at release time was not true of the files. Gate
+6 now runs the agent over every ROADMAP item marked done since the last
+deploy, against the running app; one NEEDS_WORK stops the deploy. In a
+pull request the agent runs only where the battery cannot see the clause;
+at a release it runs over all of them — the one pass that does.
+
 ### 2026-09-18 19:24 · `7aaa38f` — the review thread runs /code-review; code-reviewer goes for good (→ products)
 `code-reviewer` came back two entries ago for one property: `/code-review`
 runs as a forked subagent and inherits the author's conversation, so a

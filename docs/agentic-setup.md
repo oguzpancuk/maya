@@ -40,8 +40,9 @@ Two facts dictate the split:
   author's to inherit.
 - **`template/.claude/skills/deploy-checklist/`** — the owner's pre-deploy
   walk: generic gates (clean tree, battery green on this commit, no secrets
-  in the range, reversible migrations, release notes exist), then the
-  product's own steps in a `[STACK]` slot. Threads never deploy; the owner
+  in the range, reversible migrations, release notes exist, `evaluator-qa`
+  over every item done since the last deploy), then the product's own
+  steps in a `[STACK]` slot. Threads never deploy; the owner
   runs this in a local session.
 - **`template/docs/`** — PRD, ROADMAP, NOTES, ADR skeleton. The repo is the
   memory.
