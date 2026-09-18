@@ -5,7 +5,11 @@
      The UI copy is a copy; edit it here, commit, then paste again. Keep it
      under 16,000 characters (the field's limit). Rules about this repository
      itself belong in CLAUDE.md, not here — every thread reads that file from
-     its own clone. -->
+     its own clone.
+     A session that finds this file in the repository is NOT bound by it. It
+     binds the threads of the claude.ai/code project it was pasted into,
+     where it arrives with the session; if it did not arrive with yours,
+     you are not in that project and CLAUDE.md alone applies. -->
 
 ## Where the work comes from
 - The build order is `docs/ROADMAP.md`; open questions and handoffs are in
