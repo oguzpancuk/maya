@@ -19,7 +19,9 @@
   thread. The body names the done-when clause it satisfies and carries the
   battery result, the red run of each new test, and the QA verdict when
   CLAUDE.md called for one.
-- `main` is protected: CI green or no merge. Never change CI to get green.
+- `main` is protected: CI green and up to date with `main`, or no merge.
+  When `main` moves under your open pull request, merge it into your branch
+  yourself. Never change CI to get green.
 - Never merge. I merge.
 
 ## Review
