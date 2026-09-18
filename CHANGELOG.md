@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 19:24 · `pending` — the review thread runs /code-review; code-reviewer goes for good (→ products)
+### 2026-09-18 19:24 · `7aaa38f` — the review thread runs /code-review; code-reviewer goes for good (→ products)
 `code-reviewer` came back two entries ago for one property: `/code-review`
 runs as a forked subagent and inherits the author's conversation, so a
 review started from the author's session is not independent. That holds
