@@ -59,7 +59,11 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
       and push both;
     - create the project at claude.ai/code, add this repository, paste
       `docs/project-instructions.md` into Project settings > Memory >
-      Project instructions, and lower the thread effort from the default.
+      Project instructions (its About slots are filled after /mvp-scope,
+      from the ROADMAP), set the goal in Project settings > General to the
+      walking skeleton's done-when line, and lower the thread effort from
+      the default. The coordinator has no clone: these are all it knows
+      about the product on day one.
 
 ## Rules
 - Every slot is either correctly filled or a visible TODO. An unconfigured

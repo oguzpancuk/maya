@@ -4,6 +4,12 @@
      Edit here, commit, paste again. Rules about the repository itself live
      in CLAUDE.md, which every thread reads from its clone. -->
 
+## About
+[STACK: one-line product description — what it is, for whom. The same line
+as in CLAUDE.md; the coordinator never reads that file.]
+Walking skeleton, done when: [STACK: its end state in one line, from
+docs/ROADMAP.md].
+
 ## Work
 - The build order is `docs/ROADMAP.md`. Whatever I paste here is the task;
   if a ROADMAP item already covers it, say so instead of starting a second
