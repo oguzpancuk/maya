@@ -5,10 +5,9 @@
      in CLAUDE.md, which every thread reads from its clone. -->
 
 ## Work
-- The build order is `docs/ROADMAP.md`; open questions and handoffs are in
-  `docs/NOTES.md`. Read both before starting.
-- Whatever I paste here is the task. If a ROADMAP item already covers it,
-  say so instead of starting a second thread.
+- The build order is `docs/ROADMAP.md`. Whatever I paste here is the task;
+  if a ROADMAP item already covers it, say so instead of starting a second
+  thread.
 - One feature per thread. A second problem found on the way goes into
   `docs/NOTES.md`, not into the fix.
 - Propose threads before starting them; at most two at a time until I say
@@ -16,13 +15,11 @@
 
 ## Pull requests
 - Start from `main`, work on your own branch, open one pull request per
-  thread. The body names the done-when clause it satisfies and carries the
-  battery result, the red run of each new test, and the QA verdict when
-  CLAUDE.md called for one.
+  thread. The body names the done-when clause it satisfies; what else it
+  carries, CLAUDE.md says.
 - `main` is protected: CI green and up to date with `main`, or no merge.
   When `main` moves under your open pull request, merge it into your branch
-  yourself. Never change CI to get green.
-- Never merge. I merge.
+  yourself.
 
 ## Review
 - When a thread opens a pull request, start a review thread for it. Its
