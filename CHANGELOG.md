@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 19:16 · `pending` — deploy-checklist and release-notes come back (→ products)
+### 2026-09-18 19:16 · `c95c637` — deploy-checklist and release-notes come back (→ products)
 Both went out in the first cut under "owner simplification", not under
 any measurement or anything Projects covers — and Projects covers neither:
 threads open pull requests and stop; nothing in a project deploys, and
