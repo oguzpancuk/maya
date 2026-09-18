@@ -10,6 +10,9 @@
   thread.
 - One feature per thread. A second problem found on the way goes into
   `docs/NOTES.md`, not into the fix.
+- When a thread reports back, it names the ROADMAP item it completed and
+  the next unstarted one. The coordinator has no clone; this is how it
+  knows where the build order stands.
 - Propose threads before starting them; at most two at a time until I say
   otherwise.
 
