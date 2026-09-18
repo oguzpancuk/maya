@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Fresh-context reviewer — reads a branch's diff cold, without the author's conversation, and reports findings ordered by severity. NEVER modifies code. Use before opening a pull request when no separate review thread will review it.
+description: Fresh-context reviewer — reads a branch's diff cold, without the author's conversation, and reports findings ordered by severity. NEVER modifies code. Run by the project's review thread on a pull request's branch.
 tools: Read, Grep, Glob, Bash
 model: inherit
 ---

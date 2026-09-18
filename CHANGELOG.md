@@ -13,6 +13,26 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 19:10 · `pending` — one mode: every product session is a project thread (→ products)
+Owner decision: this harness is used only through claude.ai/code
+projects. There is no local, plain-cloud or teleported mode for product
+work, so nothing in the template may branch on which mode a session is
+in. Removed: the review rule in `template/CLAUDE.md`, which had grown a
+five-line conditional ("if project instructions delivered with this
+session… otherwise a local session, a plain cloud session, a teleported
+one…") and the "not bound by this file" note in
+`docs/project-instructions.md` — both existed only to keep a mode that
+does not exist from misreading. Review is now defined in exactly one
+place: the project instructions start a review thread per pull request,
+the thread runs `code-reviewer`, the agent file is the method. The
+agent's description no longer hints at any other trigger. Docs say the
+same: this harness is not designed for any other mode.
+
+What still runs locally, by design: maya's own work, and `/spec` and
+`/mvp-scope`, which are interactive with the owner. They touch a product
+repo only to write `docs/`, land it through a pull request like anything
+else, and get no review thread — CI green and the owner's merge.
+
 ### 2026-09-18 18:52 · `8a74ce6` — one reviewer, two wrappers; "project" disambiguated (→ products)
 The review thread and the `code-reviewer` agent had the same independence
 property and different methods: the agent file spells one out (severity

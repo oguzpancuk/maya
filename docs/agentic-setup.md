@@ -10,7 +10,7 @@ https://claude.ai/code/artifact/89e20f3f-114d-4df9-983d-dbb71cbc7e1e
 | Layer | Lives in | Reaches Claude via | Carries |
 |---|---|---|---|
 | GLOBAL (me) | `maya/global/` | `./install.sh` symlinks → `~/.claude/` | personal CLAUDE.md, /spec, /mvp-scope, /new-product, /update-stack |
-| PRODUCT | `maya/template/`, instantiated by `/new-product` | committed files in each product repo | product CLAUDE.md, `verify.sh`, CI, docs skeleton, project instructions |
+| PRODUCT | `maya/template/`, instantiated by `/new-product` | committed files in each product repo, read by every thread of the product's claude.ai/code project | product CLAUDE.md, `verify.sh`, CI, docs skeleton, project instructions |
 
 Two facts dictate the split:
 - **Cloud sessions and project threads ignore `~/.claude/`** — anything a
@@ -32,8 +32,8 @@ Two facts dictate the split:
   changes it.
 - **`template/.claude/agents/`** — two fresh-context agents, both defined
   as custom subagents so they start without the author's conversation.
-  `code-reviewer` reads a branch's diff cold before a pull request opens
-  (outside a project; inside one, the review thread does this).
+  `code-reviewer` is the review method: the project's review thread runs
+  it on a pull request's branch and posts its report as comments.
   `evaluator-qa` collects its own evidence and runs only where the battery
   cannot see the done-when clause (UI behaviour, data state, an external
   service), not on every change.
@@ -89,9 +89,9 @@ tool for the same job**.
   `code.claude.com/docs/en/*` (index: `code.claude.com/docs/llms.txt`).
 - Slash commands merged into skills; `.claude/commands/` still works but
   skills are the recommended form.
-- Claude Code projects are in beta on Pro/Max and roll out gradually. If a
-  product cannot use one yet, cloud sessions and ordinary pull requests
-  cover the same ground more manually.
+- Claude Code projects are in beta on Pro/Max and roll out gradually. This
+  harness assumes every product session is a thread of a claude.ai/code
+  project; it is not designed for any other mode.
 
 Pitfalls about the Agent SDK, Managed Agents and the MCP spec were dropped
 with the harness that needed them; `git log` has them.

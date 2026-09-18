@@ -45,13 +45,6 @@ needed. An unverifiable claim is not a passing claim.
 
 ## Workflow
 - Work on a branch, never on `main`; land through a pull request.
-- No pull request reaches the owner unreviewed by something that did not
-  write it. If project instructions delivered with this session (not the
-  `docs/project-instructions.md` file in this repository) assign a
-  separate review thread to pull requests, that thread is the review.
-  Otherwise — a local session, a plain cloud session, a teleported one —
-  run the `code-reviewer` agent before opening the pull request and put
-  its verdict in the pull request body.
 - The repo is the memory. Read `docs/ROADMAP.md` + `docs/NOTES.md` when
   starting; update `docs/NOTES.md` (dated, append-only) when stopping.
   Decisions that constrain the future go to `docs/adr/`.
@@ -67,5 +60,4 @@ needed. An unverifiable claim is not a passing claim.
 
 ## Deploy
 [STACK: deploy target and commands. Until filled: this product has no deploy
-path. Deploys are run by the owner from a local session, never from a cloud
-thread.]
+path. Deploys are run by the owner, never by a thread.]
