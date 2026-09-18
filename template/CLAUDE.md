@@ -41,7 +41,9 @@ If the battery cannot cover a done-when clause (UI behaviour, data state,
 an external service), run the `evaluator-qa` agent on it and put its
 verdict in the pull request. It collects its own evidence instead of
 taking yours; where `verify.sh` already covers the clause, it is not
-needed. An unverifiable claim is not a passing claim.
+needed. NEEDS_WORK means the feature is not done: fix, run it again, and
+open the pull request only on PASS. An unverifiable claim is not a
+passing claim.
 
 ## Workflow
 - Work on a branch, never on `main`; land through a pull request.
