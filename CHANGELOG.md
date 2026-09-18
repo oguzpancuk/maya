@@ -13,6 +13,25 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 18:52 · `pending` — one reviewer, two wrappers; "project" disambiguated (→ products)
+The review thread and the `code-reviewer` agent had the same independence
+property and different methods: the agent file spells one out (severity
+order, a failure scenario per finding, an explicit verdict), the project
+instructions gave the thread three bullets and left the rest to default
+behaviour. Now the thread's whole task is to run the agent on the pull
+request's branch and post its report as comments. The method is written
+once, in the agent file; the thread adds only a separate session and a
+place the findings persist. Outside a project the agent's verdict goes
+into the pull request body, so the pull request is the review's record
+in both modes.
+
+Also fixed: the rule in `template/CLAUDE.md` said "in a project", and in
+Claude Code that word usually means the repository. A local session could
+read it as "here" and wait for a review thread that never comes. The rule
+now keys on what a session can observe — whether project instructions in
+its context assign a review thread — and the other two uses of the word
+name the claude.ai/code feature explicitly.
+
 ### 2026-09-18 18:40 · `8b97260` — code-reviewer comes back, for the fresh context (→ products)
 The first entry today removed `code-reviewer` as a duplicate of the
 built-in `/code-review`. That was true of what it does and false of how

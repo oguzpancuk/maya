@@ -33,11 +33,11 @@
   report a check you did not run.
 
 ## Review
-- When a thread opens a pull request, start a separate review thread for it:
-  its task is to review the diff against `CLAUDE.md` and leave findings as
-  pull request comments. The review thread does not change code.
-- The review thread checks each new test against the done-when clause it
-  claims to cover, and asks for the red run if the body does not show one.
+- When a thread opens a pull request, start a separate review thread for it.
+  Its whole task: run the `code-reviewer` agent from `.claude/agents/` on
+  the pull request's branch and post its report as pull request comments,
+  verdict included. The review thread does not change code and does not
+  review by hand — the agent file is the method.
 - The authoring thread picks the findings up from the pull request and fixes
   them.
 

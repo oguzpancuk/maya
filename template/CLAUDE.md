@@ -46,8 +46,10 @@ needed. An unverifiable claim is not a passing claim.
 ## Workflow
 - Work on a branch, never on `main`; land through a pull request.
 - No pull request reaches the owner unreviewed by something that did not
-  write it: in a project, the review thread; outside one, the
-  `code-reviewer` agent, run before the pull request is opened.
+  write it. If the project instructions in your context assign a separate
+  review thread to pull requests, that thread is the review. Otherwise
+  run the `code-reviewer` agent before opening the pull request and put
+  its verdict in the pull request body.
 - The repo is the memory. Read `docs/ROADMAP.md` + `docs/NOTES.md` when
   starting; update `docs/NOTES.md` (dated, append-only) when stopping.
   Decisions that constrain the future go to `docs/adr/`.
@@ -55,7 +57,8 @@ needed. An unverifiable claim is not a passing claim.
   them in: an improvement to a template-origin file (`CLAUDE.md`,
   `verify.sh`, `ci.yml`, `docs/project-instructions.md`) under "Upstream
   candidates", and anything the battery passed that turned out broken
-  under "Battery gaps". maya harvests this repo, not a project's memory.
+  under "Battery gaps". maya harvests this repo, never the memory of a
+  claude.ai/code project.
 - Every task states its stopping condition up front; when met, stop & report.
 - Merging is the owner's call, always. Do not merge, force-push, or change
   CI configuration without being asked in this session.

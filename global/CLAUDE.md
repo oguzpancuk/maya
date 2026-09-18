@@ -53,8 +53,9 @@ Never let a degraded read become a destructive write.
   you stay receptive.
 - Long multi-item request: short plan into the ROADMAP, owner-level
   questions up front, then execute serially. Parallel work belongs in a
-  Claude Code project, where each thread gets its own branch and pull
-  request — not in one session juggling worktrees.
+  claude.ai/code project (the Projects feature: one conversation
+  coordinating cloud threads), where each thread gets its own branch and
+  pull request — not in one session juggling worktrees.
 - One feature per session or thread, with a commit and a dated NOTES.md
   entry each. Bound every unattended run ("or stop after N turns").
 - When I correct you, propose where the fix should live so it compounds:
