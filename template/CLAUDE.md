@@ -59,5 +59,6 @@ needed. An unverifiable claim is not a passing claim.
   CI configuration without being asked in this session.
 
 ## Deploy
-[STACK: deploy target and commands. Until filled: this product has no deploy
-path. Deploys are run by the owner, never by a thread.]
+[STACK: deploy target and commands — the product steps of /deploy-checklist.
+Until filled: this product has no deploy path. Deploys are run by the owner
+through /deploy-checklist, never by a thread.]

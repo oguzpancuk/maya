@@ -13,6 +13,19 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 19:16 · `pending` — deploy-checklist and release-notes come back (→ products)
+Both went out in the first cut under "owner simplification", not under
+any measurement or anything Projects covers — and Projects covers neither:
+threads open pull requests and stop; nothing in a project deploys, and
+nothing writes a user-facing account of a range. Owner decision to keep
+them. They come back unchanged: `/deploy-checklist` is the owner's
+pre-deploy walk in the product repo (generic gates, then the `[STACK]`
+product steps), run in a local session because the deploy target is
+reachable only from there; `/release-notes` is a global skill the
+checklist's fifth gate calls for. `template/CLAUDE.md`'s Deploy slot
+names the checklist again. Of the first cut's "owner simplification"
+bucket, `researcher` and `evals/` remain removed.
+
 ### 2026-09-18 19:10 · `8538217` — one mode: every product session is a project thread (→ products)
 Owner decision: this harness is used only through claude.ai/code
 projects. There is no local, plain-cloud or teleported mode for product

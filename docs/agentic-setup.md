@@ -9,14 +9,15 @@ https://claude.ai/code/artifact/89e20f3f-114d-4df9-983d-dbb71cbc7e1e
 
 | Layer | Lives in | Reaches Claude via | Carries |
 |---|---|---|---|
-| GLOBAL (me) | `maya/global/` | `./install.sh` symlinks → `~/.claude/` | personal CLAUDE.md, /spec, /mvp-scope, /new-product, /update-stack |
-| PRODUCT | `maya/template/`, instantiated by `/new-product` | committed files in each product repo, read by every thread of the product's claude.ai/code project | product CLAUDE.md, `verify.sh`, CI, docs skeleton, project instructions |
+| GLOBAL (me) | `maya/global/` | `./install.sh` symlinks → `~/.claude/` | personal CLAUDE.md, /spec, /mvp-scope, /new-product, /update-stack, /release-notes |
+| PRODUCT | `maya/template/`, instantiated by `/new-product` | committed files in each product repo, read by every thread of the product's claude.ai/code project | product CLAUDE.md, `verify.sh`, CI, docs skeleton, project instructions, /deploy-checklist |
 
 Two facts dictate the split:
 - **Cloud sessions and project threads ignore `~/.claude/`** — anything a
   thread needs must be committed in the product repo.
 - **A personal skill silently shadows a same-named project skill** — global
-  skill names (spec, mvp-scope, new-product, update-stack) are reserved.
+  skill names (spec, mvp-scope, new-product, update-stack, release-notes)
+  are reserved.
 
 ## 2. What each piece is
 
@@ -37,6 +38,11 @@ Two facts dictate the split:
   `evaluator-qa` collects its own evidence and runs only where the battery
   cannot see the done-when clause (UI behaviour, data state, an external
   service), not on every change.
+- **`template/.claude/skills/deploy-checklist/`** — the owner's pre-deploy
+  walk: generic gates (clean tree, battery green on this commit, no secrets
+  in the range, reversible migrations, release notes exist), then the
+  product's own steps in a `[STACK]` slot. Threads never deploy; the owner
+  runs this in a local session.
 - **`template/docs/`** — PRD, ROADMAP, NOTES, ADR skeleton. The repo is the
   memory.
 

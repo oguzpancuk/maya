@@ -8,8 +8,8 @@ One repo, three jobs:
 
 | Directory | What it is | Where it lands |
 |---|---|---|
-| `template/` | The per-product starter: CLAUDE.md, the verification battery, CI, docs skeleton, project instructions | copied into each new product by `/new-product` |
-| `global/` | The personal layer: conventions and the four skills | `~/.claude/` via `./install.sh` |
+| `template/` | The per-product starter: CLAUDE.md, the verification battery, CI, docs skeleton, project instructions, the deploy checklist | copied into each new product by `/new-product` |
+| `global/` | The personal layer: conventions and the five skills | `~/.claude/` via `./install.sh` |
 | `PRODUCTS.md` + `/update-stack` | The registry and the monthly harvest that carries improvements between products | run `/update-stack` |
 
 ## What problem this solves
@@ -42,7 +42,8 @@ git clone git@github.com:oguzpancuk/maya.git ~/dev/maya
 cd ~/dev/maya && ./install.sh   # copies CLAUDE.md + links the skills into ~/.claude/
 ```
 
-Installed skills: `/new-product`, `/spec`, `/mvp-scope`, `/update-stack`.
+Installed skills: `/new-product`, `/spec`, `/mvp-scope`, `/update-stack`,
+`/release-notes`.
 
 ## Starting a product
 
@@ -54,7 +55,8 @@ Installed skills: `/new-product`, `/spec`, `/mvp-scope`, `/update-stack`.
    `docs/project-instructions.md` into Project settings > Memory.
 
 Then the day-to-day is: send work to the project, read the pull requests,
-merge. Deploys stay local and manual. Monthly: `/update-stack`.
+merge. Deploys are yours: `/deploy-checklist` in the product repo, with
+`/release-notes` for the range. Monthly: `/update-stack`.
 
 ## Design rules (non-negotiable)
 
