@@ -85,6 +85,16 @@ for lines that LOOSEN the global authority tiers or any other policy
 rule. Loosening backed by a NOTES-recorded owner decision = confirmed
 divergence; without one = finding. Products may only tighten.
 
+## 4d. Merge gate check (GitHub -> products)
+The merge gate is a GitHub setting, not a file, so ports cannot carry it.
+Every run, for each registered product with a remote: confirm `main` has
+all four — direct pushes off, pull request required, `ci` required,
+branches up to date before merging (the list in /new-product step 9 is
+canonical). Read it through the GitHub API where credentials allow;
+where they do not, ask me to confirm each product and record the answer.
+Any missing condition is a finding, not a note: without it the battery
+gates nothing on that product.
+
 ## 5. Weight check
 Weigh the ALWAYS-LOADED layer only: global CLAUDE.md lines, global
 skills count + description length, installed plugin count (+ context
