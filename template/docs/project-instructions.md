@@ -26,8 +26,9 @@
 - Run `bash .claude/hooks/verify.sh` before opening the pull request and put
   its result in the body.
 - If the done-when clause covers something the battery cannot see — UI
-  behaviour, data state, an external service — verify it by hand and write
-  what you actually observed. Never report a check you did not run.
+  behaviour, data state, an external service — CLAUDE.md names what to run
+  for it; do that and put the verdict in the pull request body. Never
+  report a check you did not run.
 
 ## Review
 - When a thread opens a pull request, start a separate review thread for it:

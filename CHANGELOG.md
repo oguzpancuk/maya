@@ -13,6 +13,32 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 17:54 · `pending` — evaluator-qa comes back, narrowed (→ products)
+Reversing one removal from the entry below, on the same evidence that
+motivated the rest of it. The measured gap was never enforcement: the
+battery was green at tip in 100/100 runs while roughly 0.7 features per
+run did not work. Everything that survived the cut reads code or runs the
+battery; `evaluator-qa` was the only component that collected its own
+evidence — ran the battery itself, drove the running app, queried the
+store — so removing it deleted the only thing aimed at the one failure
+mode the numbers actually showed. The replacement line ("verify it by hand
+and say what you observed") puts the author thread in charge of grading
+its own claim, which is the exact failure the agent's first paragraph
+names.
+
+It comes back narrowed rather than as it was. The old rule ran it before
+every done report, before deploys and after unattended runs; the new one
+runs it only where `verify.sh` cannot see the done-when clause — UI
+behaviour, data state, an external service — and before a release. Where
+the battery and CI already cover the clause, their result stands. The
+agent file says so itself now, so the trigger travels with it.
+
+The rule lives in `template/CLAUDE.md` (it is about this repository and
+the agent committed in it); `project-instructions.md` points at it instead
+of repeating it. Threads load `.claude/agents/` from every repository in a
+project, so this works in a multi-repository project where hooks would
+not.
+
 ### 2026-09-18 17:49 · `2a53368` — the harness comes out; the gate moves to GitHub (→ products)
 Claude Code projects shipped on 2026-09-17: one conversation coordinates
 parallel cloud threads, each on its own branch, each opening a pull

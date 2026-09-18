@@ -30,6 +30,10 @@ Two facts dictate the split:
   Claude Code project's instructions field. The pasted copy in the web UI is
   a copy; this file is the original, and `/update-stack` reports when a port
   changes it.
+- **`template/.claude/agents/evaluator-qa.md`** — the one agent kept: a
+  fresh-context judge that collects its own evidence. It runs only where
+  the battery cannot see the done-when clause (UI behaviour, data state, an
+  external service), not on every change.
 - **`template/docs/`** — PRD, ROADMAP, NOTES, ADR skeleton. The repo is the
   memory.
 

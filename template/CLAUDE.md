@@ -34,9 +34,12 @@ and that CI run is the required status check on every pull request — nothing
 reaches `main` without it green. Run it yourself before opening a pull
 request or reporting "done": on a clean, committed HEAD, `git status
 --porcelain` empty before and after. A result from a dirty tree is not a
-result. If the battery cannot cover a done-when clause (UI behaviour, data
-state, an external service), verify it by hand and say in the pull request
-what you observed — an unverifiable claim is not a passing claim.
+result.
+If the battery cannot cover a done-when clause (UI behaviour, data state,
+an external service), run the `evaluator-qa` agent on it and put its
+verdict in the pull request. It collects its own evidence instead of
+taking yours; where `verify.sh` already covers the clause, it is not
+needed. An unverifiable claim is not a passing claim.
 
 ## Workflow
 - Work on a branch, never on `main`; land through a pull request.
