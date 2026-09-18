@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 17:49 · `pending` — the harness comes out; the gate moves to GitHub (→ products)
+### 2026-09-18 17:49 · `2a53368` — the harness comes out; the gate moves to GitHub (→ products)
 Claude Code projects shipped on 2026-09-17: one conversation coordinates
 parallel cloud threads, each on its own branch, each opening a pull
 request and watching it. Coordination was the job several components here
