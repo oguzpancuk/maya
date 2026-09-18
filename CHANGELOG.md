@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 20:05 · `pending` — fit audit against Projects: one gap, three leftovers (→ products)
+### 2026-09-18 20:05 · `1b7999f` — fit audit against Projects: one gap, three leftovers (→ products)
 Missing: every thread runs in a cloud environment whose setup script
 installs the stack before Claude starts, and nothing in maya set one up.
 `verify.sh` fails on missing deps by design, so a product with `ci.yml`
