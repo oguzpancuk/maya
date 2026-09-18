@@ -13,6 +13,26 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 18:40 · `pending` — code-reviewer comes back, for the fresh context (→ products)
+The first entry today removed `code-reviewer` as a duplicate of the
+built-in `/code-review`. That was true of what it does and false of how
+it does it: `/code-review` runs as a forked subagent that inherits the
+author's whole conversation, so the reviewer starts with the author's
+assumptions; a custom subagent under `.claude/agents/` starts with none.
+The agent's own first sentence names the property — findings the author
+cannot see because they wrote the code — and the deletion traded it away
+without noticing. Inside a project the separate review thread has the
+property anyway; outside one, nothing did.
+
+Restored as a definition only: no gate, no marker, no hook. It reviews
+the branch's diff against its merge base with `main`, committed state
+only, and also checks each new test against its done-when clause and for
+the red run the pull request should show. `template/CLAUDE.md` carries
+the one rule in one place: no pull request reaches the owner unreviewed
+by something that did not write it — the review thread in a project, the
+agent outside one. Project instructions keep only the coordinator's
+mechanics for the thread, so the rule is not written twice.
+
 ### 2026-09-18 18:26 · `25a8b6b` — the harvest gets its input back in a project (→ products)
 `/update-stack` harvests `docs/NOTES.md`; in a project, threads were never
 told to write there. The rule that sends template-origin improvements to

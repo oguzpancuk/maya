@@ -45,6 +45,9 @@ needed. An unverifiable claim is not a passing claim.
 
 ## Workflow
 - Work on a branch, never on `main`; land through a pull request.
+- No pull request reaches the owner unreviewed by something that did not
+  write it: in a project, the review thread; outside one, the
+  `code-reviewer` agent, run before the pull request is opened.
 - The repo is the memory. Read `docs/ROADMAP.md` + `docs/NOTES.md` when
   starting; update `docs/NOTES.md` (dated, append-only) when stopping.
   Decisions that constrain the future go to `docs/adr/`.
