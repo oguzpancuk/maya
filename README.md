@@ -49,7 +49,8 @@ Installed skills: `/new-product`, `/spec`, `/mvp-scope`, `/update-stack`,
 
 1. `/new-product` — repository, CLAUDE.md, verify.sh, CI, docs skeleton.
 2. Push to GitHub, install the Claude GitHub App, protect `main`: pull request
-   required, `ci` required. (`/new-product` walks these.)
+   required, `ci` required, up to date before merging. (`/new-product` walks
+   these.)
 3. `/spec` → `docs/PRD.md`, then `/mvp-scope` → `docs/ROADMAP.md`. Commit.
 4. Create the project at claude.ai/code, add the repository, and paste
    `docs/project-instructions.md` into Project settings > Memory.

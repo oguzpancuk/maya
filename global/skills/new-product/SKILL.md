@@ -40,8 +40,10 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
 8. Confirm CI ran and is green on `main`. A red or skipped first run means
    the battery or the workflow is wrong — fix it now, not later.
 9. Protect `main`: direct pushes off, pull request required, the `ci` check
-   required. This is the only thing that stops unverified work from landing,
-   so it is part of instantiation, not a later improvement.
+   required, and "require branches to be up to date before merging" on —
+   so two green branches cannot merge into a red `main`. This is the only
+   thing that stops unverified work from landing, so it is part of
+   instantiation, not a later improvement.
 
 ## C. Registration
 10. Register the product in maya's `PRODUCTS.md` (name, repo URL, local
