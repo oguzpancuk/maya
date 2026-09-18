@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 18:40 · `pending` — code-reviewer comes back, for the fresh context (→ products)
+### 2026-09-18 18:40 · `8b97260` — code-reviewer comes back, for the fresh context (→ products)
 The first entry today removed `code-reviewer` as a duplicate of the
 built-in `/code-review`. That was true of what it does and false of how
 it does it: `/code-review` runs as a forked subagent that inherits the
