@@ -52,8 +52,10 @@ Installed skills: `/new-product`, `/spec`, `/mvp-scope`, `/update-stack`,
    required, the `verify` check required, up to date before merging.
    (`/new-product` walks these.)
 3. `/spec` → `docs/PRD.md`, then `/mvp-scope` → `docs/ROADMAP.md`. Commit.
-4. Create the project at claude.ai/code, add the repository, and paste
-   `docs/project-instructions.md` into Project settings > Memory.
+4. Create the project at claude.ai/code, add the repository, paste
+   `docs/project-instructions.md` into Project settings > Memory, and send
+   the first task: orientation, which reads the PRD and ROADMAP into project
+   memory.
 
 Then the day-to-day is: send work to the project, read the pull requests,
 merge. Deploys are yours: `/deploy-checklist` in the product repo, with

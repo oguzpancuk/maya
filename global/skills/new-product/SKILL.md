@@ -62,8 +62,11 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
       Project instructions (its About slots are filled after /mvp-scope,
       from the ROADMAP), set the goal in Project settings > General to the
       walking skeleton's done-when line, and lower the thread effort from
-      the default. The coordinator has no clone: these are all it knows
-      about the product on day one.
+      the default;
+    - send the project its first task: the orientation thread the
+      instructions describe, which reads `docs/PRD.md` and `docs/ROADMAP.md`
+      into project memory. Until it runs, the About lines and the goal are
+      all the coordinator knows about the product.
 
 ## Rules
 - Every slot is either correctly filled or a visible TODO. An unconfigured
