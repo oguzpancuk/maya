@@ -21,7 +21,12 @@ honest deferred list — not a smaller wishlist.
      `evaluator-qa` before its pull request; a test does not.
    - `## v1` — what ships after the skeleton works end-to-end.
    - `## Deferred` — with the reason each item can wait.
-5. Summarize the cut to me in chat and list what I lose by accepting it.
+5. Write the About block of `docs/project-instructions.md` from the same
+   material: product line, areas, skeleton items in order with their
+   done-when, v1 items, deferred items with reasons. Remind me to paste the
+   file into the project's instructions — the coordinator reads that field,
+   not the repo.
+6. Summarize the cut to me in chat and list what I lose by accepting it.
 
 ## Rules
 - The skeleton's FIRST step is always the same, whatever the product: the dev

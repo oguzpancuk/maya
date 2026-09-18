@@ -59,14 +59,10 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
       and push both;
     - create the project at claude.ai/code, add this repository, paste
       `docs/project-instructions.md` into Project settings > Memory >
-      Project instructions (its About slots are filled after /mvp-scope,
-      from the ROADMAP), set the goal in Project settings > General to the
-      walking skeleton's done-when line, and lower the thread effort from
-      the default;
-    - send the project its first task: the orientation thread the
-      instructions describe, which reads `docs/PRD.md` and `docs/ROADMAP.md`
-      into project memory. Until it runs, the About lines and the goal are
-      all the coordinator knows about the product.
+      Project instructions (/mvp-scope has filled its About block from the
+      ROADMAP — that block is all the coordinator knows about the product),
+      set the goal in Project settings > General to the walking skeleton's
+      end state, and lower the thread effort from the default.
 
 ## Rules
 - Every slot is either correctly filled or a visible TODO. An unconfigured

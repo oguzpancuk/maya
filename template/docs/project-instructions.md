@@ -5,21 +5,20 @@
      in CLAUDE.md, which every thread reads from its clone. -->
 
 ## About
-[STACK: one-line product description — what it is, for whom. The same line
-as in CLAUDE.md; the coordinator never reads that file.]
-Walking skeleton, done when: [STACK: its end state in one line, from
-docs/ROADMAP.md].
+<!-- Written by /mvp-scope from docs/PRD.md and docs/ROADMAP.md; re-run it
+     and paste again whenever the ROADMAP changes. The coordinator has no
+     clone: this block is what it knows about the product. -->
+- Product: [one line — what it is, for whom]
+- Areas: [the product's parts, one line each]
+- Walking skeleton, in order: [item — done when …]
+- v1: [item, one line each]
+- Deferred: [item — why it can wait]
 
 ## Work
 - The plan is `docs/ROADMAP.md`, written by me. Threads execute it in
   order; nobody re-plans it here. Whatever I paste is the task; if a
   ROADMAP item already covers it, say so instead of starting a second
   thread.
-- The first thread of this project, and the first after any re-scoping,
-  is orientation: read `docs/PRD.md` and `docs/ROADMAP.md` and save to
-  project memory what the product is, its areas, the skeleton items in
-  order, the v1 items, and the deferred items with their reasons. That
-  memory is how the coordinator knows the product.
 - One feature per thread. A second problem found on the way goes into
   `docs/NOTES.md`, not into the fix.
 - When a thread reports back, it names the ROADMAP item it completed and
