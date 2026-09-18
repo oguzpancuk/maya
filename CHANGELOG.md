@@ -13,6 +13,26 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 20:05 · `pending` — fit audit against Projects: one gap, three leftovers (→ products)
+Missing: every thread runs in a cloud environment whose setup script
+installs the stack before Claude starts, and nothing in maya set one up.
+`verify.sh` fails on missing deps by design, so a product with `ci.yml`
+configured and no environment script would have had every thread red.
+`/new-product` now configures the environment with the same install
+steps as `ci.yml` and has the owner watch one tiny thread go green before
+real work.
+
+Removed: `template/.claude/settings.json` — its allow list means nothing
+under auto mode, its denies are branch protection's, auto mode's and
+`.gitignore`'s jobs, and it applied only in a single-repository project;
+three `.gitignore` entries for deleted components; and two lines in
+`global/CLAUDE.md` about unattended local runs, which no longer exist —
+a local session does not build features.
+
+Left as is, named so it is not mistaken for an oversight: the battery
+still lives at `.claude/hooks/verify.sh` with no hooks beside it. Moving
+it would touch CI, CLAUDE.md and three products for a directory name.
+
 ### 2026-09-18 19:42 · `4d88502` — QA keyed on the clause, review until APPROVE, rule files trimmed (→ products)
 Three changes to the two files every thread loads.
 

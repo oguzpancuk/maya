@@ -27,6 +27,9 @@ Two facts dictate the split:
   for "green". CI runs the same file; that CI run is the required check that
   gates every merge. Unconfigured, it exits 1 by design.
 - **`template/.github/workflows/ci.yml`** — runs `verify.sh`, nothing else.
+  Its `[STACK]` setup steps are the same commands the product's cloud
+  environment setup script runs, so a thread and CI verify on the same
+  footing.
 - **`template/docs/project-instructions.md`** — the source text for the
   Claude Code project's instructions field. The pasted copy in the web UI is
   a copy; this file is the original, and `/update-stack` reports when a port
@@ -82,7 +85,8 @@ tool for the same job**.
    product already documents — if a rival command exists, rewire it to call
    the script.
 3. Add the CI workflow that runs `verify.sh`, and confirm it is green before
-   making it required.
+   making it required. Give the product's cloud environment a setup script
+   with the same install steps.
 4. Protect `main`: pull request required, the `verify` check required, up
    to date before merging.
 5. Add `docs/project-instructions.md`, adapted to the product.

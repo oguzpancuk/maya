@@ -52,12 +52,9 @@ Never let a degraded read become a destructive write.
   the answer if needed. Commands over ~1 minute run in the background so
   you stay receptive.
 - Long multi-item request: short plan into the ROADMAP, owner-level
-  questions up front, then execute serially. Parallel work belongs in a
-  claude.ai/code project (the Projects feature: one conversation
-  coordinating cloud threads), where each thread gets its own branch and
-  pull request — not in one session juggling worktrees.
-- One feature per session or thread, with a commit and a dated NOTES.md
-  entry each. Bound every unattended run ("or stop after N turns").
+  questions up front, then execute serially. Product work runs in the
+  product's claude.ai/code project, one thread per feature; a local
+  session does not build features.
 - When I correct you, propose where the fix should live so it compounds:
   this file, the product's CLAUDE.md, or its project instructions. When
   the same mistake class shows up twice, propose a rule or a test;

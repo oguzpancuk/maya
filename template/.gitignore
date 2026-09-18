@@ -5,7 +5,4 @@ build/
 .env.*
 *.log
 .DS_Store
-.claude/.session-reads.log
 .claude/settings.local.json
-.claude/worktrees/
-.claude/last-reviewed
