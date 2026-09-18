@@ -13,6 +13,31 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 19:42 · `pending` — QA keyed on the clause, review until APPROVE, rule files trimmed (→ products)
+Three changes to the two files every thread loads.
+
+The QA trigger was the author's call: "if the battery cannot cover the
+clause, run `evaluator-qa`" left the thread that wrote the code to decide
+whether its own claim needed checking. The ROADMAP already names each
+clause's verification — `test`, `screenshot` or `manual check`, written
+by the owner through `/mvp-scope` at scoping time. The trigger now keys
+on that name: screenshot or manual check runs the agent before the pull
+request, test does not. The decision moves from the thread at pull
+request time to the owner at scoping time, and it is readable in the
+ROADMAP.
+
+Review ran once. The review thread commented on the first push and
+nothing looked at the fixes; the second eye saw only v1. The review
+thread now keeps watching the pull request and reviews each push's delta
+the same way until its summary says APPROVE, so what the owner reads
+before merging is a verdict on the current head.
+
+`template/CLAUDE.md` and `docs/project-instructions.md` are loaded into
+every thread on every turn, and about a third of their sentences were
+reasons rather than rules — the reasons belong here. Rewritten to rules
+only: 489→422 and 579→369 words, no rule dropped. The eight-line paste
+note at the top of the instructions became three.
+
 ### 2026-09-18 19:32 · `6ee3735` — the release-time QA pass gets wired (→ products)
 `evaluator-qa`'s description has said "and before a release" since it
 came back, and nothing called it at a release: `/deploy-checklist` had

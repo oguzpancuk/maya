@@ -32,9 +32,10 @@ Two facts dictate the split:
   a copy; this file is the original, and `/update-stack` reports when a port
   changes it.
 - **`template/.claude/agents/evaluator-qa.md`** — the one agent: a
-  fresh-context judge that collects its own evidence. It runs only where
-  the battery cannot see the done-when clause (UI behaviour, data state, an
-  external service), not on every change. Code review is not an agent
+  fresh-context judge that collects its own evidence. It runs before a
+  pull request only when the item's done-when clause names a screenshot or
+  manual check as its verification — the ROADMAP decides, not the thread —
+  and at a release over every item done since the last one. Code review is not an agent
   here: the project's review thread runs the built-in `/code-review
   --comment`, and being a separate session it starts with nothing of the
   author's to inherit.

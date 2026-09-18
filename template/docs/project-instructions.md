@@ -1,66 +1,47 @@
 # Project instructions — {{PRODUCT_NAME}}
 
-<!-- This file is the SOURCE. Paste its contents into the Claude Code project
-     at claude.ai/code: Project settings > Memory > Project instructions.
-     The UI copy is a copy; edit it here, commit, then paste again. Keep it
-     under 16,000 characters (the field's limit). Rules about this repository
-     itself belong in CLAUDE.md, not here — every thread reads that file from
-     its own clone. Every session on this product is a thread of its
-     claude.ai/code project; there is no other mode. -->
+<!-- SOURCE of the project's instructions field (Project settings > Memory).
+     Edit here, commit, paste again. Rules about the repository itself live
+     in CLAUDE.md, which every thread reads from its clone. -->
 
-## Where the work comes from
+## Work
 - The build order is `docs/ROADMAP.md`; open questions and handoffs are in
-  `docs/NOTES.md`. Read both before starting a thread's task.
-- Anything I paste into the conversation (a bug, a stack trace, a request)
-  is the task. If it is already covered by a ROADMAP item, say so instead of
-  starting a second thread for it.
+  `docs/NOTES.md`. Read both before starting.
+- Whatever I paste here is the task. If a ROADMAP item already covers it,
+  say so instead of starting a second thread.
+- One feature per thread. A second problem found on the way goes into
+  `docs/NOTES.md`, not into the fix.
+- Propose threads before starting them; at most two at a time until I say
+  otherwise.
 
-## Branches and pull requests
-- Start every thread from `main` and work on its own branch.
-- Open one pull request per thread, with a title that says what changed and
-  a body that states which done-when clause it satisfies.
-- `main` is protected: the CI run of `.claude/hooks/verify.sh` must be green
-  before anything can merge. Never change CI configuration to get a green.
+## Pull requests
+- Start from `main`, work on your own branch, open one pull request per
+  thread. The body names the done-when clause it satisfies and carries the
+  battery result, the red run of each new test, and the QA verdict when
+  CLAUDE.md called for one.
+- `main` is protected: CI green or no merge. Never change CI to get green.
 - Never merge. I merge.
 
-## How a thread checks its own work
-- Run `bash .claude/hooks/verify.sh` before opening the pull request and put
-  its result in the body.
-- Every new test is run red before the change that turns it green; the
-  pull request body says which test and how it was made to fail.
-- If the done-when clause covers something the battery cannot see — UI
-  behaviour, data state, an external service — CLAUDE.md names what to run
-  for it; do that and put the verdict in the pull request body. Never
-  report a check you did not run.
-
 ## Review
-- When a thread opens a pull request, start a separate review thread for it.
-  Its whole task: run `/code-review --comment` on the pull request so the
-  findings land as pull request comments. Never `--fix`: the review thread
-  does not change code. If `--comment` cannot post from the thread, post
-  each finding as a pull request comment yourself, file and line included.
-- Beyond what the review reports on its own, the review thread checks two
-  things and says so in a summary comment: that every new test covers the
-  done-when clause it claims, and that the pull request body shows the
-  test's red run. It ends the summary with an explicit verdict, APPROVE or
-  NEEDS_WORK, and one sentence why.
-- The authoring thread picks the findings up from the pull request and fixes
-  them.
+- When a thread opens a pull request, start a review thread for it. Its
+  task: `/code-review --comment` on the pull request — never `--fix`. If
+  `--comment` cannot post from the thread, post each finding as a pull
+  request comment yourself, file and line included.
+- In a summary comment it also checks that every new test covers the clause
+  it claims and that the body shows its red run, then ends with APPROVE or
+  NEEDS_WORK and one sentence why.
+- The review thread keeps watching the pull request. After each push it
+  reviews the delta the same way, until its summary says APPROVE. The
+  authoring thread fixes what the review posts.
 
 ## Ask me first
 - Anything outward-facing: deploys, DNS, third-party dashboards, production
   data.
-- Any schema or API change that is not reversible in one commit.
-- Adding a dependency that is not clearly better than the standard library.
+- A schema or API change that is not reversible in one commit.
+- A dependency that is not clearly better than the standard library.
 
-## What to remember where
-- Project memory is for this project. When what you save there is about
-  this repository — a pitfall, a template improvement, something the
-  battery missed — write it in `docs/NOTES.md` as well, under the section
-  `CLAUDE.md` names. Only the repo reaches the other products.
-
-## Pace
-- Propose threads before starting them; run at most two at a time until I
-  say otherwise.
-- One feature per thread. A thread that discovers a second problem writes it
-  into `docs/NOTES.md` and reports it instead of fixing it.
+## Memory
+- Project memory stays in this project. What is about the repository — a
+  pitfall, a template improvement, a battery miss — also goes into
+  `docs/NOTES.md`, under the section CLAUDE.md names. Only the repo reaches
+  the other products.

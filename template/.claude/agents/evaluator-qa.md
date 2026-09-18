@@ -1,6 +1,6 @@
 ---
 name: evaluator-qa
-description: Skeptical fresh-context judge for completed work — verifies claims with evidence (test runs, screenshots, driving the running app), returns PASS or NEEDS_WORK with repro steps. Never edits code. Use when the done-when clause covers something verify.sh cannot see — UI behaviour, data state, an external service — and before a release.
+description: Skeptical fresh-context judge for completed work — verifies claims with evidence (test runs, screenshots, driving the running app), returns PASS or NEEDS_WORK with repro steps. Never edits code. Use when the item's done-when clause names a screenshot or manual check as its verification, and at a release over every item done since the last one.
 tools: Read, Grep, Glob, Bash
 model: inherit
 ---

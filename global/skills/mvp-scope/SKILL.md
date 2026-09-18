@@ -16,7 +16,9 @@ honest deferred list — not a smaller wishlist.
    Deferring is the default; promotion needs a one-line justification.
 4. Write `docs/ROADMAP.md`:
    - `## Walking skeleton` — ordered steps, each with a done-when clause
-     naming its verification (test, screenshot, manual check).
+     naming its verification: `test`, `screenshot` or `manual check`. The
+     name is a trigger: a screenshot or manual check makes the thread run
+     `evaluator-qa` before its pull request; a test does not.
    - `## v1` — what ships after the skeleton works end-to-end.
    - `## Deferred` — with the reason each item can wait.
 5. Summarize the cut to me in chat and list what I lose by accepting it.
