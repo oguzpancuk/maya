@@ -31,13 +31,13 @@ Two facts dictate the split:
   Claude Code project's instructions field. The pasted copy in the web UI is
   a copy; this file is the original, and `/update-stack` reports when a port
   changes it.
-- **`template/.claude/agents/`** — two fresh-context agents, both defined
-  as custom subagents so they start without the author's conversation.
-  `code-reviewer` is the review method: the project's review thread runs
-  it on a pull request's branch and posts its report as comments.
-  `evaluator-qa` collects its own evidence and runs only where the battery
-  cannot see the done-when clause (UI behaviour, data state, an external
-  service), not on every change.
+- **`template/.claude/agents/evaluator-qa.md`** — the one agent: a
+  fresh-context judge that collects its own evidence. It runs only where
+  the battery cannot see the done-when clause (UI behaviour, data state, an
+  external service), not on every change. Code review is not an agent
+  here: the project's review thread runs the built-in `/code-review
+  --comment`, and being a separate session it starts with nothing of the
+  author's to inherit.
 - **`template/.claude/skills/deploy-checklist/`** — the owner's pre-deploy
   walk: generic gates (clean tree, battery green on this commit, no secrets
   in the range, reversible migrations, release notes exist), then the

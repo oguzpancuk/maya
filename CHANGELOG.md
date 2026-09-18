@@ -13,6 +13,27 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 19:24 · `pending` — the review thread runs /code-review; code-reviewer goes for good (→ products)
+`code-reviewer` came back two entries ago for one property: `/code-review`
+runs as a forked subagent and inherits the author's conversation, so a
+review started from the author's session is not independent. That holds
+in the author's session. It does not hold in the review thread, which is
+a separate session with no conversation to inherit — and since the
+one-mode decision every review runs there. With independence given by the
+wrapper, the choice was method against method, and the built-in wins on
+what a repo file cannot supply: Anthropic maintains it, `--comment` posts
+findings as inline pull request comments, and effort levels and `ultra`
+exist. What the agent file had over it — an explicit verdict, the
+done-when and red-run check, never editing — is three lines of the review
+thread's task in the project instructions, where they now live.
+
+Removed: `template/.claude/agents/code-reviewer.md`. The restoration was
+right under two modes and wrong under one; the ledger keeps both.
+`evaluator-qa` stays: nothing built in collects evidence.
+
+Unverified until the first real thread: whether `--comment` can post from
+a cloud thread. The instructions say what to do if it cannot.
+
 ### 2026-09-18 19:16 · `c95c637` — deploy-checklist and release-notes come back (→ products)
 Both went out in the first cut under "owner simplification", not under
 any measurement or anything Projects covers — and Projects covers neither:

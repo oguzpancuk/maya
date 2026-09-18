@@ -35,10 +35,15 @@
 
 ## Review
 - When a thread opens a pull request, start a separate review thread for it.
-  Its whole task: run the `code-reviewer` agent from `.claude/agents/` on
-  the pull request's branch and post its report as pull request comments,
-  verdict included. The review thread does not change code and does not
-  review by hand — the agent file is the method.
+  Its whole task: run `/code-review --comment` on the pull request so the
+  findings land as pull request comments. Never `--fix`: the review thread
+  does not change code. If `--comment` cannot post from the thread, post
+  each finding as a pull request comment yourself, file and line included.
+- Beyond what the review reports on its own, the review thread checks two
+  things and says so in a summary comment: that every new test covers the
+  done-when clause it claims, and that the pull request body shows the
+  test's red run. It ends the summary with an explicit verdict, APPROVE or
+  NEEDS_WORK, and one sentence why.
 - The authoring thread picks the findings up from the pull request and fixes
   them.
 
