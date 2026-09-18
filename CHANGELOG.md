@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 19:32 · `pending` — the release-time QA pass gets wired (→ products)
+### 2026-09-18 19:32 · `6ee3735` — the release-time QA pass gets wired (→ products)
 `evaluator-qa`'s description has said "and before a release" since it
 came back, and nothing called it at a release: `/deploy-checklist` had
 five gates and none was it. So the claim that a test-green-but-broken
