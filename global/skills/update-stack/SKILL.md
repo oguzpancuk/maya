@@ -47,6 +47,11 @@ at its `.maya-version`, and read its docs/NOTES.md "upstream candidates".
 - Anything a product improved in template-origin files is an upstream
   candidate: list it with its diff hunk so approved ones land in maya
   (and its CHANGELOG) and every product inherits the fix.
+- Read each product's NOTES.md "Battery gaps" too. A test is product-
+  specific; the CLASS of miss is not ("mocked DB passed, real query
+  failed"). For each class seen, propose the template rule or `verify.sh`
+  pattern that would have caught it, so the next product's battery is
+  born without that hole.
 
 ## 4b. Ports (maya -> products)
 Template changes flow down via a three-way check per file:

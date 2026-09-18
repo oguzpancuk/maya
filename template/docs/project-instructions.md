@@ -47,6 +47,12 @@
 - Any schema or API change that is not reversible in one commit.
 - Adding a dependency that is not clearly better than the standard library.
 
+## What to remember where
+- Project memory is for this project. When what you save there is about
+  this repository — a pitfall, a template improvement, something the
+  battery missed — write it in `docs/NOTES.md` as well, under the section
+  `CLAUDE.md` names. Only the repo reaches the other products.
+
 ## Pace
 - Propose threads before starting them; run at most two at a time until I
   say otherwise.

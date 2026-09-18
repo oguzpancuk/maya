@@ -13,6 +13,20 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-18 18:26 · `pending` — the harvest gets its input back in a project (→ products)
+`/update-stack` harvests `docs/NOTES.md`; in a project, threads were never
+told to write there. The rule that sends template-origin improvements to
+"Upstream candidates" lived only in `global/CLAUDE.md`, which threads do
+not read, and what a thread learns goes to project memory, which maya
+does not read. Propagation — the one job nothing else here does — had no
+input while work ran through Projects. Three lines close it: the rule
+moves into `template/CLAUDE.md` where every thread sees it; project
+instructions say memory stays in the project and NOTES.md is what
+travels; and `/update-stack` now reads "Battery gaps" as well, proposing
+the template rule or `verify.sh` pattern for each class of miss so the
+next product's battery is born without that hole. The entry below had
+promised that harvest without wiring it; this one wires it.
+
 ### 2026-09-18 18:15 · `59e9cf3` — the battery gets a discipline, not a measurement (→ products)
 With `evals/` gone, nothing measures whether a green battery means a
 working feature — the one gap the old instrument did show. Four rules

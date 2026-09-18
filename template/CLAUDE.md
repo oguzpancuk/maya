@@ -48,6 +48,11 @@ needed. An unverifiable claim is not a passing claim.
 - The repo is the memory. Read `docs/ROADMAP.md` + `docs/NOTES.md` when
   starting; update `docs/NOTES.md` (dated, append-only) when stopping.
   Decisions that constrain the future go to `docs/adr/`.
+- Two things always go into `docs/NOTES.md`, whatever else you remember
+  them in: an improvement to a template-origin file (`CLAUDE.md`,
+  `verify.sh`, `ci.yml`, `docs/project-instructions.md`) under "Upstream
+  candidates", and anything the battery passed that turned out broken
+  under "Battery gaps". maya harvests this repo, not a project's memory.
 - Every task states its stopping condition up front; when met, stop & report.
 - Merging is the owner's call, always. Do not merge, force-push, or change
   CI configuration without being asked in this session.
