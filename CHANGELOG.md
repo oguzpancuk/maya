@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-18 19:10 · `pending` — one mode: every product session is a project thread (→ products)
+### 2026-09-18 19:10 · `8538217` — one mode: every product session is a project thread (→ products)
 Owner decision: this harness is used only through claude.ai/code
 projects. There is no local, plain-cloud or teleported mode for product
 work, so nothing in the template may branch on which mode a session is
