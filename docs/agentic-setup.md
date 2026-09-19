@@ -80,7 +80,10 @@ Updating individual pieces:
 Principles: **minimal merge** — never replace a working setup; **no second
 tool for the same job**.
 
-1. Read the product's CLAUDE.md and conventions FIRST.
+1. Read the product's CLAUDE.md and conventions FIRST. If the repo has an
+   `AGENTS.md` and no CLAUDE.md, merge its rules into the CLAUDE.md you add:
+   Claude Code reads AGENTS.md only when CLAUDE.md is absent, so adding
+   ours would silently shadow it.
 2. Make `verify.sh` the SINGLE implementation of whatever battery the
    product already documents — if a rival command exists, rewire it to call
    the script.
