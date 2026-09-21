@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 13:10 · — three facts about the cloud environment, from the first threads
+### 2026-09-21 13:02 · `87a3b12` — three facts about the cloud environment, from the first threads
 pati's and juno's first threads, the same afternoon their projects were
 created, failed in ways nothing here warned of. `/new-product` step 11 and
 the manual now say: the setup script starts in the clone's PARENT directory
