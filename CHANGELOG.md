@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 10:05 · `pending` — iOS pull requests build to TestFlight on open, not on push (→ products)
+### 2026-09-21 10:05 · `c8264ec` — iOS pull requests build to TestFlight on open, not on push (→ products)
 Owner decision: the pull-request workflow on Xcode Cloud is on, not
 optional. Trigger is the pull request opening plus on-demand rebuilds;
 never every push, because the review thread pushes until APPROVE and each
