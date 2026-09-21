@@ -135,7 +135,5 @@ Then finish the machine — maintenance commands are never handed back to
 the owner:
 - Global layer changed (a skill or global/CLAUDE.md)? Run
   `bash <maya>/install.sh` yourself.
-- A checklist plugin missing? `claude plugin install` WITH approval, per
-  instance; report its context cost from `claude plugin details` after.
 The owner's one manual step: restarting open sessions so an updated
 ~/.claude/CLAUDE.md is re-read.

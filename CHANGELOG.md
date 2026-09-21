@@ -13,6 +13,29 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 11:00 · — sixth update run: the battery checks exec bits; registry follows a rename (→ products)
+First `/update-stack` run after the Projects rewrite. It began on a local
+checkout 54 commits behind `origin/main` — the skill text it was handed was
+the old one — so it read `origin/main` without pulling, reported against
+`2a89f0d`, and only then fast-forwarded and re-ran `install.sh`.
+Adopted from juno's NOTES: `verify.sh`'s pattern gains rule (4), every
+tracked `*.sh` keeps its exec bit. An agent's write-then-rename drops the
+mode, no content diff shows it, and three commits in five went to putting
+one back there; the cause is generic to any repository an agent edits.
+Not adopted, with reasons: juno's refusal-test rule — a test that passes
+for the wrong reason cannot be seen red first, so `59e9cf3` already
+refuses the class; its docs-figures gate (124 lines, found three stale
+figures after six review rounds) stays in juno until a second product
+carries measured figures in docs; `pod install` locale, the React clock
+pattern and `init.sh`'s `CI=1` are juno-local now that iOS archives on
+Xcode Cloud and `contracts/` is gone.
+Registry: `stardate` was renamed `juno` on GitHub and gained a remote; the
+row said neither. `/update-stack` step 7 loses its "checklist plugin"
+bullet — `install.sh` has carried no plugin list since `2a53368`.
+Findings reported, not fixed here (4d): no product has a protected `main`
+or uses pull requests yet, and all three still carry the pre-rewrite
+harness; their first ports open as pull requests from this run.
+
 ### 2026-09-21 10:20 · `af030ac` — deploys run in CI on the release tag; the laptop leaves the loop (→ products)
 The last thing a release needed from the owner's machine was the deploy
 command and its credentials. Now `template/.github/workflows/deploy.yml`
