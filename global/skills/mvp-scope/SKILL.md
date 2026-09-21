@@ -18,7 +18,10 @@ honest deferred list — not a smaller wishlist.
    - `## Walking skeleton` — ordered steps, each with a done-when clause
      naming its verification: `test`, `screenshot` or `manual check`. The
      name is a trigger: a screenshot or manual check makes the thread run
-     `evaluator-qa` before its pull request; a test does not.
+     `evaluator-qa` before its pull request; a test does not. `screenshot`
+     means a screen the thread can drive from a cloud VM — a web page or a
+     web target of the app. A native mobile screen is `manual check`, and
+     that check is the owner's, on a device, before the merge.
    - `## v1` — what ships after the skeleton works end-to-end.
    - `## Deferred` — with the reason each item can wait.
 5. Write the About block of `docs/project-instructions.md` from the same

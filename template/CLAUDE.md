@@ -40,6 +40,10 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
   `evaluator-qa` agent on it and put its verdict in the pull request body.
   NEEDS_WORK means not done: fix, run it again, open the pull request only
   on PASS. A clause that names a test needs no QA pass.
+- A native mobile screen cannot be driven from a cloud thread. For such a
+  clause the pull request says exactly what to try and where (see Preview);
+  the owner checks it on a device before merging, and the item is not
+  reported done until then.
 - Never report a check you did not run.
 
 ## Workflow
@@ -54,6 +58,12 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
 - State the stopping condition up front; when met, stop and report.
 - Never merge, force-push, or change CI configuration. Merging is the
   owner's.
+
+## Preview
+[STACK: where a pull request is tried — a preview URL per PR, an EAS Update
+channel, TestFlight / an internal track. Every pull request body carries
+the link or channel for its own build. Until filled: a pull request is
+tried nowhere but CI.]
 
 ## Deploy
 [STACK: deploy target and commands — the product steps of /deploy-checklist.

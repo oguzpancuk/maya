@@ -13,6 +13,29 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 09:01 · `pending` — where a pull request is tried, and what a cloud thread cannot see (→ products)
+Nothing in the template said where the owner tries a pull request, and
+the QA rules assumed every screen could be driven from a thread. Neither
+held for a mobile product: a cloud VM has Chromium and Playwright but no
+iOS or Android simulator, so a native screen cannot be driven there, and
+the owner had no channel to try a build without a local simulator.
+
+Added: a `Preview` slot in `template/CLAUDE.md` — a preview URL per pull
+request for web, an EAS Update channel or TestFlight for mobile — which
+`/new-product` asks for with the other stack questions and every pull
+request body carries for its own build. `/mvp-scope` now says what the
+verification names mean: `screenshot` is a screen a thread can drive (web
+or a web target), a native screen is `manual check`, and that check is the
+owner's on a device before the merge. Project instructions list such
+clauses as awaiting the owner's check, and the thread does not report the
+item done. `evaluator-qa` names the native screen as its standing
+"unverified, never PASS" case. The environment step notes that web QA
+needs nothing installed.
+
+Net: code, tests, review and most of QA run in the cloud; the owner tries
+a pull request on a URL or a phone; a native screen's last look is the
+owner's. A laptop is required for none of it.
+
 ### 2026-09-18 20:05 · `1b7999f` — fit audit against Projects: one gap, three leftovers (→ products)
 Missing: every thread runs in a cloud environment whose setup script
 installs the stack before Claude starts, and nothing in maya set one up.

@@ -22,8 +22,11 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    placeholder survived.
 3. Fill the `[STACK]` slots interactively — ask me in ONE batch:
    language/runtime, framework(s), package layout (single app / monorepo),
-   database, deploy target, test runner. Then:
-   - complete the Commands table and Standards slot in `CLAUDE.md`,
+   database, deploy target, test runner, and **where a pull request is
+   tried**: a preview URL per PR (Vercel/Netlify/Fly preview), an EAS
+   Update channel, TestFlight / an internal track, or none yet. Then:
+   - complete the Commands table, Standards and Preview slots in
+     `CLAUDE.md`,
    - write the real battery into `.claude/hooks/verify.sh` (typecheck, lint,
      tests, build — whatever the stack offers; remove the FAIL placeholder),
    - adjust `.github/workflows/ci.yml` setup steps to match.
@@ -67,7 +70,10 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
       threads run in. Its setup script installs the stack exactly as
       `ci.yml`'s setup steps do — `verify.sh` fails when deps are missing,
       so without this every thread is red. Add the env vars the battery
-      needs. One environment serves every product on the same stack;
+      needs. Chromium and Playwright are already in Anthropic-hosted
+      environments, so web QA needs nothing extra; a native mobile screen
+      cannot be driven there at all. One environment serves every product
+      on the same stack;
     - before real work, send one tiny task and open the thread: `verify.sh`
       must have gone green inside it. A red first thread is the environment,
       not the product.

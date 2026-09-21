@@ -51,6 +51,13 @@ Two facts dictate the split:
 - **`template/docs/`** — PRD, ROADMAP, NOTES, ADR skeleton. The repo is the
   memory.
 
+Trying the app never needs a local simulator: each pull request carries
+its preview link or build channel (the `Preview` slot in `CLAUDE.md` —
+a preview URL for web, an EAS channel or TestFlight for mobile). Web
+screens are also driven by `evaluator-qa` inside the thread; a native
+mobile screen cannot be, so its clause is a `manual check` the owner does
+on a device before merging.
+
 Enforcement is not in this repo. It lives on GitHub: `main` protected, pull
 request required, the `verify` check required, branches must be up to
 date before they merge. A hook can be argued with; a required check cannot.
