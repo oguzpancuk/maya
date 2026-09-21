@@ -95,6 +95,12 @@ where they do not, ask me to confirm each product and record the answer.
 Any missing condition is a finding, not a note: without it the battery
 gates nothing on that product.
 
+## 4e. Xcode Cloud hours (products with an iOS surface)
+Read the month's compute usage in App Store Connect against the 25
+included hours, and how many builds pull requests triggered. Over budget
+or climbing: propose moving the pull-request workflow to on-demand only,
+or report it — never change the workflow.
+
 ## 5. Weight check
 Weigh the ALWAYS-LOADED layer only: global CLAUDE.md lines, global
 skills count + description length, installed plugin count (+ context

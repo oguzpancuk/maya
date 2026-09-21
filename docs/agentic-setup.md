@@ -54,9 +54,11 @@ Two facts dictate the split:
   memory.
 
 A native iOS surface is archived by Xcode Cloud on the release tag and
-distributed through TestFlight; the owner's Mac needs Xcode only to run a
-branch on a cabled phone, and not even that if pull-request branches are
-also built to TestFlight.
+distributed through TestFlight; pull-request branches are built to
+TestFlight too, when the pull request opens and on demand, so an iOS pull
+request is tried on a phone with no Mac. Xcode stays on the Mac for now
+only as a faster path for a cabled phone; whether to drop it is a
+`/update-stack` question after a month of compute-hour readings.
 
 Trying the app never needs a local simulator: every pull request gets a
 preview URL and carries it (the `Preview` slot in `CLAUDE.md`); a mobile

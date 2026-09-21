@@ -63,10 +63,12 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
     release tag (`v*`), actions archive + distribute to the TestFlight
     internal group; put dependency setup in `ci_scripts/ci_post_clone.sh`
     if the stack needs it. Like branch protection, this is a setting, not
-    a file: record in `docs/NOTES.md` what the workflow does. Optionally a
-    second workflow builds pull-request branches to TestFlight, which is
-    what makes an iOS pull request tryable on a phone without a Mac —
-    say so in the Preview slot if you turn it on.
+    a file: record in `docs/NOTES.md` what the workflow does. A second
+    workflow builds pull-request branches to TestFlight, triggered when a
+    pull request opens and on demand — not on every push, or each review
+    round costs a build. This is what makes an iOS pull request tryable on
+    a phone without a Mac; the Preview slot names it. Included compute is
+    25 hours a month; `/update-stack` reads the month's usage.
 
 ## C. Registration
 10. Register the product in maya's `PRODUCTS.md` (name, repo URL, local

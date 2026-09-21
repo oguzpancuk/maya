@@ -33,8 +33,10 @@
   this pull request's preview URL (CLAUDE.md, Preview) — without it the
   pull request is not ready for me; what else it carries, CLAUDE.md says.
 - A `manual check` clause is listed in the body as "awaiting the owner's
-  check on a device", with what to try. I check before merging; the thread
-  does not report that item done.
+  check on a device", with what to try and which TestFlight build. I check
+  before merging; the thread does not report that item done. After review
+  fixes, do not trigger a new build yourself — I ask for one when I want
+  to look again.
 - `main` is protected: CI green and up to date with `main`, or no merge.
   When `main` moves under your open pull request, merge it into your branch
   yourself.

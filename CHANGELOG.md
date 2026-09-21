@@ -13,6 +13,18 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 10:05 · `pending` — iOS pull requests build to TestFlight on open, not on push (→ products)
+Owner decision: the pull-request workflow on Xcode Cloud is on, not
+optional. Trigger is the pull request opening plus on-demand rebuilds;
+never every push, because the review thread pushes until APPROVE and each
+push would be a build. The pull request body carries the TestFlight build
+number next to the "awaiting the owner's check" items, and the thread
+does not trigger rebuilds — the owner asks. `/update-stack` gains 4e:
+read the month's Xcode Cloud hours against the 25 included and the number
+of builds pull requests caused, and propose on-demand-only if it climbs.
+Xcode stays on the Mac for now as the fast path to a cabled phone;
+dropping it is decided on those readings, not today.
+
 ### 2026-09-21 09:55 · `96a0dfe` — the iOS archive moves to Xcode Cloud (→ products)
 The last thing a release needed from the owner's Mac was Xcode, to
 archive and upload. Owner decision: the archive is Xcode Cloud's, on the
