@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 09:40 · `pending` — a battery step this OS cannot run: "not run here", and a CI job per OS (→ products)
+### 2026-09-21 09:40 · `74b083e` — a battery step this OS cannot run: "not run here", and a CI job per OS (→ products)
 The products have a native iOS surface built with Xcode. A cloud thread is
 a Linux VM: it cannot build or test that surface, and the template had one
 `ubuntu-latest` job and no word for a step a machine cannot run. Now
