@@ -101,9 +101,19 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
       needs. Chromium and Playwright are already in Anthropic-hosted
       environments, so web QA needs nothing extra; a native mobile screen
       cannot be driven there at all. One environment serves every product
-      on the same stack;
-    - before real work, send one tiny task and open the thread: `verify.sh`
-      must have gone green inside it. A red first thread is the environment,
+      on the same stack. Three facts, each learned the hard way: the setup
+      script starts in the clone's PARENT directory (`/home/user`), so
+      `cd <repo>` first; there is no Docker daemon, so a battery step that
+      needs containers (a local database stack) cannot run in a thread —
+      give `verify.sh` its "NOT RUN here — CI's `verify` is the run" branch
+      for it, never a silent skip; and a fix to the script is tested with a
+      NEW thread, because a resumed one keeps the container built before
+      the fix;
+    - before real work, send one tiny task — "run the battery, install
+      nothing yourself, report missing deps instead" — and open the thread:
+      `verify.sh` must have gone green inside it WITHOUT the thread
+      installing anything; a thread that quietly runs `npm ci` hides a setup
+      script that never ran. A red first thread is the environment,
       not the product.
 
 ## Rules

@@ -13,6 +13,25 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 13:10 · — three facts about the cloud environment, from the first threads
+pati's and juno's first threads, the same afternoon their projects were
+created, failed in ways nothing here warned of. `/new-product` step 11 and
+the manual now say: the setup script starts in the clone's PARENT directory
+(`/home/user`) — both products' scripts died on `cd backend` / a missing
+lockfile until they began with `cd <repo>`; a hosted thread has no Docker
+daemon — juno's RLS suite needs a local Supabase stack and cannot run
+there, so its battery gets the "NOT RUN here" branch `74b083e` introduced
+for another OS, with CI's `verify` (which has Docker) as the required run;
+and a fixed script is tested with a NEW thread — both resumed threads kept
+the container built before the fix and reported "deps missing" against a
+script that was already right. The first-thread check is sharpened to
+match: the thread is told to install nothing, because one that helpfully
+runs `npm ci` hides a setup script that never ran. Cost recorded, not
+solved: work under juno's `supabase/` gets its feedback from CI (~5 min a
+round), and red-before-green for an RLS test is shown by CI's check
+history, not inside the thread; a self-hosted environment with Docker is
+the real fix if that loop starts to hurt.
+
 ### 2026-09-21 11:00 · `d58cc34` — sixth update run: the battery checks exec bits; registry follows a rename (→ products)
 First `/update-stack` run after the Projects rewrite. It began on a local
 checkout 54 commits behind `origin/main` — the skill text it was handed was

@@ -32,6 +32,11 @@ Two facts dictate the split:
   footing. A surface that builds only on another OS (a native iOS app) gets
   its own job on that OS, also required: a Linux thread cannot run it and
   says so in the pull request body — "not run here" — never "passing".
+  The same holds for a step that needs containers: a hosted thread has no
+  Docker daemon, CI does, and CI's run is the required check. The
+  environment's setup script starts in the clone's parent directory
+  (`cd <repo>` first), and a change to it is tested with a new thread — a
+  resumed thread keeps its old container.
 - **`template/docs/project-instructions.md`** — the source text for the
   Claude Code project's instructions field. The pasted copy in the web UI is
   a copy; this file is the original, and `/update-stack` reports when a port
