@@ -53,22 +53,20 @@ Two facts dictate the split:
   walk: generic gates (clean tree, CI green on this commit, no secrets
   in the range, reversible migrations, release notes exist, `evaluator-qa`
   over every item done since the last deploy), then the product's own
-  steps in a `[STACK]` slot. Threads never deploy; the owner
-  runs this in a local session.
-- **`template/.github/workflows/deploy.yml`** — the deploy, on the release
-  tag, gated by the `production` environment's required reviewer (the
-  owner). Credentials are Actions secrets. Unconfigured, it fails on
-  purpose. A native iOS surface is archived by Xcode Cloud on the same
-  tag. Rollback is the same workflow run by hand with an earlier tag.
+  steps in a `[STACK]` slot. Threads never deploy: the owner runs this in
+  a LOCAL Claude Code session, and the deploy commands run on that
+  machine, with credentials that exist nowhere else. The release tag is
+  pushed after the deploy; an iOS surface is archived from it by Xcode
+  Cloud.
 - **`template/docs/`** — PRD, ROADMAP, NOTES, ADR skeleton. The repo is the
   memory.
 
 A native iOS surface is archived by Xcode Cloud on the release tag and
-distributed through TestFlight; pull-request branches are built to
-TestFlight too, when the pull request opens and on demand, so an iOS pull
-request is tried on a phone with no Mac. Xcode stays on the Mac for now
-only as a faster path for a cabled phone; whether to drop it is a
-`/update-stack` question after a month of compute-hour readings.
+distributed through TestFlight. A pull-request branch is built to
+TestFlight only ON REQUEST: every product keeps web and iOS in sync, so the
+web preview is the normal check and a phone build is the exception the
+owner asks for. Xcode stays on the Mac as the faster path for a cabled
+phone.
 
 Trying the app never needs a local simulator: every pull request gets a
 preview URL and carries it (the `Preview` slot in `CLAUDE.md`); a mobile
@@ -89,9 +87,10 @@ next to that token; `/new-product` step 3 has the details.
 
 Enforcement is not in this repo. It lives on GitHub: `main` protected, pull
 request required, the `verify` check required, branches must be up to
-date before they merge; and a release tag deploys only after the owner
-approves the `production` environment. A hook can be argued with; a
-required check and a required reviewer cannot.
+date before they merge. A hook can be argued with; a required check
+cannot. Deploys sit outside GitHub altogether: they run from the owner's
+local session with credentials no thread and no workflow holds — a thread
+cannot deploy what it cannot authenticate to.
 
 ## 3. Update routine
 

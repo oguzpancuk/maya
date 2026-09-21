@@ -81,18 +81,20 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
     internal group; put dependency setup in `ci_scripts/ci_post_clone.sh`
     if the stack needs it. Like branch protection, this is a setting, not
     a file: record in `docs/NOTES.md` what the workflow does. A second
-    workflow builds pull-request branches to TestFlight, triggered when a
-    pull request opens and on demand — not on every push, or each review
-    round costs a build. This is what makes an iOS pull request tryable on
-    a phone without a Mac; the Preview slot names it. Included compute is
-    25 hours a month; `/update-stack` reads the month's usage.
+    workflow builds a pull-request branch to TestFlight ON REQUEST only —
+    manual start, never on open or on push: the web preview is the normal
+    check, and I ask for a phone build when a native screen needs one. The
+    Preview slot names it. Included compute is 25 hours a month;
+    `/update-stack` reads the month's usage.
 
-9c. Deploy path: put the deploy credentials in the repository's Actions
-    secrets; create the `production` environment on GitHub with yourself
-    as required reviewer, so a release tag deploys only after your
-    approval; and turn off the preview provider's automatic production
-    deploy from `main` — production follows the tag, not the branch.
-    `deploy.yml` fails on purpose until its `[STACK]` steps are filled.
+9c. Deploy path: deploys run from my LOCAL Claude Code session, through
+    /deploy-checklist, on my machine. Log the deploy CLIs in there
+    (`fly auth login`, `wrangler login`, …) and put NO deploy credential in
+    a cloud environment or an Actions secret — a thread cannot deploy what
+    it cannot authenticate to. Fill the checklist's product steps with the
+    real commands, health check and rollback. Turn off the preview
+    provider's automatic production deploy from `main`: production follows
+    my deploy, not the branch.
 
 ## C. Registration
 10. Register the product in maya's `PRODUCTS.md` (name, repo URL, local

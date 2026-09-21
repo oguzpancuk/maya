@@ -13,6 +13,40 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 15:06 · — deploys come back to the owner's machine; phone builds only on request (→ products)
+Two owner decisions, the same day as the entries they change, made after
+the per-pull-request previews were working and the division of labour was
+clear: project threads produce pull requests and their previews; the
+owner's LOCAL Claude Code session does the releasing.
+(1) Deploy commands run on the owner's machine, through `/deploy-checklist`
+in a local session. This REVERSES `af030ac` of this morning ("deploys run
+in CI on the release tag; the laptop leaves the loop"): `deploy.yml` is
+removed from the template, and with it the `production` environment, the
+Actions secrets and `/new-product` 9c as it stood. Reason as the owner
+gave it: deploy work is run from the local agent, not through projects.
+What this buys is a stronger version of "a thread never deploys" than CI
+offered — a thread cannot deploy what it cannot authenticate to, and the
+credentials now exist in no cloud environment and no repository. What it
+gives back is what `af030ac` had bought: a release again needs the laptop,
+the CLIs logged in on it, and a rollback is the product's own command
+rather than a re-run. In no product had `deploy.yml` ever been configured;
+it failed on purpose in all three, so nothing that worked is lost.
+The release tag stays: it is pushed AFTER a verified deploy, marks what is
+live, and is still what Xcode Cloud archives for an iOS surface
+(`96a0dfe` stands). Gate 2 of the checklist (`439898f`: trust CI's green,
+not a local battery) stands too — it is about verification, not about
+where the deploy runs.
+(2) A pull-request build to TestFlight happens only ON REQUEST. This
+narrows `c8264ec` ("on, not optional; when the pull request opens plus on
+demand"): every product keeps web and iOS in sync, so the web preview is
+the normal check and a phone build is the exception the owner asks for. A
+thread never triggers one. `/update-stack` 4e now treats any build that
+was not asked for as a finding.
+Touched: `template/CLAUDE.md` (Preview slot, Deploy), `/deploy-checklist`
+(Release steps, product slot), `template/docs/project-instructions.md`,
+`/new-product` 9b and 9c, `/update-stack` 4e, the constitution's authority
+tier and working loop ("running a deploy"), the manual.
+
 ### 2026-09-21 14:51 · `f30853a` — previews: a required check, built by a workflow that a branch cannot rewrite
 pati and juno got their per-pull-request previews the same afternoon — Fly
 review apps with a database each, and a Cloudflare Worker version per pull

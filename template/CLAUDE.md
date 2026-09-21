@@ -66,15 +66,17 @@ Every pull request gets a preview URL and its body carries it. A pull
 request without its preview link is not ready for the owner.
 [STACK: the provider and how the link is produced. A native-only surface,
 where no URL is possible, names its build channel here instead — the
-exception, not the rule; for iOS that is the TestFlight build Xcode Cloud
-makes when the pull request opens — the body carries its build number,
-and a re-build is asked for, not automatic. Until filled: no pull request
+exception, not the rule; for iOS that is a TestFlight build Xcode Cloud
+makes ON REQUEST — the owner asks for one when a native screen needs a
+look, and a thread never triggers a build. Until filled: no pull request
 is ready.]
 
 ## Deploy
-Deploys run in CI on the release tag: `deploy.yml` for web and backend,
-after the owner approves the `production` environment; Xcode Cloud for
-iOS. The owner pushes the tag through /deploy-checklist; a thread never
-pushes a release tag or deploys.
-[STACK: what the tag deploys, the health check, the rollback. Until
+Deploys are the owner's, run from a LOCAL Claude Code session through
+/deploy-checklist: the deploy commands run on the owner's machine, with
+credentials that live only there — in no cloud environment and no Actions
+secret. The release tag is pushed after the deploy; for an iOS surface it
+is what Xcode Cloud archives to TestFlight. A thread never deploys and
+never pushes a release tag.
+[STACK: the deploy commands, the health check, the rollback. Until
 filled: this product has no deploy path.]

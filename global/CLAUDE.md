@@ -36,8 +36,8 @@ Never let a degraded read become a destructive write.
 ## Authority tiers
 - Free without asking: commits, branches, battery/tests, screenshots,
   local dev work, pushing a branch and opening a pull request.
-- Ask every time, per instance: MERGING a pull request, pushing a release
-  tag or approving a deploy, anything outward-facing, anything that
+- Ask every time, per instance: MERGING a pull request, running a deploy
+  or pushing a release tag, anything outward-facing, anything that
   destroys or rewrites data or history. A green pull request is an offer,
   not a decision.
 - Products may only tighten these tiers; loosening requires an owner
@@ -55,7 +55,8 @@ Never let a degraded read become a destructive write.
 - Long multi-item request: short plan into the ROADMAP, owner-level
   questions up front, then execute serially. Product work runs in the
   product's claude.ai/code project, one thread per feature; a local
-  session does not build features.
+  session does not build features. Deploys are the reverse: they run
+  from a local session, through /deploy-checklist, never from a thread.
 - When I correct you, propose where the fix should live so it compounds:
   this file, the product's CLAUDE.md, or its project instructions. When
   the same mistake class shows up twice, propose a rule or a test;
