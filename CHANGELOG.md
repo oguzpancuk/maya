@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 15:06 · — deploys come back to the owner's machine; phone builds only on request (→ products)
+### 2026-09-21 15:06 · `596facf` — deploys come back to the owner's machine; phone builds only on request (→ products)
 Two owner decisions, the same day as the entries they change, made after
 the per-pull-request previews were working and the division of labour was
 clear: project threads produce pull requests and their previews; the
