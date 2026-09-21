@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 09:55 · `pending` — the iOS archive moves to Xcode Cloud (→ products)
+### 2026-09-21 09:55 · `96a0dfe` — the iOS archive moves to Xcode Cloud (→ products)
 The last thing a release needed from the owner's Mac was Xcode, to
 archive and upload. Owner decision: the archive is Xcode Cloud's, on the
 release tag. `/deploy-checklist`'s product steps say so for an iOS
