@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 10:20 · `pending` — deploys run in CI on the release tag; the laptop leaves the loop (→ products)
+### 2026-09-21 10:20 · `af030ac` — deploys run in CI on the release tag; the laptop leaves the loop (→ products)
 The last thing a release needed from the owner's machine was the deploy
 command and its credentials. Now `template/.github/workflows/deploy.yml`
 runs on a `v*` tag (and by hand with any tag, which is the rollback),
