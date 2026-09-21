@@ -24,11 +24,17 @@ A fail stops the deploy — no "deploy anyway" without my explicit say-so.
    tests. One NEEDS_WORK stops the deploy. This is the only pass that
    checks every clause, not just the ones the battery could not see.
 
+## Release
+7. Push the release tag (`vX.Y.Z` on the commit the gates passed). That is
+   the only deploy action anyone takes by hand: `deploy.yml` deploys web
+   and backend once the owner approves the `production` environment on
+   GitHub, and Xcode Cloud archives the iOS surface to TestFlight.
+8. Watch until done: the `deploy` workflow green, the health check
+   answering, the TestFlight build present — then open it on a device.
+   Rollback is the same workflow run by hand with the previous tag.
+
 ## Product steps
-[STACK: the real deploy commands + post-deploy verification — health check
-URL, smoke-test flow, rollback command. For a native iOS surface the
-archive is not built here: push the release tag, Xcode Cloud archives and
-uploads to TestFlight, then confirm the build appears in TestFlight and
-open it on a device. Nothing in this checklist needs Xcode. Until filled,
-this skill stops here and reports that the product has no deploy path
-defined.]
+[STACK: what the tag deploys and where, the health check URL, the
+smoke-test flow, the rollback command. Nothing here runs on a laptop.
+Until filled, this skill stops before step 7 and reports that the product
+has no deploy path defined.]

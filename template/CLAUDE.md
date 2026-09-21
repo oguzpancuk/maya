@@ -72,6 +72,9 @@ and a re-build is asked for, not automatic. Until filled: no pull request
 is ready.]
 
 ## Deploy
-[STACK: deploy target and commands — the product steps of /deploy-checklist.
-Until filled: this product has no deploy path. Deploys are the owner's,
-never a thread's.]
+Deploys run in CI on the release tag: `deploy.yml` for web and backend,
+after the owner approves the `production` environment; Xcode Cloud for
+iOS. The owner pushes the tag through /deploy-checklist; a thread never
+pushes a release tag or deploys.
+[STACK: what the tag deploys, the health check, the rollback. Until
+filled: this product has no deploy path.]

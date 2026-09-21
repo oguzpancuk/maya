@@ -13,6 +13,32 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 10:20 · `pending` — deploys run in CI on the release tag; the laptop leaves the loop (→ products)
+The last thing a release needed from the owner's machine was the deploy
+command and its credentials. Now `template/.github/workflows/deploy.yml`
+runs on a `v*` tag (and by hand with any tag, which is the rollback),
+deploys the web and backend surfaces, and is gated by GitHub's
+`production` environment with the owner as required reviewer — so a tag
+deploys only after a click, wherever the tag came from. Credentials are
+Actions secrets, in no cloud environment and on no laptop. Unconfigured,
+the job fails on purpose, like `verify.sh`. Xcode Cloud archives iOS on
+the same tag: one tag, every surface.
+
+`/deploy-checklist` gains steps 7–8 — push the tag, watch the workflow,
+the health check and the TestFlight build — and its product steps say
+"nothing here runs on a laptop". `/new-product` 9c sets up the secrets,
+the environment and turns off the preview provider's automatic production
+deploy from `main`. The authority tier and the project instructions name
+"pushing a release tag" as a per-instance ask, so a release thread may
+run the checklist but never pushes the tag on its own.
+
+What this settles: the morning's "should a thread deploy" question
+without giving a thread anything — the tag is the only hand-made action,
+and GitHub asks the owner before it does anything with it. Day to day, a
+product now needs the owner's phone: the project, GitHub, TestFlight, a
+browser. A laptop remains for `/new-product`, `/spec`, `/mvp-scope` and
+`/update-stack`, all movable later.
+
 ### 2026-09-21 10:05 · `c8264ec` — iOS pull requests build to TestFlight on open, not on push (→ products)
 Owner decision: the pull-request workflow on Xcode Cloud is on, not
 optional. Trigger is the pull request opening plus on-demand rebuilds;

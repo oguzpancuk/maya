@@ -70,6 +70,13 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
     a phone without a Mac; the Preview slot names it. Included compute is
     25 hours a month; `/update-stack` reads the month's usage.
 
+9c. Deploy path: put the deploy credentials in the repository's Actions
+    secrets; create the `production` environment on GitHub with yourself
+    as required reviewer, so a release tag deploys only after your
+    approval; and turn off the preview provider's automatic production
+    deploy from `main` — production follows the tag, not the branch.
+    `deploy.yml` fails on purpose until its `[STACK]` steps are filled.
+
 ## C. Registration
 10. Register the product in maya's `PRODUCTS.md` (name, repo URL, local
     path, the same maya commit as `.maya-version`), commit that in the maya

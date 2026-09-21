@@ -54,8 +54,8 @@
   authoring thread fixes what the review posts.
 
 ## Ask me first
-- Anything outward-facing: deploys, DNS, third-party dashboards, production
-  data.
+- Anything outward-facing: pushing a release tag, deploys, DNS, third-party
+  dashboards, production data.
 - A schema or API change that is not reversible in one commit.
 - A dependency that is not clearly better than the standard library.
 

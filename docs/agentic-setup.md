@@ -50,6 +50,11 @@ Two facts dictate the split:
   over every item done since the last deploy), then the product's own
   steps in a `[STACK]` slot. Threads never deploy; the owner
   runs this in a local session.
+- **`template/.github/workflows/deploy.yml`** — the deploy, on the release
+  tag, gated by the `production` environment's required reviewer (the
+  owner). Credentials are Actions secrets. Unconfigured, it fails on
+  purpose. A native iOS surface is archived by Xcode Cloud on the same
+  tag. Rollback is the same workflow run by hand with an earlier tag.
 - **`template/docs/`** — PRD, ROADMAP, NOTES, ADR skeleton. The repo is the
   memory.
 
@@ -70,7 +75,9 @@ on a device before merging.
 
 Enforcement is not in this repo. It lives on GitHub: `main` protected, pull
 request required, the `verify` check required, branches must be up to
-date before they merge. A hook can be argued with; a required check cannot.
+date before they merge; and a release tag deploys only after the owner
+approves the `production` environment. A hook can be argued with; a
+required check and a required reviewer cannot.
 
 ## 3. Update routine
 

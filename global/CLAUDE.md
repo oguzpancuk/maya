@@ -36,9 +36,10 @@ Never let a degraded read become a destructive write.
 ## Authority tiers
 - Free without asking: commits, branches, battery/tests, screenshots,
   local dev work, pushing a branch and opening a pull request.
-- Ask every time, per instance: MERGING a pull request, deploy, anything
-  outward-facing, anything that destroys or rewrites data or history. A
-  green pull request is an offer, not a decision.
+- Ask every time, per instance: MERGING a pull request, pushing a release
+  tag or approving a deploy, anything outward-facing, anything that
+  destroys or rewrites data or history. A green pull request is an offer,
+  not a decision.
 - Products may only tighten these tiers; loosening requires an owner
   decision recorded in that product's docs/NOTES.md. Silence is not
   permission.
