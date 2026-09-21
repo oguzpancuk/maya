@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 15:45 · — new products are hosted where previews come for free
+### 2026-09-21 15:39 · `6706eb5` — new products are hosted where previews come for free
 Owner decision at the end of the day the previews were built: the choice
 of HOST is where a preview is won or lost. pati's and juno's previews are
 workflows of our own; between them they took most of a day, surfaced four
