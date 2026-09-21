@@ -78,6 +78,15 @@ screens are also driven by `evaluator-qa` inside the thread; a native
 mobile screen cannot be, so its clause is a `manual check` the owner does
 on a device before merging.
 
+The preview is a REQUIRED check, like `verify` (owner decision,
+2026-09-21). Required does not mean "built on request" — a preview is
+built for every pull request either way; it means a pull request whose
+preview is red, or still running, cannot merge. The cost is accepted: when
+the provider is down, nothing merges. Where the preview is our own
+workflow it holds a production-capable token, so it runs as
+`pull_request_target` from `main` and never runs the pull request's code
+next to that token; `/new-product` step 3 has the details.
+
 Enforcement is not in this repo. It lives on GitHub: `main` protected, pull
 request required, the `verify` check required, branches must be up to
 date before they merge; and a release tag deploys only after the owner

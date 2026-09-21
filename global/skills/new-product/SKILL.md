@@ -32,6 +32,22 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
      `CLAUDE.md`,
    - write the real battery into `.claude/hooks/verify.sh` (typecheck, lint,
      tests, build — whatever the stack offers; remove the FAIL placeholder).
+   When the preview is a workflow of ours rather than a provider's Git
+   integration, four things learned on pati and juno:
+   - its token can almost always deploy PRODUCTION too (Fly has no
+     narrower token that creates apps; Cloudflare none for "upload only"),
+     so the workflow is `pull_request_target` — read from `main`, where a
+     branch cannot rewrite its steps — and a job that runs the pull
+     request's code (`npm ci`, a build) holds NO secrets: build in one job,
+     hand the output over as an artifact, upload in another;
+   - such a workflow cannot run from the pull request that adds it. Its
+     first real run is the NEXT pull request: open a small one right after
+     merging, and call the preview done only when that one is green and
+     the URL answers from outside the job;
+   - third-party actions are pinned to a commit sha, not a tag or branch;
+   - it ends with a request to the preview itself, so a deploy that did
+     not take is red, and it removes on `closed` whatever it created — the
+     app AND what came with it (a database, a role).
      A surface that builds only on another OS (native iOS: macOS) gets its
      own steps, reported "NOT RUN here" where they cannot run,
    - adjust `.github/workflows/ci.yml` setup steps to match, with a job per
@@ -51,9 +67,10 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
 9. Protect `main`: direct pushes off, pull request required, the `verify`
    status check required (the job in `ci.yml`; GitHub lists checks by job
    name) and every other verify job the stack added (a `verify-ios` on
-   macOS for a native surface), the preview provider's status check
-   required too when it posts one, and "require branches to be up to date
-   before merging" on —
+   macOS for a native surface), the preview's check required too — EVERY
+   job of it: a job skipped because the one it `needs` failed counts as
+   passing, so requiring only the last job of a chain gates nothing — and
+   "require branches to be up to date before merging" on —
    so two green branches cannot merge into a red `main`. This is the only
    thing that stops unverified work from landing, so it is part of
    instantiation, not a later improvement.

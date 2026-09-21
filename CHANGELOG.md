@@ -13,6 +13,32 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 15:05 · — previews: a required check, built by a workflow that a branch cannot rewrite
+pati and juno got their per-pull-request previews the same afternoon — Fly
+review apps with a database each, and a Cloudflare Worker version per pull
+request — and both were verified on real pull requests, from outside the
+job. Owner decision: the preview is a REQUIRED check on both, EVERY job of
+it (juno's has two; a job skipped by a failed `needs` counts as passing,
+so requiring only `upload` would have let a broken build merge). Accepted
+cost: a provider outage blocks merges.
+What generalises, now in `/new-product` step 3 and step 9 and in the
+manual: a preview workflow's token can almost always deploy production, so
+it runs as `pull_request_target` from `main` and the job that runs the
+pull request's code holds no secrets — the first pati version used plain
+`pull_request` with an org-scoped Fly token, which made "a thread never
+deploys" a sentence instead of a fact for about an hour; such a workflow
+cannot be tested by the pull request that adds it, so a follow-up pull
+request is part of the job; third-party actions are pinned to a sha; the
+workflow ends by asking the preview itself, and on `closed` removes what
+it created, database and role included (the review-apps action leaves
+them: 17 MB and a superuser per pull request).
+Product-side findings that stay in the products' NOTES: a Fly Postgres
+machine needs 1024 MB for `CREATE EXTENSION postgis`; `fly.toml` without
+`primary_region` lands in `iad`; wrangler's `preview_urls` is a
+non-versioned setting and needs one `wrangler triggers deploy`.
+iOS previews were skipped by owner decision: every product keeps web and
+iOS in sync, and the web target is the preview.
+
 ### 2026-09-21 13:02 · `87a3b12` — three facts about the cloud environment, from the first threads
 pati's and juno's first threads, the same afternoon their projects were
 created, failed in ways nothing here warned of. `/new-product` step 11 and
