@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 15:05 · — previews: a required check, built by a workflow that a branch cannot rewrite
+### 2026-09-21 14:51 · `f30853a` — previews: a required check, built by a workflow that a branch cannot rewrite
 pati and juno got their per-pull-request previews the same afternoon — Fly
 review apps with a database each, and a Cloudflare Worker version per pull
 request — and both were verified on real pull requests, from outside the
