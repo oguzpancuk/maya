@@ -58,6 +58,16 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    thing that stops unverified work from landing, so it is part of
    instantiation, not a later improvement.
 
+## B2. Release path for a native iOS surface (only when there is one)
+9b. Set up the Xcode Cloud workflow in App Store Connect: trigger on the
+    release tag (`v*`), actions archive + distribute to the TestFlight
+    internal group; put dependency setup in `ci_scripts/ci_post_clone.sh`
+    if the stack needs it. Like branch protection, this is a setting, not
+    a file: record in `docs/NOTES.md` what the workflow does. Optionally a
+    second workflow builds pull-request branches to TestFlight, which is
+    what makes an iOS pull request tryable on a phone without a Mac —
+    say so in the Preview slot if you turn it on.
+
 ## C. Registration
 10. Register the product in maya's `PRODUCTS.md` (name, repo URL, local
     path, the same maya commit as `.maya-version`), commit that in the maya

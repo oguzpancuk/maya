@@ -26,5 +26,9 @@ A fail stops the deploy — no "deploy anyway" without my explicit say-so.
 
 ## Product steps
 [STACK: the real deploy commands + post-deploy verification — health check
-URL, smoke-test flow, rollback command. Until filled, this skill stops here
-and reports that the product has no deploy path defined.]
+URL, smoke-test flow, rollback command. For a native iOS surface the
+archive is not built here: push the release tag, Xcode Cloud archives and
+uploads to TestFlight, then confirm the build appears in TestFlight and
+open it on a device. Nothing in this checklist needs Xcode. Until filled,
+this skill stops here and reports that the product has no deploy path
+defined.]

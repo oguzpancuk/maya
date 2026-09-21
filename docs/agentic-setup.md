@@ -53,6 +53,11 @@ Two facts dictate the split:
 - **`template/docs/`** — PRD, ROADMAP, NOTES, ADR skeleton. The repo is the
   memory.
 
+A native iOS surface is archived by Xcode Cloud on the release tag and
+distributed through TestFlight; the owner's Mac needs Xcode only to run a
+branch on a cabled phone, and not even that if pull-request branches are
+also built to TestFlight.
+
 Trying the app never needs a local simulator: every pull request gets a
 preview URL and carries it (the `Preview` slot in `CLAUDE.md`); a mobile
 product meets this with a web target, and only a native-only surface

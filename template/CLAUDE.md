@@ -66,7 +66,9 @@ Every pull request gets a preview URL and its body carries it. A pull
 request without its preview link is not ready for the owner.
 [STACK: the provider and how the link is produced. A native-only surface,
 where no URL is possible, names its build channel here instead — the
-exception, not the rule. Until filled: no pull request is ready.]
+exception, not the rule; for iOS that is a TestFlight build from Xcode
+Cloud, per release or, if the workflow is on, per pull request. Until
+filled: no pull request is ready.]
 
 ## Deploy
 [STACK: deploy target and commands — the product steps of /deploy-checklist.

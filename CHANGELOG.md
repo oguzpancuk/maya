@@ -13,6 +13,19 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 09:55 · `pending` — the iOS archive moves to Xcode Cloud (→ products)
+The last thing a release needed from the owner's Mac was Xcode, to
+archive and upload. Owner decision: the archive is Xcode Cloud's, on the
+release tag. `/deploy-checklist`'s product steps say so for an iOS
+surface — push the tag, confirm the TestFlight build, open it on a
+device; nothing in the checklist needs Xcode. `/new-product` gains step
+9b: set up the workflow in App Store Connect (a setting, not a file, like
+branch protection) and record it in NOTES.md; optionally build
+pull-request branches to TestFlight too, which makes an iOS pull request
+tryable on a phone with no Mac at all. The `verify-ios` GitHub Actions job
+stays the required check: whether Xcode Cloud reports a status to GitHub
+was not verified, and the merge gate is not tied to anything unverified.
+
 ### 2026-09-21 09:40 · `74b083e` — a battery step this OS cannot run: "not run here", and a CI job per OS (→ products)
 The products have a native iOS surface built with Xcode. A cloud thread is
 a Linux VM: it cannot build or test that surface, and the template had one
