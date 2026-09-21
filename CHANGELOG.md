@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 11:00 · — sixth update run: the battery checks exec bits; registry follows a rename (→ products)
+### 2026-09-21 11:00 · `d58cc34` — sixth update run: the battery checks exec bits; registry follows a rename (→ products)
 First `/update-stack` run after the Projects rewrite. It began on a local
 checkout 54 commits behind `origin/main` — the skill text it was handed was
 the old one — so it read `origin/main` without pulling, reported against
