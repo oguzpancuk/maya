@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 09:20 · `pending` — deploy-checklist trusts CI's green, not a local battery (→ products)
+### 2026-09-21 09:20 · `439898f` — deploy-checklist trusts CI's green, not a local battery (→ products)
 Gate 2 ran `verify.sh` locally, which needs the product's deps installed
 on the owner's machine — the one thing the new order otherwise never asks
 of the laptop. The same fact already exists on GitHub: every commit on
