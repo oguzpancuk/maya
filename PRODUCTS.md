@@ -6,6 +6,6 @@ invisible to the harvest — that is why registration is part of instantiation.
 
 | Product | Repo | Local path | Instantiated at (maya commit) |
 |---|---|---|---|
-| pati | https://github.com/oguzpancuk/pati | ~/dev/pati (Mac) | d58cc34 |
-| dealcloser | https://github.com/oguzpancuk/dealcloser | ~/dev/dealcloser (Mac) | d58cc34 (retrofit — repo predates maya) |
-| juno | https://github.com/oguzpancuk/juno | ~/dev/juno (Mac) | d58cc34 |
+| pati | https://github.com/oguzpancuk/pati | ~/dev/pati (Mac) | 596facf |
+| dealcloser | https://github.com/oguzpancuk/dealcloser | ~/dev/dealcloser (Mac) | 596facf (retrofit — repo predates maya) |
+| juno | https://github.com/oguzpancuk/juno | ~/dev/juno (Mac) | 596facf |
