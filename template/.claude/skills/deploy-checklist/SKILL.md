@@ -10,7 +10,10 @@ A fail stops the deploy — no "deploy anyway" without my explicit say-so.
 
 ## Generic gates (every product)
 1. Working tree clean, on the release branch, synced with remote.
-2. Full battery green on this exact commit: `bash .claude/hooks/verify.sh`.
+2. CI green on this exact commit: the `verify` check on the commit `main`
+   points at — the required check that let it merge. Do not run the
+   battery locally instead: a local tree can carry deps or state CI does
+   not, and CI's run is the one the merge gate trusted.
 3. No secrets in the diff since last deploy (`git diff <last-tag>..HEAD`
    scanned for keys/tokens/passwords).
 4. Migrations/data changes: reversible, or the irreversibility is stated

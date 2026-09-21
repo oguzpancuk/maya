@@ -43,7 +43,7 @@ Two facts dictate the split:
   --comment`, and being a separate session it starts with nothing of the
   author's to inherit.
 - **`template/.claude/skills/deploy-checklist/`** — the owner's pre-deploy
-  walk: generic gates (clean tree, battery green on this commit, no secrets
+  walk: generic gates (clean tree, CI green on this commit, no secrets
   in the range, reversible migrations, release notes exist, `evaluator-qa`
   over every item done since the last deploy), then the product's own
   steps in a `[STACK]` slot. Threads never deploy; the owner

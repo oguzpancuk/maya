@@ -13,6 +13,16 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 09:20 · `pending` — deploy-checklist trusts CI's green, not a local battery (→ products)
+Gate 2 ran `verify.sh` locally, which needs the product's deps installed
+on the owner's machine — the one thing the new order otherwise never asks
+of the laptop. The same fact already exists on GitHub: every commit on
+`main` passed the `verify` required check to get there. Gate 2 now reads
+that check on the exact commit, and says not to run the battery locally
+instead: a local tree can carry deps or state CI does not, and CI's run is
+the one the merge gate trusted. A release now needs a checkout and the
+deploy commands, nothing else.
+
 ### 2026-09-21 09:01 · `b483626` — where a pull request is tried, and what a cloud thread cannot see (→ products)
 Nothing in the template said where the owner tries a pull request, and
 the QA rules assumed every screen could be driven from a thread. Neither
