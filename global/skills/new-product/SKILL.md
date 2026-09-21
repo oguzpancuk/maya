@@ -31,8 +31,11 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    - complete the Commands table, Standards and Preview slots in
      `CLAUDE.md`,
    - write the real battery into `.claude/hooks/verify.sh` (typecheck, lint,
-     tests, build — whatever the stack offers; remove the FAIL placeholder),
-   - adjust `.github/workflows/ci.yml` setup steps to match.
+     tests, build — whatever the stack offers; remove the FAIL placeholder).
+     A surface that builds only on another OS (native iOS: macOS) gets its
+     own steps, reported "NOT RUN here" where they cannot run,
+   - adjust `.github/workflows/ci.yml` setup steps to match, with a job per
+     OS the battery needs.
    Leave anything still unknown as an explicit `[STACK: TODO — <question>]`
    marker; never fill a slot with a guess.
 4. Record provenance: write the maya repo's current commit hash to
@@ -47,8 +50,10 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    the battery or the workflow is wrong — fix it now, not later.
 9. Protect `main`: direct pushes off, pull request required, the `verify`
    status check required (the job in `ci.yml`; GitHub lists checks by job
-   name), the preview provider's status check required too when it posts
-   one, and "require branches to be up to date before merging" on —
+   name) and every other verify job the stack added (a `verify-ios` on
+   macOS for a native surface), the preview provider's status check
+   required too when it posts one, and "require branches to be up to date
+   before merging" on —
    so two green branches cannot merge into a red `main`. This is the only
    thing that stops unverified work from landing, so it is part of
    instantiation, not a later improvement.

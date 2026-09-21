@@ -10,11 +10,14 @@ cd "$(dirname "$0")/../.."
 # nothing. /new-product must replace this block.
 echo "FAIL: verify.sh is not configured yet — this battery verifies NOTHING." >&2
 echo "Fill it with the real stack commands (see CLAUDE.md commands table)." >&2
-# [STACK: replace everything below with the real battery. Two rules proven
-# in pati: (1) attempt EVERY step even after a failure, then report them
-# together — a run that stops at the first error hides the rest; (2) a
-# package with missing node_modules is a FAIL ("run npm ci"), never a
-# silent skip — what cannot be verified is not verified. Pattern:
+# [STACK: replace everything below with the real battery. Three rules:
+# (1) attempt EVERY step even after a failure, then report them together —
+# a run that stops at the first error hides the rest; (2) a package with
+# missing node_modules is a FAIL ("run npm ci"), never a silent skip — what
+# cannot be verified is not verified; (3) a step this OS cannot run at all
+# (xcodebuild on Linux) is reported as "NOT RUN here — <ci job> is the run",
+# a third state beside ok/FAIL: it does not fail the battery, it is never
+# silent, and the CI job named is a required check. Pattern:
 #
 #   fail=0; results=()
 #   step() { name="$1" dir="$2"; shift 2

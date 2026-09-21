@@ -35,7 +35,9 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
   file as the required check on every pull request.
 - Run it before opening a pull request, on a clean committed HEAD
   (`git status --porcelain` empty before and after), and put the result in
-  the pull request body.
+  the pull request body. A step this machine cannot run (a build that needs
+  another OS) goes in the body as "not run here — CI's `<job>` is the
+  run", never as passing; CI's job for it is a required check.
 - If the item's done-when clause names a screenshot or manual check, run the
   `evaluator-qa` agent on it and put its verdict in the pull request body.
   NEEDS_WORK means not done: fix, run it again, open the pull request only

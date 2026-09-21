@@ -29,7 +29,9 @@ Two facts dictate the split:
 - **`template/.github/workflows/ci.yml`** — runs `verify.sh`, nothing else.
   Its `[STACK]` setup steps are the same commands the product's cloud
   environment setup script runs, so a thread and CI verify on the same
-  footing.
+  footing. A surface that builds only on another OS (a native iOS app) gets
+  its own job on that OS, also required: a Linux thread cannot run it and
+  says so in the pull request body — "not run here" — never "passing".
 - **`template/docs/project-instructions.md`** — the source text for the
   Claude Code project's instructions field. The pasted copy in the web UI is
   a copy; this file is the original, and `/update-stack` reports when a port

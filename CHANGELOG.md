@@ -13,6 +13,19 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 09:40 · `pending` — a battery step this OS cannot run: "not run here", and a CI job per OS (→ products)
+The products have a native iOS surface built with Xcode. A cloud thread is
+a Linux VM: it cannot build or test that surface, and the template had one
+`ubuntu-latest` job and no word for a step a machine cannot run. Now
+`verify.sh` has a third state beside ok and FAIL — "NOT RUN here — <job>
+is the run" — which never fails the battery and is never silent; `ci.yml`
+shows a job per OS the battery needs, each a required check;
+`template/CLAUDE.md` says how a thread reports such a step in the pull
+request body, never as passing; `/new-product` requires every verify job
+and `/update-stack` checks for all of them. The screen half of this (a
+native screen is the owner's manual check) landed two entries ago; this
+is the build half.
+
 ### 2026-09-21 09:20 · `439898f` — deploy-checklist trusts CI's green, not a local battery (→ products)
 Gate 2 ran `verify.sh` locally, which needs the product's deps installed
 on the owner's machine — the one thing the new order otherwise never asks

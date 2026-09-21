@@ -17,3 +17,11 @@ jobs:
       #     with: { node-version: 20 }
       # add service containers (db etc.) here if verify.sh needs them]
       - run: bash .claude/hooks/verify.sh
+  # [STACK: a surface that builds only on another OS gets its own job, also
+  # a required check — e.g. a native iOS app:
+  #   verify-ios:
+  #     runs-on: macos-latest
+  #     steps:
+  #       - uses: actions/checkout@v4
+  #       - run: bash .claude/hooks/verify.sh ios
+  # verify.sh then runs only that surface's steps when given its name.]
