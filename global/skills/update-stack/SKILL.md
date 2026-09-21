@@ -59,6 +59,11 @@ template@(product's .maya-version) vs template@HEAD vs the product file.
 - Unmodified in the product: copy the new version, with my approval.
 - Deliberately diverged: NEVER clobber — port the change as a patch, or
   record "superseded locally" with one line of why.
+- Deleted from the template since the product's base: propose deleting
+  the product's copy (and any wiring that names it — settings, CLAUDE.md
+  lines) if unmodified; if modified, show the diff and ask. Added to the
+  template since the base: propose adding it, its [STACK] slots filled
+  from what the product already has, TODO where it does not.
 - Hybrid files (generic half + [STACK] slots, e.g. ci.yml): sync generic
   sections PER HUNK — outside the slots, template@HEAD wins unless the
   product hunk has a NOTES-documented rationale.
@@ -68,7 +73,10 @@ template@(product's .maya-version) vs template@HEAD vs the product file.
   the report: the copy pasted into that product's project settings is a
   copy, and only I can re-paste it.
 Apply ports only to a PULLED, CLEAN checkout: `git pull` first, postpone
-if `git status --porcelain` is not empty.
+if `git status --porcelain` is not empty. Land each product's port as ONE
+commit on a branch and open its pull request; never merge it — the owner
+does. A first port after a template rewrite lands before the merge gate
+is turned on, since the gate's checks arrive with it.
 
 **Watermark**: at the run's close — after the approved maya updates are
 committed and PUSHED — bump EVERY harvested product's `.maya-version`
