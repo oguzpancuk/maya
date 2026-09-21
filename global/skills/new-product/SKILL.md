@@ -23,8 +23,14 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
 3. Fill the `[STACK]` slots interactively — ask me in ONE batch:
    language/runtime, framework(s), package layout (single app / monorepo),
    database, deploy target, test runner, and the **preview provider**:
-   every pull request gets a preview URL (Vercel, Netlify, Cloudflare
-   Pages, Fly preview apps…) — this is the rule, not an option. A mobile
+   every pull request gets a preview URL — this is the rule, not an
+   option. CHOOSE THE HOST FOR IT: one whose own Git integration gives
+   each pull request a URL and a status check (Vercel, Netlify, Cloudflare
+   Pages / Workers Builds…), so the preview is a few clicks and no token
+   of ours sits in Actions. If I name a host without one, say so before
+   going on: a preview workflow of our own is the exception, costs most of
+   a day, and needs its reason in `docs/NOTES.md`. `docs/preview-recipes.md`
+   in maya has the rule, two verified recipes and their pitfalls. A mobile
    product satisfies it with a web target (Expo web or the like); only a
    surface where no URL is physically possible names a build channel
    (EAS Update, TestFlight) instead, as the exception. Then:

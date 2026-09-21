@@ -13,6 +13,26 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-21 15:45 · — new products are hosted where previews come for free
+Owner decision at the end of the day the previews were built: the choice
+of HOST is where a preview is won or lost. pati's and juno's previews are
+workflows of our own; between them they took most of a day, surfaced four
+provider-specific pitfalls, and each leaves a production-capable token in
+GitHub Actions that had to be fenced in. A provider's Git integration has
+none of that. So `/new-product` step 3 now steers the host choice — and
+says so out loud when a named host has no such integration — and a
+workflow of our own is the exception, with its reason in the product's
+NOTES. New: `docs/preview-recipes.md` — the rule, the two verified
+workflows verbatim (Fly review apps with a database each; a Cloudflare
+Worker version per pull request), what bit on each, and the six rules for
+any preview workflow of ours. It is reference material; nothing loads it
+until it is needed. pati and juno stay as they are, as recorded
+exceptions: Fly.io offers no such integration and moving a live PostGIS
+app for preview convenience is out of proportion; Cloudflare does
+(Workers Builds), but the rule arrived after juno's workflow was built,
+hardened and proven. Not verified, and written down as such: whether
+Workers Builds can be kept from deploying the production branch.
+
 ### 2026-09-21 15:06 · `596facf` — deploys come back to the owner's machine; phone builds only on request (→ products)
 Two owner decisions, the same day as the entries they change, made after
 the per-pull-request previews were working and the division of labour was

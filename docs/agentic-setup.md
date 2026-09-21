@@ -76,6 +76,11 @@ screens are also driven by `evaluator-qa` inside the thread; a native
 mobile screen cannot be, so its clause is a `manual check` the owner does
 on a device before merging.
 
+New products are hosted where the provider's Git integration makes the
+preview by itself; a workflow of our own is the recorded exception (pati,
+juno). `docs/preview-recipes.md` has the rule, both recipes and what each
+one cost.
+
 The preview is a REQUIRED check, like `verify` (owner decision,
 2026-09-21). Required does not mean "built on request" — a preview is
 built for every pull request either way; it means a pull request whose
