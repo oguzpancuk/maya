@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-21 09:01 · `pending` — where a pull request is tried, and what a cloud thread cannot see (→ products)
+### 2026-09-21 09:01 · `b483626` — where a pull request is tried, and what a cloud thread cannot see (→ products)
 Nothing in the template said where the owner tries a pull request, and
 the QA rules assumed every screen could be driven from a thread. Neither
 held for a mobile product: a cloud VM has Chromium and Playwright but no
