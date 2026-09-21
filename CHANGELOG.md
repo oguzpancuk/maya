@@ -32,8 +32,15 @@ item done. `evaluator-qa` names the native screen as its standing
 "unverified, never PASS" case. The environment step notes that web QA
 needs nothing installed.
 
+Owner decision the same morning: the preview URL is the rule, not one
+option among channels. Every pull request gets one and its body carries
+it; a pull request without it is not ready. A mobile product meets the
+rule with a web target; a build channel stands in only where no URL is
+physically possible. Where the preview provider posts a status check,
+`/new-product` requires it alongside `verify`.
+
 Net: code, tests, review and most of QA run in the cloud; the owner tries
-a pull request on a URL or a phone; a native screen's last look is the
+every pull request on its preview URL; a native screen's last look is the
 owner's. A laptop is required for none of it.
 
 ### 2026-09-18 20:05 · `1b7999f` — fit audit against Projects: one gap, three leftovers (→ products)

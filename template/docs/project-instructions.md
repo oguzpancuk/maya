@@ -29,9 +29,9 @@
 
 ## Pull requests
 - Start from `main`, work on your own branch, open one pull request per
-  thread. The body names the done-when clause it satisfies and carries the
-  preview link or build channel for this pull request (CLAUDE.md, Preview);
-  what else it carries, CLAUDE.md says.
+  thread. The body names the done-when clause it satisfies and carries
+  this pull request's preview URL (CLAUDE.md, Preview) — without it the
+  pull request is not ready for me; what else it carries, CLAUDE.md says.
 - A `manual check` clause is listed in the body as "awaiting the owner's
   check on a device", with what to try. I check before merging; the thread
   does not report that item done.

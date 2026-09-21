@@ -22,9 +22,12 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    placeholder survived.
 3. Fill the `[STACK]` slots interactively — ask me in ONE batch:
    language/runtime, framework(s), package layout (single app / monorepo),
-   database, deploy target, test runner, and **where a pull request is
-   tried**: a preview URL per PR (Vercel/Netlify/Fly preview), an EAS
-   Update channel, TestFlight / an internal track, or none yet. Then:
+   database, deploy target, test runner, and the **preview provider**:
+   every pull request gets a preview URL (Vercel, Netlify, Cloudflare
+   Pages, Fly preview apps…) — this is the rule, not an option. A mobile
+   product satisfies it with a web target (Expo web or the like); only a
+   surface where no URL is physically possible names a build channel
+   (EAS Update, TestFlight) instead, as the exception. Then:
    - complete the Commands table, Standards and Preview slots in
      `CLAUDE.md`,
    - write the real battery into `.claude/hooks/verify.sh` (typecheck, lint,
@@ -44,7 +47,8 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    the battery or the workflow is wrong — fix it now, not later.
 9. Protect `main`: direct pushes off, pull request required, the `verify`
    status check required (the job in `ci.yml`; GitHub lists checks by job
-   name), and "require branches to be up to date before merging" on —
+   name), the preview provider's status check required too when it posts
+   one, and "require branches to be up to date before merging" on —
    so two green branches cannot merge into a red `main`. This is the only
    thing that stops unverified work from landing, so it is part of
    instantiation, not a later improvement.

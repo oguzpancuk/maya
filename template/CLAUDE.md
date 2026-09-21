@@ -60,10 +60,11 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
   owner's.
 
 ## Preview
-[STACK: where a pull request is tried — a preview URL per PR, an EAS Update
-channel, TestFlight / an internal track. Every pull request body carries
-the link or channel for its own build. Until filled: a pull request is
-tried nowhere but CI.]
+Every pull request gets a preview URL and its body carries it. A pull
+request without its preview link is not ready for the owner.
+[STACK: the provider and how the link is produced. A native-only surface,
+where no URL is possible, names its build channel here instead — the
+exception, not the rule. Until filled: no pull request is ready.]
 
 ## Deploy
 [STACK: deploy target and commands — the product steps of /deploy-checklist.
