@@ -43,7 +43,8 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
   NEEDS_WORK means not done: fix, run it again, open the pull request only
   on PASS. A clause that names a test needs no QA pass.
 - A native mobile screen cannot be driven from a cloud thread. For such a
-  clause the pull request says exactly what to try and where (see Preview);
+  clause the pull request says exactly what to try and where (see Looking
+  at it);
   the owner checks it on a device before merging, and the item is not
   reported done until then.
 - Never report a check you did not run.
@@ -61,15 +62,15 @@ Spec: `docs/PRD.md` · Build order: `docs/ROADMAP.md` · Working notes:
 - Never merge, force-push, or change CI configuration. Merging is the
   owner's.
 
-## Preview
-Every pull request gets a preview URL and its body carries it. A pull
-request without its preview link is not ready for the owner.
-[STACK: the provider and how the link is produced. A native-only surface,
-where no URL is possible, names its build channel here instead — the
-exception, not the rule; for iOS that is a TestFlight build Xcode Cloud
-makes ON REQUEST — the owner asks for one when a native screen needs a
-look, and a thread never triggers a build. Until filled: no pull request
-is ready.]
+## Looking at it
+There is no preview URL. A thread runs the web surface in its own
+container, drives it (`evaluator-qa`, the screenshot command) and puts
+the screenshots in the pull request body: that is what the owner sees of
+the change. When the owner wants to try it himself he brings it up from a
+LOCAL session, on the web and in the iOS simulator, before merging. A
+thread never sets up hosting for that and never triggers a build.
+[STACK: the dev command and the screenshot command a thread uses for the
+web surface.]
 
 ## Deploy
 Deploys are the owner's, run from a LOCAL Claude Code session through

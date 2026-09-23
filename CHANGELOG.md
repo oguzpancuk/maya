@@ -13,6 +13,26 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-23 03:27 · `PENDING` — no preview URL: projects develop, looking is local (→ products)
+Owner decision, reversing 2026-09-21's previews for simplicity: a thread
+already sends screenshots of the web surface it built, and whatever the
+owner wants to try himself he brings up from a local session, on the web
+and in the iOS simulator — the two things a cloud container cannot do
+anyway. Two preview workflows, two production-capable tokens in GitHub
+Actions and a review database cluster were cost without a matching gain.
+Removed: the `Preview` slot in `template/CLAUDE.md` (replaced by a short
+`Looking at it`), the preview-URL and TestFlight lines in
+`docs/project-instructions.md`, the host rule and the four own-workflow
+rules in `/new-product` step 3, the preview part of the merge gate in
+step 9, on-request phone builds in 9b, and `docs/preview-recipes.md`
+(git history keeps both recipes if a product ever needs one). The merge
+gate is `verify` and the product's own CI jobs. Xcode Cloud builds the
+release tag only; `/update-stack` 4e reads it that way. pati and juno
+dismantle their workflows, required checks, secrets and the Fly cluster
+in the port.
+
+---
+
 ### 2026-09-21 15:39 · `6706eb5` — new products are hosted where previews come for free
 Owner decision at the end of the day the previews were built: the choice
 of HOST is where a preview is won or lost. pati's and juno's previews are

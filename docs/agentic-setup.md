@@ -62,33 +62,16 @@ Two facts dictate the split:
   memory.
 
 A native iOS surface is archived by Xcode Cloud on the release tag and
-distributed through TestFlight. A pull-request branch is built to
-TestFlight only ON REQUEST: every product keeps web and iOS in sync, so the
-web preview is the normal check and a phone build is the exception the
-owner asks for. Xcode stays on the Mac as the faster path for a cabled
-phone.
+distributed through TestFlight; nothing else builds. Xcode stays on the
+Mac as the faster path for a cabled phone.
 
-Trying the app never needs a local simulator: every pull request gets a
-preview URL and carries it (the `Preview` slot in `CLAUDE.md`); a mobile
-product meets this with a web target, and only a native-only surface
-names a build channel instead. Web
-screens are also driven by `evaluator-qa` inside the thread; a native
-mobile screen cannot be, so its clause is a `manual check` the owner does
-on a device before merging.
-
-New products are hosted where the provider's Git integration makes the
-preview by itself; a workflow of our own is the recorded exception (pati,
-juno). `docs/preview-recipes.md` has the rule, both recipes and what each
-one cost.
-
-The preview is a REQUIRED check, like `verify` (owner decision,
-2026-09-21). Required does not mean "built on request" — a preview is
-built for every pull request either way; it means a pull request whose
-preview is red, or still running, cannot merge. The cost is accepted: when
-the provider is down, nothing merges. Where the preview is our own
-workflow it holds a production-capable token, so it runs as
-`pull_request_target` from `main` and never runs the pull request's code
-next to that token; `/new-product` step 3 has the details.
+There is no preview URL (owner decision, 2026-09-23; it replaced a day of
+preview workflows built on 2026-09-21 — the ledger has both). A thread
+runs the web surface in its container, drives it with `evaluator-qa` and
+puts screenshots in the pull request; a native mobile screen cannot be
+driven there, so its clause is a `manual check`. When the owner wants to
+try a change himself he brings it up from a local session — web and iOS
+simulator — before merging. Projects develop; looking is local.
 
 Enforcement is not in this repo. It lives on GitHub: `main` protected, pull
 request required, the `verify` check required, branches must be up to

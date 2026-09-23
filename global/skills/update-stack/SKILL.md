@@ -105,9 +105,8 @@ gates nothing on that product.
 
 ## 4e. Xcode Cloud hours (products with an iOS surface)
 Read the month's compute usage in App Store Connect against the 25
-included hours. Pull-request builds are on request only, so the number
-should track how often I asked for one; anything else building on its own
-is a finding. Report it — never change the workflow.
+included hours. Only the release tag builds, so the number should track
+releases; anything else building on its own is a finding. Report it — never change the workflow.
 
 ## 5. Weight check
 Weigh the ALWAYS-LOADED layer only: global CLAUDE.md lines, global

@@ -22,38 +22,11 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
    placeholder survived.
 3. Fill the `[STACK]` slots interactively — ask me in ONE batch:
    language/runtime, framework(s), package layout (single app / monorepo),
-   database, deploy target, test runner, and the **preview provider**:
-   every pull request gets a preview URL — this is the rule, not an
-   option. CHOOSE THE HOST FOR IT: one whose own Git integration gives
-   each pull request a URL and a status check (Vercel, Netlify, Cloudflare
-   Pages / Workers Builds…), so the preview is a few clicks and no token
-   of ours sits in Actions. If I name a host without one, say so before
-   going on: a preview workflow of our own is the exception, costs most of
-   a day, and needs its reason in `docs/NOTES.md`. `docs/preview-recipes.md`
-   in maya has the rule, two verified recipes and their pitfalls. A mobile
-   product satisfies it with a web target (Expo web or the like); only a
-   surface where no URL is physically possible names a build channel
-   (EAS Update, TestFlight) instead, as the exception. Then:
-   - complete the Commands table, Standards and Preview slots in
+   database, deploy target, test runner. Then:
+   - complete the Commands table, Standards and Looking-at-it slots in
      `CLAUDE.md`,
    - write the real battery into `.claude/hooks/verify.sh` (typecheck, lint,
      tests, build — whatever the stack offers; remove the FAIL placeholder).
-   When the preview is a workflow of ours rather than a provider's Git
-   integration, four things learned on pati and juno:
-   - its token can almost always deploy PRODUCTION too (Fly has no
-     narrower token that creates apps; Cloudflare none for "upload only"),
-     so the workflow is `pull_request_target` — read from `main`, where a
-     branch cannot rewrite its steps — and a job that runs the pull
-     request's code (`npm ci`, a build) holds NO secrets: build in one job,
-     hand the output over as an artifact, upload in another;
-   - such a workflow cannot run from the pull request that adds it. Its
-     first real run is the NEXT pull request: open a small one right after
-     merging, and call the preview done only when that one is green and
-     the URL answers from outside the job;
-   - third-party actions are pinned to a commit sha, not a tag or branch;
-   - it ends with a request to the preview itself, so a deploy that did
-     not take is red, and it removes on `closed` whatever it created — the
-     app AND what came with it (a database, a role).
      A surface that builds only on another OS (native iOS: macOS) gets its
      own steps, reported "NOT RUN here" where they cannot run,
    - adjust `.github/workflows/ci.yml` setup steps to match, with a job per
@@ -73,10 +46,8 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
 9. Protect `main`: direct pushes off, pull request required, the `verify`
    status check required (the job in `ci.yml`; GitHub lists checks by job
    name) and every other verify job the stack added (a `verify-ios` on
-   macOS for a native surface), the preview's check required too — EVERY
-   job of it: a job skipped because the one it `needs` failed counts as
-   passing, so requiring only the last job of a chain gates nothing — and
-   "require branches to be up to date before merging" on —
+   macOS for a native surface) and "require branches to be up to date
+   before merging" on —
    so two green branches cannot merge into a red `main`. This is the only
    thing that stops unverified work from landing, so it is part of
    instantiation, not a later improvement.
@@ -86,21 +57,19 @@ argument-hint: [product-name] [target-directory, default ~/dev/<product-name>]
     release tag (`v*`), actions archive + distribute to the TestFlight
     internal group; put dependency setup in `ci_scripts/ci_post_clone.sh`
     if the stack needs it. Like branch protection, this is a setting, not
-    a file: record in `docs/NOTES.md` what the workflow does. A second
-    workflow builds a pull-request branch to TestFlight ON REQUEST only —
-    manual start, never on open or on push: the web preview is the normal
-    check, and I ask for a phone build when a native screen needs one. The
-    Preview slot names it. Included compute is 25 hours a month;
-    `/update-stack` reads the month's usage.
+    a file: record in `docs/NOTES.md` what the workflow does. Nothing
+    else builds: a pull request is looked at on the web in the thread and
+    locally by me. Included compute is 25 hours a month; `/update-stack`
+    reads the month's usage.
 
 9c. Deploy path: deploys run from my LOCAL Claude Code session, through
     /deploy-checklist, on my machine. Log the deploy CLIs in there
     (`fly auth login`, `wrangler login`, …) and put NO deploy credential in
     a cloud environment or an Actions secret — a thread cannot deploy what
     it cannot authenticate to. Fill the checklist's product steps with the
-    real commands, health check and rollback. Turn off the preview
-    provider's automatic production deploy from `main`: production follows
-    my deploy, not the branch.
+    real commands, health check and rollback. Turn off the host's own
+    deploy-on-push from `main` if it has one: production follows my
+    deploy, not the branch.
 
 ## C. Registration
 10. Register the product in maya's `PRODUCTS.md` (name, repo URL, local
