@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-23 03:27 · `PENDING` — no preview URL: projects develop, looking is local (→ products)
+### 2026-09-23 03:27 · `e87bb6f` — no preview URL: projects develop, looking is local (→ products)
 Owner decision, reversing 2026-09-21's previews for simplicity: a thread
 already sends screenshots of the web surface it built, and whatever the
 owner wants to try himself he brings up from a local session, on the web
