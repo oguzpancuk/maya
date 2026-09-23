@@ -35,8 +35,11 @@ Two facts dictate the split:
   The same holds for a step that needs containers: a hosted thread has no
   Docker daemon, CI does, and CI's run is the required check. The
   environment's setup script starts in the clone's parent directory
-  (`cd <repo>` first), and a change to it is tested with a new thread — a
-  resumed thread keeps its old container.
+  (`cd <repo>` first, guarded with `[ -d <repo> ] || exit 0`: the
+  project's own chat runs the same script without a clone, and an
+  unguarded `cd` silences the coordinator while every thread keeps
+  working), and a change to it is tested with a new thread — a resumed
+  thread keeps its old container.
 - **`template/docs/project-instructions.md`** — the source text for the
   Claude Code project's instructions field. The pasted copy in the web UI is
   a copy; this file is the original, and `/update-stack` reports when a port
@@ -81,6 +84,14 @@ local session with credentials no thread and no workflow holds — a thread
 cannot deploy what it cannot authenticate to.
 
 ## 3. Update routine
+
+maya itself is not a product: it has no `CLAUDE.md` from the template, no
+battery, no deploy, no project. It is edited from the LOCAL session that
+runs `/update-stack` — the one place that also reads the products, which
+are private and out of a cloud thread's reach — and its `main` moves on
+the owner's per-push approval (decided 2026-09-23, after weighing a
+project for it). The "a local session does not build features" rule is
+about products; maintaining maya is that local session's job.
 
 Monthly, or when a model releases: run `/update-stack`. It checks the
 marketplace, diffs Anthropic news + engineering + the Claude Code changelog

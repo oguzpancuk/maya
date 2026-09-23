@@ -13,6 +13,19 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-23 04:29 · `PENDING` — fourth environment fact; maya itself is maintained locally
+The project's own chat (the coordinator) runs the environment setup
+script too, with NO clone: an unguarded `cd <repo>` fails there and
+silences the coordinator while every thread keeps working (juno,
+2026-09-22). `/new-product` step 11 and the handbook now say `[ -d <repo>
+] || exit 0` before the `cd`. And the handbook §3 states what was only
+implied: maya is not a product — no template CLAUDE.md, battery, deploy
+or project — and is edited from the local `/update-stack` session, the
+one place that can also read the private products; decided 2026-09-23
+after weighing a claude.ai/code project for it.
+
+---
+
 ### 2026-09-23 03:27 · `e87bb6f` — no preview URL: projects develop, looking is local (→ products)
 Owner decision, reversing 2026-09-21's previews for simplicity: a thread
 already sends screenshots of the web surface it built, and whatever the
