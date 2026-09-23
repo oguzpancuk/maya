@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-23 04:29 · `PENDING` — fourth environment fact; maya itself is maintained locally
+### 2026-09-23 04:29 · `1b8e7ed` — fourth environment fact; maya itself is maintained locally
 The project's own chat (the coordinator) runs the environment setup
 script too, with NO clone: an unguarded `cd <repo>` fails there and
 silences the coordinator while every thread keeps working (juno,
