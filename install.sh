@@ -58,7 +58,7 @@ prune "$CLAUDE_DIR/skills"
 prune "$CLAUDE_DIR/agents"
 
 echo ""
-echo "Done. Installed: /new-product, /update-stack, /spec, /mvp-scope, /release-notes."
+echo "Done. Installed: /new-product, /integrate-product, /update-stack, /spec, /mvp-scope, /release-notes."
 echo ""
 echo "Cloud sessions and project threads do NOT read ~/.claude — for those,"
 echo "the product repo's own CLAUDE.md and .claude/ (from template/) is what"

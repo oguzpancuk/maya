@@ -9,15 +9,15 @@ https://claude.ai/code/artifact/89e20f3f-114d-4df9-983d-dbb71cbc7e1e
 
 | Layer | Lives in | Reaches Claude via | Carries |
 |---|---|---|---|
-| GLOBAL (me) | `maya/global/` | `./install.sh` symlinks → `~/.claude/` | personal CLAUDE.md, /spec, /mvp-scope, /new-product, /update-stack, /release-notes |
+| GLOBAL (me) | `maya/global/` | `./install.sh` symlinks → `~/.claude/` | personal CLAUDE.md, /spec, /mvp-scope, /new-product, /integrate-product, /update-stack, /release-notes |
 | PRODUCT | `maya/template/`, instantiated by `/new-product` | committed files in each product repo, read by every thread of the product's claude.ai/code project | product CLAUDE.md, `verify.sh`, CI, docs skeleton, project instructions, /deploy-checklist |
 
 Two facts dictate the split:
 - **Cloud sessions and project threads ignore `~/.claude/`** — anything a
   thread needs must be committed in the product repo.
 - **A personal skill silently shadows a same-named project skill** — global
-  skill names (spec, mvp-scope, new-product, update-stack, release-notes)
-  are reserved.
+  skill names (spec, mvp-scope, new-product, integrate-product,
+  update-stack, release-notes) are reserved.
 
 ## 2. What each piece is
 
@@ -113,27 +113,22 @@ Updating individual pieces:
 
 ## 4. Integrating an EXISTING product (brownfield)
 
-Principles: **minimal merge** — never replace a working setup; **no second
-tool for the same job**.
-
-1. Read the product's CLAUDE.md and conventions FIRST. If the repo has an
-   `AGENTS.md` and no CLAUDE.md, merge its rules into the CLAUDE.md you add:
-   Claude Code reads AGENTS.md only when CLAUDE.md is absent, so adding
-   ours would silently shadow it.
-2. Make `verify.sh` the SINGLE implementation of whatever battery the
-   product already documents — if a rival command exists, rewire it to call
-   the script.
-3. Add the CI workflow that runs `verify.sh`, and confirm it is green before
-   making it required. Give the product's cloud environment a setup script
-   with the same install steps.
-4. Protect `main`: pull request required, the `verify` check required, up
-   to date before merging.
-5. Add `docs/project-instructions.md`, adapted to the product.
-6. Add the "Upstream candidates" section to the product's NOTES.md.
-7. Write maya's current commit to `.maya-version`. Registering in maya's
-   `PRODUCTS.md` is a MAYA write — do it in a maya session, or let the next
-   `/update-stack` catch it as "unregistered".
-8. Land it as ONE revertible commit so opting out later is a single revert.
+`/integrate-product` is the procedure; this section is only its two
+principles, so the skill and the handbook cannot drift apart. **Minimal
+merge**: never replace a working setup — read the repo's own rules,
+commands and workflows first, then merge the template onto them, and
+land the whole integration as ONE revertible commit so opting out later
+is a single revert. **No second tool for the same job**: `verify.sh`
+becomes the single implementation of whatever battery the product
+already documented, `ci.yml` the single workflow that runs it, and a
+rival (`AGENTS.md` beside a `CLAUDE.md`, a second test workflow) is
+merged or removed, never left running in parallel. The baseline the
+product shows before the merge is the baseline the battery reports
+after it: a failing step stays red rather than disappearing. Merge gate
+and registration follow `/new-product`'s steps, with one ordering rule
+the skill spells out: `main` is protected only after the integration is
+merged and green, because a required check that cannot pass gates the
+fix too.
 
 ## 5. Known version pitfalls (verified 2026-08)
 

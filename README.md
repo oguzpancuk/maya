@@ -9,7 +9,7 @@ One repo, three jobs:
 | Directory | What it is | Where it lands |
 |---|---|---|
 | `template/` | The per-product starter: CLAUDE.md, the verification battery, CI, docs skeleton, project instructions, the deploy checklist | copied into each new product by `/new-product` |
-| `global/` | The personal layer: conventions and the five skills | `~/.claude/` via `./install.sh` |
+| `global/` | The personal layer: conventions and the six skills | `~/.claude/` via `./install.sh` |
 | `PRODUCTS.md` + `/update-stack` | The registry and the monthly harvest that carries improvements between products | run `/update-stack` |
 
 ## What problem this solves
@@ -25,7 +25,9 @@ carry a lesson learned in one product over to the next. That is maya's job:
   battery fails on purpose; a green check on nothing is worse than no check.
 - **Every product starts equipped.** `/new-product` copies the template, fills
   the stack slots, sets up the repository and its merge gate, and records the
-  maya commit it came from in `.maya-version`.
+  maya commit it came from in `.maya-version`. A product that predates maya
+  gets the same through `/integrate-product`: a minimal merge onto what the
+  repo already has, landed as one revertible pull request.
 - **Improvements propagate.** Products are registered in `PRODUCTS.md`;
   `/update-stack` harvests what one product learned and reports which products
   are behind the template. Without it, each product relearns the same lesson.
@@ -42,12 +44,14 @@ git clone git@github.com:oguzpancuk/maya.git ~/dev/maya
 cd ~/dev/maya && ./install.sh   # copies CLAUDE.md + links the skills into ~/.claude/
 ```
 
-Installed skills: `/new-product`, `/spec`, `/mvp-scope`, `/update-stack`,
-`/release-notes`.
+Installed skills: `/new-product`, `/integrate-product`, `/spec`, `/mvp-scope`,
+`/update-stack`, `/release-notes`.
 
 ## Starting a product
 
 1. `/new-product` — repository, CLAUDE.md, verify.sh, CI, docs skeleton.
+   An existing repository: `/integrate-product` instead — it reads what is
+   there, merges the template in and walks the same gate.
 2. Push to GitHub, install the Claude GitHub App, protect `main`: pull request
    required, the `verify` check required, up to date before merging.
    (`/new-product` walks these.)

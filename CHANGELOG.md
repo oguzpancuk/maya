@@ -13,6 +13,33 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
+### 2026-09-23 HH:MM · `TBD` — /integrate-product: the brownfield twin of /new-product
+Owner request, before handing his older products over one by one:
+the procedure for bringing an EXISTING repository onto maya lived only
+as an eight-point list in the handbook (§4), and dealcloser was
+retrofitted from it by hand in August. It is now a global skill,
+`global/skills/integrate-product/`, built from what the three products
+taught: read the repo's own rules, commands, workflows and AGENTS.md
+first and get the owner's word on the plan before writing; `verify.sh`
+becomes the single implementation of the battery the product already
+documented, and a step that fails in the pre-merge baseline stays in and
+stays red rather than disappearing; `AGENTS.md` is `@`-included when a
+tool owns it (dealcloser's Next.js block) and merged away otherwise; a
+line that loosens the authority tiers does not survive the merge without
+a NOTES-recorded decision; the whole integration lands as ONE commit on
+a branch and a pull request, so opting out is a single revert; `main` is
+protected only AFTER that pull request is merged and green, because a
+required check that cannot pass would gate the fix too; and the product
+bugs the integration surfaces become the product's first ROADMAP items,
+never fixes inside the integration commit. A repository that is not one
+yet is imported as found in its own commit first, and a live
+deploy-on-push is reported, then switched off only on the owner's word.
+The handbook's §4 shrinks to the two principles (minimal merge, no
+second tool for the same job) and points at the skill; README and
+install.sh list six skills.
+
+---
+
 ### 2026-09-23 04:29 · `1b8e7ed` — fourth environment fact; maya itself is maintained locally
 The project's own chat (the coordinator) runs the environment setup
 script too, with NO clone: an unguarded `cd <repo>` fails there and
