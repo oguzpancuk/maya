@@ -13,7 +13,7 @@ update run that last reconciled it (its watermark), never plain HEAD.
 
 ---
 
-### 2026-09-23 HH:MM · `TBD` — /integrate-product: the brownfield twin of /new-product
+### 2026-09-23 04:45 · `c05674c` — /integrate-product: the brownfield twin of /new-product
 Owner request, before handing his older products over one by one:
 the procedure for bringing an EXISTING repository onto maya lived only
 as an eight-point list in the handbook (§4), and dealcloser was
